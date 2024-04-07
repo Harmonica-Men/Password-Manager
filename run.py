@@ -13,9 +13,25 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
-passwords = SHEET.worksheet('passwords')
+def get_passwords():
+    """
+    Get user data password information
+    site, login, password
+    """ 
 
-data = passwords.get_all_values()
+    print("Please enter password data")
+    print("Data consist of Site, Login and Password, separated by commas")
+    print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
 
-print(data)
+    data_string = input("Enter your data here: ")
+    print(f"The password data is : {data_string}")
 
+def main():
+    """
+    Run all program functions    
+    """
+    get_passwords()
+
+print("Welcome to Password Manager")
+main()
+    
