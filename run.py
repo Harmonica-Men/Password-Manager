@@ -29,15 +29,22 @@ def check_value_in_column_a(data_array):
 def update_password_data(data_dict):
     """
     Update existing password data in the passwords worksheet.
-
-    Args:
-        data_dict (dict): A dictionary containing the password data.
     """
+    print(f"/n")
+    print (data_dict)
+    
     if all(key in data_dict for key in ['site', 'login', 'password']):  # Check if all required keys are present
         worksheet = SHEET.worksheet("passwords")
         column_a_values = worksheet.col_values(1)
-        input("Press any key to continue...")
+        
         row_index = column_a_values.index(data_dict['site'].lower()) + 1
+
+        print("Row index:", row_index) 
+
+        print(data_dict['login'])
+
+        input("Press any key to continue...")
+
         worksheet.update('B' + str(row_index), data_dict['login'])  # Update login value
         worksheet.update('C' + str(row_index), data_dict['password'])  # Update password value
         print("Password data updated successfully")
@@ -58,10 +65,15 @@ def get_passwords():
     print(f"The password data is : {data_string}")
 
     data_array = data_string.split(',')
-    if check_value_in_column_a(data_array[0]):  # Check if value exists in column A (site)
+    data_dict = {'site': data_array[0], 'login': data_array[1], 'password': data_array[2]}
+
+    # print (data_dict)
+    # input("Press any key to continue...")
+
+    if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
         choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
         if choice == 'yes':
-            update_password_data(data_array)
+            update_password_data(data_dict)
         elif choice == 'no':
             print("No changes made to password data")
         else:
@@ -70,6 +82,9 @@ def get_passwords():
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.append_row(data_array)
         print(f"Password added successfully\n")
+
+    input("Press any key to continue...")
+
 
     
 def main():
