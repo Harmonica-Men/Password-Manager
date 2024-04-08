@@ -18,12 +18,6 @@ def caesar_cipher(text, shift):
     """
     Apply Caesar Cipher to the given text by shifting all alphabet letters to the right by the specified shift value.
     
-    Args:
-        text (str): The text to be encrypted.
-        shift (int): The number of characters to shift each alphabet letter.
-    
-    Returns:
-        str: The encrypted text.
     """
     encrypted_text = ""
     for char in text:
@@ -37,6 +31,25 @@ def caesar_cipher(text, shift):
             encrypted_char = char  # Keep non-alphabet characters unchanged
         encrypted_text += encrypted_char
     return encrypted_text
+
+def caesar_decipher(text, shift):
+    """
+    Apply Caesar Cipher decryption to the given text by shifting all alphabet letters to the left by the specified shift value.
+
+    """
+    decrypted_text = ""
+    for char in text:
+        if char.isalpha():
+            # Determine if it's uppercase or lowercase
+            if char.isupper():
+                decrypted_char = chr((ord(char) - 65 - shift) % 26 + 65)  # Shift uppercase letters
+            else:
+                decrypted_char = chr((ord(char) - 97 - shift) % 26 + 97)  # Shift lowercase letters
+        else:
+            decrypted_char = char  # Keep non-alphabet characters unchanged
+        decrypted_text += decrypted_char
+    return decrypted_text
+
 
 
 def check_value_in_column_a(data_array):
@@ -81,21 +94,26 @@ def list_all_entries(num_entries=None):
     """
     worksheet = SHEET.worksheet("passwords")
     data = worksheet.get_all_values()
-    
-    if len(data) > 1:
-        # Convert data to DataFrame
-        df = pd.DataFrame(data[1:], columns=data[0])
-        
-        # Display the specified number of entries or all entries if None
-        if num_entries is None:
-            print("List of all entries:")
-            print(df)
-        else:
-            print(f"List of the first {num_entries} entries:")
-            print(df.head(num_entries))
-    else:
-        print("No entries found in the passwords worksheet.")
 
+    # Convert the data into a list of arrays
+    data_list = [row for row in data]
+
+    # Print the list of arrays with the third variable in uppercase
+    # print("List of arrays:")
+    for row in data_list:
+        row[2] = caesar_decipher(row[2],5)  # decypher the third variable 
+        print(row)
+
+    new_data_list = [row for row in data_list]
+
+    new_data_dict_list = [{"Site": row[0], "Login": row[1], "Password": row[2]} for row in new_data_list]
+
+    df = pd.DataFrame(new_data_dict_list)
+
+    # Print the DataFrame
+    print(df)
+
+    
 def get_passwords():
     """
     Get user data password information
@@ -104,8 +122,10 @@ def get_passwords():
 
     # data_dict = {'site': site, 'login': login, 'password': password}
 
+    
+
     while True:
-        print(f"Please enter password data/n")
+        print(f"Please enter password data\n")
                
         password = "Pa$$word123" #dummy password
 
@@ -126,36 +146,36 @@ def get_passwords():
             break  # Break out of the outer while loop after both site and login are provided
 
         if not login or not site:  # Check if either login or site is empty
-            print("No data entered. Exiting...")
+            print(f"No data entered. Exiting...\n")
             return  # Break out of the function if either login or site is empty
 
         # password = input(f"enter the password: ")
 
-        print(site)
-        print(login)
-        print(password)
-        print(f"encrypted : {caesar_cipher(password,5)}")
+        # print(site)
+        # print(login)
+        # print(password)
+        # print(f"encrypted : {caesar_cipher(password,5)}")
 
-        input("PRESS ANY KEY TO CONTINUE .... ")
+        # input("PRESS ANY KEY TO CONTINUE .... ")
 
         data_dict = {'site': site, 'login': login, 'password': caesar_cipher(password,5)}
 
-        print(f"Site: {site}")
-        print(f"Login: {login}")
-        print(f"Password: {caesar_cipher(password,5)}")
+        # print(f"Site: {site}")
+        # print(f"Login: {login}")
+        # print(f"Password: {caesar_cipher(password,5)}")
 
         if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
             choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
-            if choice == 'yes':
+            if choice == 'yes' or choice == 'y':
                 update_password_data(data_dict)
-            elif choice == 'no':
-                print("No changes made to password data")
+            elif choice == 'no' or choice == 'n':
+                print(f"No changes made to password data\n")
             else:
                 print("Invalid choice. Please enter 'Yes' or 'No'")
         else:
             worksheet_to_update = SHEET.worksheet("passwords")
             worksheet_to_update.append_row([site, login, caesar_cipher(password,5)])
-            print("Password added successfully\n")
+            print(f"Password added successfully\n")
 
     
 def main():
