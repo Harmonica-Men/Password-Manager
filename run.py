@@ -39,32 +39,12 @@ def update_password_data(data_dict):
         
         row_index = column_a_values.index(data_dict['site'].lower()) + 1
 
-        print("Row index:", row_index) 
-
-        print(data_dict['login'])
-
-        data_string = ','.join([data_dict['site'], data_dict['login'], data_dict['password']])
-
-        print(data_string)
-
-
-
-
-        print("Row index:", row_index) 
-
-        # worksheet_to_update = SHEET.worksheet("passwords")
+        worksheet_to_update = SHEET.worksheet("passwords")
         
-        print (f"login data:  {data_dict['login']}")
-
-        input("Press any key to continue...")
+        # input("Press any key to continue...")
         
-        worksheet = SHEET.worksheet("passwords")
-        column_a_values = worksheet.col_values(1)
-        worksheet.update('B' + str(row_index), data_dict['login'])  # Update login value
-        # worksheet.update('C' + str(row_index), data_dict['password'])  # Update password value
-
-        
-        # worksheet_to_update.append_row(data_string)
+        worksheet_to_update.update_cell(row_index, 2, data_dict['login'])  # Update login value (column B)
+        worksheet_to_update.update_cell(row_index, 3, data_dict['password'])  # Update password value (column C)
 
         print("Password data updated successfully")
     else:
