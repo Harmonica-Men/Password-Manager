@@ -43,10 +43,29 @@ def update_password_data(data_dict):
 
         print(data_dict['login'])
 
-        input("Press any key to continue...")
+        data_string = ','.join([data_dict['site'], data_dict['login'], data_dict['password']])
 
+        print(data_string)
+
+
+
+
+        print("Row index:", row_index) 
+
+        # worksheet_to_update = SHEET.worksheet("passwords")
+        
+        print (f"login data:  {data_dict['login']}")
+
+        input("Press any key to continue...")
+        
+        worksheet = SHEET.worksheet("passwords")
+        column_a_values = worksheet.col_values(1)
         worksheet.update('B' + str(row_index), data_dict['login'])  # Update login value
-        worksheet.update('C' + str(row_index), data_dict['password'])  # Update password value
+        # worksheet.update('C' + str(row_index), data_dict['password'])  # Update password value
+
+        
+        # worksheet_to_update.append_row(data_string)
+
         print("Password data updated successfully")
     else:
         print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
@@ -81,6 +100,7 @@ def get_passwords():
     else:
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.append_row(data_array)
+        print(data_array)
         print(f"Password added successfully\n")
 
     input("Press any key to continue...")
