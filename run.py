@@ -14,6 +14,30 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
+def caesar_cipher(text, shift):
+    """
+    Apply Caesar Cipher to the given text by shifting all alphabet letters to the right by the specified shift value.
+    
+    Args:
+        text (str): The text to be encrypted.
+        shift (int): The number of characters to shift each alphabet letter.
+    
+    Returns:
+        str: The encrypted text.
+    """
+    encrypted_text = ""
+    for char in text:
+        if char.isalpha():
+            # Determine if it's uppercase or lowercase
+            if char.isupper():
+                encrypted_char = chr((ord(char) - 65 + shift) % 26 + 65)  # Shift uppercase letters
+            else:
+                encrypted_char = chr((ord(char) - 97 + shift) % 26 + 97)  # Shift lowercase letters
+        else:
+            encrypted_char = char  # Keep non-alphabet characters unchanged
+        encrypted_text += encrypted_char
+    return encrypted_text
+
 
 def check_value_in_column_a(data_array):
     """
@@ -42,9 +66,7 @@ def update_password_data(data_dict):
         row_index = column_a_values.index(data_dict['site'].lower()) + 1
 
         worksheet_to_update = SHEET.worksheet("passwords")
-        
-        # input("Press any key to continue...")
-        
+                
         worksheet_to_update.update_cell(row_index, 2, data_dict['login'])  # Update login value (column B)
         worksheet_to_update.update_cell(row_index, 3, data_dict['password'])  # Update password value (column C)
 
@@ -82,7 +104,7 @@ def get_passwords():
     """
     while True:
         print("Please enter password data")
-        print("Data consist of Site, Login, and Password, separated by commas")
+        print("Data consist of Site, Login, and Password, separated by commas as delimter")
         print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
 
         data_string = input("Enter your data here: ").lower()
@@ -91,27 +113,31 @@ def get_passwords():
             print("No entry. Exiting...")
             break
 
-        print(f"The password data is : {data_string}")
-
+        
         data_array = data_string.split(',')
+               
         if len(data_array) < 3:  # Check if login or password is missing
             print("Please provide all the required information (Site, Login, and Password)")
             continue
 
-        data_dict = {'site': data_array[0], 'login': data_array[1], 'password': data_array[2]}
+        data_dict = {'site': data_array[0], 'login': data_array[1], 'password': caesar_cipher(data_array[2], 5)}
 
         if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
             choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
-            if choice == 'yes':
+            if choice == 'yes' or choice == 'y':
+
                 update_password_data(data_dict)
-            elif choice == 'no':
+            elif choice == 'no' or choice == 'n':
                 print("No changes made to password data")
             else:
                 print("Invalid choice. Please enter 'Yes' or 'No'")
         else:
             worksheet_to_update = SHEET.worksheet("passwords")
             worksheet_to_update.append_row(data_array)
-            print(data_array)
+
+
+            # encrypted_text = caesar_cipher(plain_text, shift)
+            
             print(f"Password added successfully\n")
 
     
