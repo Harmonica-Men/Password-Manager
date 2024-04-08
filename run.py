@@ -1,4 +1,6 @@
 import gspread
+import pandas as pd
+
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -50,6 +52,23 @@ def update_password_data(data_dict):
     else:
         print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
 
+def list_all_entries():
+    """
+    List the first five entries in the passwords worksheet.
+    """
+    worksheet = SHEET.worksheet("passwords")
+    data = worksheet.get_all_values()
+    
+    if len(data) > 1:
+        # Convert data to DataFrame
+        df = pd.DataFrame(data[1:], columns=data[0])
+        
+        # Display the first five entries
+        print("List of the first five entries:")
+        print(df.head())
+    else:
+        print("No entries found in the passwords worksheet.")
+
 
 def get_passwords():
     """
@@ -98,6 +117,7 @@ def main():
     print("Hello User")
     print("Welcome to Password Manager")
     get_passwords()
+    list_all_entries()
 
 
 main()
