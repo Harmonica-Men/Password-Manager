@@ -96,7 +96,6 @@ def list_all_entries(num_entries=None):
     else:
         print("No entries found in the passwords worksheet.")
 
-
 def get_passwords():
     """
     Get user data password information
@@ -105,62 +104,45 @@ def get_passwords():
 
     # data_dict = {'site': site, 'login': login, 'password': password}
 
-
     while True:
-        print("Please enter password data")
-        print("Data consists of Site, Login, and Password, separated by commas")
-        # print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
-
-        # data_string = input("Enter your data here: ").lower()
-
-        # if not data_string:  # Check if the input string is empty
-        #    print("No entry. Exiting...")
-        #    break
-
-        # Split the input string into three separate strings
-        # site, login, password = data_string.split(',')
-
-        password = "Pa$$word123"
+        print(f"Please enter password data/n")
+               
+        password = "Pa$$word123" #dummy password
 
         while True:
             site = input("Enter site or platform: ")
             if not site:  # Check if the input string is empty
                 print("Empty input site")
-                break  # Break out of the main loop if site is empty
+                return  # Break out of the function if site is empty
 
             while True:
                 login = input("Enter login or email: ")
                 if not login:  # Check if the input string is empty
                     print("Empty input login")
-                    break  # Break out of the inner while loop if login is empty
-                
+                    return  # Break out of the function if login is empty
+
                 break  # Break out of the inner while loop if login is provided
 
-
-            if not login:  # Check if login is empty
-                print ("No data is entered")
-                break  # Break out of the main loop if login is empty
             break  # Break out of the outer while loop after both site and login are provided
 
-        
-            
-#        password = input(f"enter the password: ")
+        if not login or not site:  # Check if either login or site is empty
+            print("No data entered. Exiting...")
+            return  # Break out of the function if either login or site is empty
+
+        # password = input(f"enter the password: ")
 
         print(site)
         print(login)
         print(password)
+        print(f"encrypted : {caesar_cipher(password,5)}")
 
-        input ("PRESS ANY KEY TO CONTINUE .... ")
+        input("PRESS ANY KEY TO CONTINUE .... ")
 
-        data_dict = {'site': site, 'login': login, 'password': password}
-
-
+        data_dict = {'site': site, 'login': login, 'password': caesar_cipher(password,5)}
 
         print(f"Site: {site}")
         print(f"Login: {login}")
-        print(f"Password: {password}")
-
-       
+        print(f"Password: {caesar_cipher(password,5)}")
 
         if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
             choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
@@ -172,7 +154,7 @@ def get_passwords():
                 print("Invalid choice. Please enter 'Yes' or 'No'")
         else:
             worksheet_to_update = SHEET.worksheet("passwords")
-            worksheet_to_update.append_row([site, login, password])
+            worksheet_to_update.append_row([site, login, caesar_cipher(password,5)])
             print("Password added successfully\n")
 
     
