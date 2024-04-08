@@ -61,8 +61,13 @@ def get_passwords():
     print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
 
     data_string = input("Enter your data here: ").lower()
+
     print(f"The password data is : {data_string}")
 
+    if not data_string:  # Check if the input string is empty
+        print("No entry")
+        return
+    
     data_array = data_string.split(',')
     data_dict = {'site': data_array[0], 'login': data_array[1], 'password': data_array[2]}
 
@@ -82,9 +87,6 @@ def get_passwords():
         worksheet_to_update.append_row(data_array)
         print(data_array)
         print(f"Password added successfully\n")
-
-    input("Press any key to continue...")
-
 
     
 def main():
