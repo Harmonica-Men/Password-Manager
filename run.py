@@ -56,37 +56,39 @@ def get_passwords():
     Get user data password information
     site, login, password
     """
-    print("Please enter password data")
-    print("Data consist of Site, Login and Password, separated by commas")
-    print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
+    while True:
+        print("Please enter password data")
+        print("Data consist of Site, Login, and Password, separated by commas")
+        print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
 
-    data_string = input("Enter your data here: ").lower()
+        data_string = input("Enter your data here: ").lower()
 
-    print(f"The password data is : {data_string}")
+        if not data_string:  # Check if the input string is empty
+            print("No entry. Exiting...")
+            break
 
-    if not data_string:  # Check if the input string is empty
-        print("No entry")
-        return
-    
-    data_array = data_string.split(',')
-    data_dict = {'site': data_array[0], 'login': data_array[1], 'password': data_array[2]}
+        print(f"The password data is : {data_string}")
 
-    # print (data_dict)
-    # input("Press any key to continue...")
+        data_array = data_string.split(',')
+        if len(data_array) < 3:  # Check if login or password is missing
+            print("Please provide all the required information (Site, Login, and Password)")
+            continue
 
-    if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
-        choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
-        if choice == 'yes':
-            update_password_data(data_dict)
-        elif choice == 'no':
-            print("No changes made to password data")
+        data_dict = {'site': data_array[0], 'login': data_array[1], 'password': data_array[2]}
+
+        if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
+            choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
+            if choice == 'yes':
+                update_password_data(data_dict)
+            elif choice == 'no':
+                print("No changes made to password data")
+            else:
+                print("Invalid choice. Please enter 'Yes' or 'No'")
         else:
-            print("Invalid choice. Please enter 'Yes' or 'No'")
-    else:
-        worksheet_to_update = SHEET.worksheet("passwords")
-        worksheet_to_update.append_row(data_array)
-        print(data_array)
-        print(f"Password added successfully\n")
+            worksheet_to_update = SHEET.worksheet("passwords")
+            worksheet_to_update.append_row(data_array)
+            print(data_array)
+            print(f"Password added successfully\n")
 
     
 def main():
