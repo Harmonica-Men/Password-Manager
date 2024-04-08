@@ -14,13 +14,14 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
 
-def check_array_exists(data_array):
+def check_value_in_column_a(data_array):
     """
-    Check if the given data array already exists in the passwords worksheet.
+    Check if the given data array already exists in the passwords worksheet. 
+    Only for column A
     
     """
     worksheet = SHEET.worksheet("passwords")
-    column_a_values = worksheet.col_values(1)
+    column_a_values = worksheet.col_values(1) # Check Column A
     if data_array in column_a_values:
         return True
     return False
@@ -36,19 +37,17 @@ def get_passwords():
     print("Data consist of Site, Login and Password, separated by commas")
     print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
 
-    data_string = input("Enter your data here: ")
+    data_string = input("Enter your data here: ").lower()
     print(f"The password data is : {data_string}")
 
     data_array = data_string.split(',')
-    if not check_array_exists(data_array[0]):  # Check only the value in column A (site)
+    if not check_value_in_column_a(data_array[0]):  # Check only the value in column A (site)
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.append_row(data_array) 
         print(f"Password added successfully\n")
     else:
-        print("Password data already exists\n")
+        print(f"Password data already exists\n")
   
-
-    
 
 def main():
     """
@@ -57,6 +56,7 @@ def main():
     get_passwords()
 
 # welcome text
+print("Hello User")
 print("Welcome to Password Manager")
 main()  
     
