@@ -102,43 +102,52 @@ def get_passwords():
     Get user data password information
     site, login, password
     """
+
+    # data_dict = {'site': site, 'login': login, 'password': password}
+
+
     while True:
         print("Please enter password data")
-        print("Data consist of Site, Login, and Password, separated by commas as delimter")
-        print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
+        print("Data consists of Site, Login, and Password, separated by commas")
+        # print("Example: Facebook, mygmail@gmail.com, Pa$$word\n")
 
-        data_string = input("Enter your data here: ").lower()
+        # data_string = input("Enter your data here: ").lower()
 
-        if not data_string:  # Check if the input string is empty
-            print("No entry. Exiting...")
-            break
+        # if not data_string:  # Check if the input string is empty
+        #    print("No entry. Exiting...")
+        #    break
 
-        
-        data_array = data_string.split(',')
-               
-        if len(data_array) < 3:  # Check if login or password is missing
-            print("Please provide all the required information (Site, Login, and Password)")
-            continue
+        # Split the input string into three separate strings
+        # site, login, password = data_string.split(',')
 
-        data_dict = {'site': data_array[0], 'login': data_array[1], 'password': caesar_cipher(data_array[2], 5)}
+        site = input(f"enter site or platform: ")
+        login = input(f"enter login or email: ")
+        password = input(f"enter the password: ")
+
+        print(site)
+        print(login)
+        print(password)
+
+        input ("PRESS ANY KEY TO CONTINUE .... ")
+
+        #print(f"Site: {site}")
+        #print(f"Login: {login}")
+        #print(f"Password: {password}")
+
+        #data_dict = {'site': site, 'login': login, 'password': password}
 
         if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
             choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
-            if choice == 'yes' or choice == 'y':
-
+            if choice == 'yes':
                 update_password_data(data_dict)
-            elif choice == 'no' or choice == 'n':
+            elif choice == 'no':
                 print("No changes made to password data")
             else:
                 print("Invalid choice. Please enter 'Yes' or 'No'")
         else:
             worksheet_to_update = SHEET.worksheet("passwords")
-            worksheet_to_update.append_row(data_array)
-
-
-            # encrypted_text = caesar_cipher(plain_text, shift)
-            
-            print(f"Password added successfully\n")
+            worksheet_to_update.append_row([site, login, password])
+            print("Password added successfully\n")
 
     
 def main():
