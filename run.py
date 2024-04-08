@@ -52,9 +52,10 @@ def update_password_data(data_dict):
     else:
         print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
 
-def list_all_entries():
+def list_all_entries(num_entries=None):
     """
-    List the first five entries in the passwords worksheet.
+    List the specified number of entries in the passwords worksheet.
+    If num_entries is None, all entries will be displayed.
     """
     worksheet = SHEET.worksheet("passwords")
     data = worksheet.get_all_values()
@@ -63,9 +64,13 @@ def list_all_entries():
         # Convert data to DataFrame
         df = pd.DataFrame(data[1:], columns=data[0])
         
-        # Display the first five entries
-        print("List of the first five entries:")
-        print(df.head())
+        # Display the specified number of entries or all entries if None
+        if num_entries is None:
+            print("List of all entries:")
+            print(df)
+        else:
+            print(f"List of the first {num_entries} entries:")
+            print(df.head(num_entries))
     else:
         print("No entries found in the passwords worksheet.")
 
@@ -117,7 +122,20 @@ def main():
     print("Hello User")
     print("Welcome to Password Manager")
     get_passwords()
-    list_all_entries()
+    
+    # Ask user for number of entries to display
+    num_entries = input("Enter the number of entries to display (leave empty to display all): ")
+    
+    if num_entries.strip():  # Check if input is not empty
+        try:
+            num_entries = int(num_entries)
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+            return
+    else:
+        num_entries = None  # Show all entries if input is empty
+        
+    list_all_entries(num_entries)
 
 
 main()
