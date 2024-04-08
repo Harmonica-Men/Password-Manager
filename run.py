@@ -120,9 +120,31 @@ def get_passwords():
         # Split the input string into three separate strings
         # site, login, password = data_string.split(',')
 
-        site = input(f"enter site or platform: ")
-        login = input(f"enter login or email: ")
-        password = input(f"enter the password: ")
+        password = "Pa$$word123"
+
+        while True:
+            site = input("Enter site or platform: ")
+            if not site:  # Check if the input string is empty
+                print("Empty input site")
+                break  # Break out of the main loop if site is empty
+
+            while True:
+                login = input("Enter login or email: ")
+                if not login:  # Check if the input string is empty
+                    print("Empty input login")
+                    break  # Break out of the inner while loop if login is empty
+                
+                break  # Break out of the inner while loop if login is provided
+
+
+            if not login:  # Check if login is empty
+                print ("No data is entered")
+                break  # Break out of the main loop if login is empty
+            break  # Break out of the outer while loop after both site and login are provided
+
+        
+            
+#        password = input(f"enter the password: ")
 
         print(site)
         print(login)
@@ -130,11 +152,15 @@ def get_passwords():
 
         input ("PRESS ANY KEY TO CONTINUE .... ")
 
-        #print(f"Site: {site}")
-        #print(f"Login: {login}")
-        #print(f"Password: {password}")
+        data_dict = {'site': site, 'login': login, 'password': password}
 
-        #data_dict = {'site': site, 'login': login, 'password': password}
+
+
+        print(f"Site: {site}")
+        print(f"Login: {login}")
+        print(f"Password: {password}")
+
+       
 
         if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
             choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
@@ -155,7 +181,7 @@ def main():
     Run all program functions
     """
     print("Hello User")
-    print("Welcome to Password Manager")
+    print("Welcome to Password Manager\n")
     get_passwords()
     
     # Ask user for number of entries to display
