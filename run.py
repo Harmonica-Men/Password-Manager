@@ -20,12 +20,39 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
+import string
+import random
+
 def generate_random_password(length=12):
     """
-    Generate a random password of the specified length.
+    Generate a random password of the specified length meeting complexity requirements.
     """
-    characters = string.ascii_letters + string.digits + string.punctuation
-    return ''.join(random.choice(characters) for _ in range(length))
+    categories = [
+        string.ascii_lowercase,
+        string.ascii_uppercase,
+        string.digits,
+        string.punctuation
+    ]
+
+    password = []
+
+    # Ensure the password contains characters from at least three of the five categories
+    selected_categories = random.sample(categories, k=3)
+
+    # Select at least one character from each selected category
+    for category in selected_categories:
+        password.append(random.choice(category))
+
+    # Select remaining characters randomly
+    for _ in range(length - 3):
+        category = random.choice(categories)
+        password.append(random.choice(category))
+
+    # Shuffle the password to ensure randomness
+    random.shuffle(password)
+
+    return ''.join(password)
+
 
 def vigenere_cipher(text, key, mode='encode'):
     """
@@ -211,14 +238,11 @@ def get_passwords():
                 data_dict = {'site': site, 'login': login, 'password': password}
 
                 update_password_data(data_dict)
-
-                # print(data_dict)
-
+                
                 input('Press any key to continue ... ') 
 
-                return       
-                
-                #continue  # Continue the loop to prompt for site again
+                return  # Break out of the funcion
+            
             elif choice == 'no' or choice == 'n':
                 return  # Exit the function if site should not be changed
             else:
