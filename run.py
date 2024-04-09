@@ -64,6 +64,7 @@ def vigenere_cipher(text, key, mode='encode'):
             key_char = key[i % len(key)] 
         except ZeroDivisionError: 
             print(f"Key Value Error: Cannot divide by zero.\n") 
+            print(f"Return to menu ... \n")
             break
 
         key_char = key[i % len(key)]
@@ -135,8 +136,12 @@ def list_all_entries(num_entries=None):
     # Convert the list of dictionaries into a DataFrame
     df = pd.DataFrame(new_data_dict_list)
 
-    # Print the DataFrame
-    print(df.head(num_entries) if num_entries else df)
+    # Print the DataFrame without headers
+    if num_entries:
+        print(df.head(num_entries).to_string(header=False, index=False))
+    else:
+        print(df.to_string(header=False, index=False))
+        
 
 def get_passwords():
     """
@@ -200,7 +205,7 @@ def main():
     """
 
     menu = """
-    Password Manager
+    Password Manager (1.01)
 
     
     Menu:
@@ -248,7 +253,8 @@ def main():
 
                 
             case '5':
-                print("Bye bye ...")
+                print(f"TY for using Password Manager\n")
+                print(f"Bye bye ...\n")
                 break
 
             case _:
@@ -256,7 +262,7 @@ def main():
     
     
     
-    
+# Main program    
     
 
 if __name__ == "__main__":
