@@ -35,11 +35,6 @@ def generate_random_password(length=12):
         string.punctuation
     ]
 
-    print(categories)
-
-    input('Press any key to continue ... ') 
-
-
     password = []
 
     # Ensure the password contains characters from at least three of the five categories
@@ -253,25 +248,13 @@ def get_passwords():
             choice = input("Do you want to change the site? (Yes/No): ").lower()
             if choice == 'yes' or choice == 'y':
                 login = get_login()
-
-                print(login)
-
-                input ('press any to continue ... 1')
-
                 if len(login) == 0:
                     return
                 else:
                     password = option_password()        
-                    
-
-                print (vigenere_cipher(password,key,mode="decode"))
-
-               # input ("press any key to continue ... ")
 
                 data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,key,mode="decode")}
-
                 update_password_data(data_dict)
-                              
                 return  # Break out of the funcion
             
             elif choice == 'no' or choice == 'n':
@@ -281,20 +264,11 @@ def get_passwords():
                 continue  # Continue the loop to prompt for choice again
         else:
             login = get_login()  # Prompt for login using the get_login function
-
-            print(login)
-
-            # input ('press any to continue ... ')
-
             if len(login) == 0:
-              #  print ("EmtNo data ")
                 return
-
             
-
             password = option_password()
             if not password:
-                # print("No data is procesed")
                 return  # Break out of the function if password is empty
             break  # Break out of the outer while loop after both site, login, and password are provided
 
@@ -313,8 +287,6 @@ def get_passwords():
         worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='encode')])
         print(f"Password added successfully\n")
 
-
-
 def password_visible():
     """
     Prompt the user for a Yes or No answer and return a boolean value.
@@ -324,25 +296,12 @@ def password_visible():
     while True:
         user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
         if user_input == 'no' or user_input == 'n':
-          #  print("user input")
-          #  print(user_input)
-          #  input(f'Press any key to continue ... {user_input}')
             return True
-            
         elif user_input == 'yes' or user_input == 'y':
-          #  print("user input")
-          #  print(user_input)
-          #  input(f'Press any key to continue ... {user_input}')
             return False
         else:
             print("Invalid input. Please enter 'Yes' or 'No'.")
-          #  print("user input")
-          #  print(user_input)
-          #  input(f'Press any key to continue ... ')
             return True
-            #
-            # user_input = False
-
 
 def copy_password_entry(index_number):
     """
@@ -351,7 +310,6 @@ def copy_password_entry(index_number):
 
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
-
     max_row = len(data)
 
     if int(index_number) <= max_row:
@@ -360,14 +318,11 @@ def copy_password_entry(index_number):
         data_list = [row for row in data]
 
         # Decrypt the passwords using a Vigenère cipher
-
         for row in data_list:
             row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
 
         password_entry = data_list[int(index_number)][2]
-
         pyperclip.copy(password_entry)
-
     else:
         print(f"Your index exceed the maximum of rows {max_row} in this\n")
 
@@ -497,10 +452,6 @@ def main():
                 emptyblock()               
                 print("Invalid choice. Please enter a number between 1 and 5.")
     
-    
-    
 # Main program    
-    
-
 if __name__ == "__main__":
     main()
