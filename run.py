@@ -208,14 +208,34 @@ def password_visible():
         
     while True:
         user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
-        if user_input == 'yes' or user_input == 'y':
+        if user_input == 'no' or user_input == 'n':
             return True
-        elif user_input == 'no' or user_input == 'n':
+        elif user_input == 'yes' or user_input == 'y':
             return False
         else:
             return False
             print("Invalid input. Please enter 'Yes' or 'No'.")
             # user_input = False
+
+def menu_option_2():
+    """
+    Function to handle menu option 2: List passwords
+    """
+    print("Menu option 2")
+    print("Listing passwords...")
+    
+    num_entries = input("Enter the number of entries to display (leave empty to display all): ")
+
+    if num_entries.strip():  # Check if input is not empty
+        try:
+            num_entries = int(num_entries)
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+            return
+    else:
+        num_entries = None  # Show all entries if input is empty
+        
+    list_passwords(num_entries, password_visible())
        
 def main():
     """
@@ -253,25 +273,12 @@ def main():
 
         match user_choice:
             case '1':
+                print('Menu option 1')
                 print("Creating new entry...")
                 get_passwords()
 
             case '2':
-                # Ask user for number of entries to display
-                print("Listing passwords...")
-                
-                num_entries = input("Enter the number of entries to display (leave empty to display all): ")
-    
-                if num_entries.strip():  # Check if input is not empty
-                    try:
-                        num_entries = int(num_entries)
-                    except ValueError:
-                        print(f"Invalid input. Please enter a valid number.\n")
-                        return
-                else:
-                    num_entries = None  # Show all entries if input is empty
-                    
-                list_passwords(num_entries,password_visible())
+                menu_option_2()
                 
             case '3':
                 key = input("Enter the key for password: ")
