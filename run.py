@@ -225,12 +225,17 @@ def password_visible():
     while True:
         user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
         if user_input == 'no' or user_input == 'n':
+            print(f'Press any key to continue ... {user_input}')
             return True
+            
         elif user_input == 'yes' or user_input == 'y':
+            print(f'Press any key to continue ... {user_input}')
             return False
         else:
+            print("Invalid input. Please enter 'Yes' or 'No'.")
+            print(f'Press any key to continue ... {user_input}')
             return True
-            #print("Invalid input. Please enter 'Yes' or 'No'.")
+            #
             # user_input = False
 
 def menu_option_1():
