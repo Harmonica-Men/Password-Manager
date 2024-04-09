@@ -140,6 +140,12 @@ def list_passwords(num_entries=None, show_password=bool):
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
 
+    # Print emtpy block of lines
+    
+    for _ in range(5):
+        print("\n" * 5)
+
+
     # Print the DataFrame without headers and from the second row 
     if num_entries:
         print(df.iloc[1:].head(num_entries).to_string(header=False, index=False))
