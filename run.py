@@ -301,7 +301,7 @@ def main():
                     key = input(f"Enter the key, {key} , for password: ")
                     if key == "":
                         break
-                    elif len(key) < 8:
+                    elif len(key) < 3 or len(key) > 8:
                         print("Key must be at least eight characters long.")
                     else:
                         return key
