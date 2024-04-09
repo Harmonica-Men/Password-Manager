@@ -222,7 +222,7 @@ def password_visible():
         elif user_input == 'yes' or user_input == 'y':
             return False
         else:
-            return False
+            return True
             print("Invalid input. Please enter 'Yes' or 'No'.")
             # user_input = False
 
