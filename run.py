@@ -137,11 +137,11 @@ def list_passwords(num_entries=None, show_password=bool):
     # Convert the list of dictionaries into a DataFrame
     df = pd.DataFrame(new_data_dict_list)
 
-    # Print the DataFrame without headers
+    # Print the DataFrame without headers and from the second row 
     if num_entries:
-        print(df.head(num_entries).to_string(header=False, index=False))
+        print(df.iloc[1:].head(num_entries).to_string(header=False, index=False))
     else:
-        print(df.to_string(header=False, index=False))
+        print(df.iloc[1:].to_string(header=False, index=False))
 
     
 def get_passwords():
@@ -200,7 +200,7 @@ def get_passwords():
         worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='encode')])
         print(f"Password added successfully\n")
 
-def password_visible(password_bool):
+def password_visible():
     """
     Prompt the user for a Yes or No answer and return a boolean value.
     If the input is neither Yes nor No, return False to indicate going back to the main menu. 
@@ -209,11 +209,11 @@ def password_visible(password_bool):
     while True:
         user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
         if user_input == 'yes' or user_input == 'y':
-            return False
+            return True
         elif user_input == 'no' or user_input == 'n':
-            return True
+            return False
         else:
-            return True
+            return False
             print("Invalid input. Please enter 'Yes' or 'No'.")
             # user_input = False
        
@@ -221,15 +221,18 @@ def main():
     """
     Run all program functions
     """
-
-    global password_hide
+    
     global key 
-
-    password_hide = True   
+    
     key = "KEY"
 
     menu = """
-    Password Manager (1.01)
+
+
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
 
     
 *** Menu ***
@@ -268,7 +271,7 @@ def main():
                 else:
                     num_entries = None  # Show all entries if input is empty
                     
-                list_passwords(num_entries,password_visible(password_hide))
+                list_passwords(num_entries,password_visible())
                 
             case '3':
                 key = input("Enter the key for password: ")
