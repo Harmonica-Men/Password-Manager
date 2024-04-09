@@ -164,8 +164,23 @@ def get_passwords():
     Get user data password information: site, login, password
     """
 
+    def get_login():
+        """
+        Prompt the user to enter login or email.
+        Returns the entered login if not empty.
+        """
+        while True:
+            login = input("Enter login or email: ")
+            if not login:  # Check if the input string is empty
+                print("Empty input login")
+            else:
+                return login  # Return the entered login if not empty
+
+
     emptyblock()
     print(f"Please enter password data\n")
+
+
 
     while True:
         site = input("Enter site or platform: ")
@@ -176,14 +191,16 @@ def get_passwords():
         # Check if site already exists
         if check_value_in_column_a(site.lower()):
             print("Site already exists")
-            return
+            choice = input("Do you want to change the site? (Yes/No): ").lower()
+            if choice == 'yes' or choice == 'y':
+                continue  # Continue the loop to prompt for site again
+            elif choice == 'no' or choice == 'n':
+                return  # Exit the function if site should not be changed
+            else:
+                print("Invalid choice. Please enter 'Yes' or 'No'")
+                continue  # Continue the loop to prompt for choice again
 
-        while True:
-            login = input("Enter login or email: ")
-            if not login:  # Check if the input string is empty
-                print("Empty input login")
-                return  # Break out of the function if login is empty
-            break  # Break out of the inner while loop if login is provided
+        get_login()
 
         while True:
             password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
@@ -215,6 +232,7 @@ def get_passwords():
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='encode')])
         print(f"Password added successfully\n")
+
 
 def password_visible():
     """
