@@ -62,17 +62,14 @@ def vigenere_cipher(text, key, mode='encode'):
     Apply Vigenère Cipher to the given text using the provided key.       
     """
    
-
     if mode not in ['encode', 'decode']:
         raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
     
     # Define the alphabet including both uppercase letters and symbolic characters
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
 
-       
     # Convert both text and key to uppercase
     text = text.upper()
-    
     key = key.upper()
     
     # Initialize the result string
@@ -134,14 +131,10 @@ def update_password_data(data_dict):
     if all(key in data_dict for key in ['site', 'login', 'password']):  # Check if all required keys are present
         worksheet = SHEET.worksheet("passwords")
         column_a_values = worksheet.col_values(1)
-        
         row_index = column_a_values.index(data_dict['site'].lower()) + 1
-
         worksheet_to_update = SHEET.worksheet("passwords")
-                
         worksheet_to_update.update_cell(row_index, 2, data_dict['login'])  # Update login value (column B)
         worksheet_to_update.update_cell(row_index, 3, data_dict['password'])  # Update password value (column C)
-
         print("Password data updated successfully")
     else:
         print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
@@ -164,11 +157,15 @@ def list_passwords(num_entries=None, show_password=bool):
     data_list = [row for row in data]
 
     # Decrypt the passwords using a Vigenère cipher
-    if show_password:
-        pass
-    else:
-        for row in data_list:
-            row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
+    # Decrypt the passwords using a Vigenère cipher
+    if not show_password:
+        data_list = [[row[0], row[1], vigenere_cipher(row[2], key, mode='decode')] for row in data_list]
+
+    # if show_password:
+    #    pass
+    # else:
+    #    for row in data_list:
+    #        row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
 
     # Convert the list of arrays into a list of dictionaries
     new_data_dict_list = [{"Row Number": i, "Site": row[0], "Login": row[1], "Password": row[2]} for i, row in enumerate(data_list)]
