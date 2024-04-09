@@ -199,14 +199,23 @@ def get_login():
     Prompt the user to enter login or email.
     Returns the entered login if not empty.
     """
+    consecutive_empty_logins = 0
+
     while True:
         login = input("Enter login or email: ")
         if not login:  # Check if the input string is empty
+            consecutive_empty_logins += 1
+            if consecutive_empty_logins >= 3:
+                # print("No data processed.")
+                return login
             print("Empty input login")
         else:
             return login  # Return the entered login if not empty
 
 def option_password():
+
+    consecutive_empty_password_option = 0
+
     while True:
         password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
         if password_option == 'yes' or password_option == 'y':
@@ -218,7 +227,10 @@ def option_password():
             return password
             # break
         else:
+            consecutive_empty_password_option += 1
             print("Invalid input. Please enter 'Yes' or 'No'.")
+            if consecutive_empty_password_option >= 3:
+                break
 
 
 def get_passwords():
@@ -241,7 +253,16 @@ def get_passwords():
             choice = input("Do you want to change the site? (Yes/No): ").lower()
             if choice == 'yes' or choice == 'y':
                 login = get_login()
-                password = option_password()        
+
+                print(login)
+
+                input ('press any to continue ... 1')
+
+                if len(login) == 0:
+                    return
+                else:
+                    password = option_password()        
+                    
 
                 print (vigenere_cipher(password,key,mode="decode"))
 
@@ -260,9 +281,20 @@ def get_passwords():
                 continue  # Continue the loop to prompt for choice again
         else:
             login = get_login()  # Prompt for login using the get_login function
+
+            print(login)
+
+            # input ('press any to continue ... ')
+
+            if len(login) == 0:
+              #  print ("EmtNo data ")
+                return
+
+            
+
             password = option_password()
             if not password:
-                print("Empty input password")
+                # print("No data is procesed")
                 return  # Break out of the function if password is empty
             break  # Break out of the outer while loop after both site, login, and password are provided
 
@@ -331,11 +363,6 @@ def copy_password_entry(index_number):
     password_entry = data_list[int(index_number)][2]
 
     pyperclip.copy(password_entry)
-
-
-
-
-
 
 
 def menu_option_1():
