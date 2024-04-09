@@ -132,13 +132,13 @@ def list_passwords(num_entries=None, show_password=bool):
             row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
 
     # Convert the list of arrays into a list of dictionaries
-    new_data_dict_list = [{"Site": row[0], "Login": row[1], "Password": row[2]} for row in data_list]
+    new_data_dict_list = [{"Row Number": i, "Site": row[0], "Login": row[1], "Password": row[2]} for i, row in enumerate(data_list)]
 
     # Convert the list of dictionaries into a DataFrame
     df = pd.DataFrame(new_data_dict_list)
 
-    # Add a new column for row numbers
-    df['Row Number'] = df.index + 1
+    # Reorder columns to have 'Row Number' as the first column
+    df = df[['Row Number', 'Site', 'Login', 'Password']]
 
     # Print the DataFrame without headers and from the second row 
     if num_entries:
