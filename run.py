@@ -141,14 +141,14 @@ def list_all_entries(num_entries=None):
         print(df.head(num_entries).to_string(header=False, index=False))
     else:
         print(df.to_string(header=False, index=False))
-        
+
 
 def get_passwords():
     """
     Get user data password information: site, login, password
     """
     
-    print("Please enter password data\n")
+    print(f"Please enter password data\n")
 
     while True:
         site = input("Enter site or platform: ")
@@ -214,7 +214,9 @@ def main():
     2. list passwords
     3. set decipher key
     4. set password complexity
-    5. quit
+    5. hide / unhide password
+
+    6. quit
 
     
     Please enter your choice (1-5): """
@@ -251,8 +253,10 @@ def main():
             case '4':
                 print("Setting password complexity...")
 
-                
             case '5':
+                print("Hide / unhide password ...")
+                
+            case '6':
                 print(f"TY for using Password Manager\n")
                 print(f"Bye bye ...\n")
                 break
