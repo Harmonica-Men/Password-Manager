@@ -210,11 +210,11 @@ def option_password():
 
     while True:
         password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
-        if password_option == 'yes' or password_option == 'y':
+        if password_option == 'yes' or password_option == 'y' or password_option == 'Y':
             password = generate_random_password()  # Generate random password
             return password
             # break
-        elif password_option == 'no' or password_option == 'n':
+        elif password_option == 'no' or password_option == 'n' or password_option == 'N':
             password = input("Enter password: ")
             return password
             # break
@@ -243,7 +243,7 @@ def get_passwords():
         if check_value_in_column_a(site.lower()):
             print("Site already exists")
             choice = input("Do you want to change the site? (Yes/No): ").lower()
-            if choice == 'yes' or choice == 'y':
+            if choice == 'yes' or choice == 'y' or choice == 'Y':
                 login = get_login()
                 if len(login) == 0:
                     return
@@ -251,11 +251,11 @@ def get_passwords():
                     password = option_password()        
 
                 print(password)
-                data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,"KEY",mode="encode")}
+                data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,key,mode="encode")}
                 update_password_data(data_dict)
                 return  # Break out of the funcion
             
-            elif choice == 'no' or choice == 'n':
+            elif choice == 'no' or choice == 'n' or choice == 'N':
                 return  # Exit the function if site should not be changed
             else:
                 print("Invalid choice. Please enter 'Yes' or 'No'")
@@ -274,9 +274,9 @@ def get_passwords():
 
     if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
         choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
-        if choice == 'yes' or choice == 'y':
+        if choice == 'yes' or choice == 'y' or choice == 'Y':
             update_password_data(data_dict)
-        elif choice == 'no' or choice == 'n':
+        elif choice == 'no' or choice == 'n' or choice == 'N':
             print(f"No changes made to password data\n")
         else:
             print("Invalid choice. Please enter 'Yes' or 'No'")
@@ -293,9 +293,9 @@ def password_visible():
         
     while True:
         user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
-        if user_input == 'no' or user_input == 'n':
+        if user_input == 'no' or user_input == 'N' or user_input == 'n':
             return True
-        elif user_input == 'yes' or user_input == 'y':
+        elif user_input == 'yes' or user_input == 'Y' or user_input == 'y':
             return False
         else:
             print("Invalid input. Please enter 'Yes' or 'No'.")
