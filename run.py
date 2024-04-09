@@ -34,6 +34,11 @@ def generate_random_password(length=12):
         string.punctuation
     ]
 
+    print(categories)
+
+    input('Press any key to continue ... ') 
+
+
     password = []
 
     # Ensure the password contains characters from at least three of the five categories
@@ -50,6 +55,8 @@ def generate_random_password(length=12):
 
     # Shuffle the password to ensure randomness
     random.shuffle(password)
+
+    
 
     return ''.join(password)
 
@@ -238,9 +245,7 @@ def get_passwords():
                 data_dict = {'site': site, 'login': login, 'password': password}
 
                 update_password_data(data_dict)
-                
-                input('Press any key to continue ... ') 
-
+                              
                 return  # Break out of the funcion
             
             elif choice == 'no' or choice == 'n':
@@ -300,6 +305,16 @@ def password_visible():
             return True
             #
             # user_input = False
+
+def copy_password_entry(df, index):
+    """
+    Copy the password entry from the specified index in the DataFrame.
+    """
+    password_entry = df.iloc[index]["Password"]
+    return password_entry
+
+
+
 
 def menu_option_1():
     """
@@ -380,7 +395,7 @@ def main():
     1. create new entry
     2. list passwords
     3. set cipher key
-    4. set password complexity
+    4. copy / paste password 
     5. quit
     
     Please enter your choice (1-5): """
