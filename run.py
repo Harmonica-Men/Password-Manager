@@ -16,8 +16,6 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
-key = "KEY"
-
 def generate_random_password(length=12):
     """
     Generate a random password of the specified length.
@@ -115,7 +113,7 @@ def update_password_data(data_dict):
         print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
 
 
-def list_all_entries(num_entries=None):
+def list_all_entries(num_entries=None, show_password=bool):
     """
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
@@ -127,8 +125,11 @@ def list_all_entries(num_entries=None):
     data_list = [row for row in data]
 
     # Decrypt the passwords using a Vigenère cipher
-    for row in data_list:
-        row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
+    if show_password:
+        pass
+    else:
+        for row in data_list:
+            row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
 
     # Convert the list of arrays into a list of dictionaries
     new_data_dict_list = [{"Site": row[0], "Login": row[1], "Password": row[2]} for row in data_list]
@@ -204,6 +205,12 @@ def main():
     Run all program functions
     """
 
+    global password_hide
+    global key 
+
+    password_hide = True   
+    key = "KEY"
+
     menu = """
     Password Manager (1.01)
 
@@ -244,7 +251,7 @@ def main():
                 else:
                     num_entries = None  # Show all entries if input is empty
                     
-                list_all_entries(num_entries)
+                list_all_entries(num_entries,True)
                 
             case '3':
                 key = input("Enter the key for password: ")
@@ -255,6 +262,7 @@ def main():
 
             case '5':
                 print("Hide / unhide password ...")
+                password_hide = True
                 
             case '6':
                 print(f"TY for using Password Manager\n")
