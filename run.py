@@ -243,7 +243,11 @@ def get_passwords():
                 login = get_login()
                 password = option_password()        
 
-                data_dict = {'site': site, 'login': login, 'password': password}
+                print (vigenere_cipher(password,key,mode="decode"))
+
+               # input ("press any key to continue ... ")
+
+                data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,key,mode="decode")}
 
                 update_password_data(data_dict)
                               
@@ -401,7 +405,7 @@ def menu_option_4():
     index_number = input(f"Enter password index number copy/paste into clipboard? : ")
     
     copy_password_entry(index_number)
-    
+
     emptyblock()
 
        
