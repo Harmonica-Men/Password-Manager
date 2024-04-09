@@ -253,7 +253,8 @@ def get_passwords():
                 else:
                     password = option_password()        
 
-                data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,key,mode="decode")}
+                print(password)
+                data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,"KEY",mode="encode")}
                 update_password_data(data_dict)
                 return  # Break out of the funcion
             
@@ -284,7 +285,7 @@ def get_passwords():
             print("Invalid choice. Please enter 'Yes' or 'No'")
     else:
         worksheet_to_update = SHEET.worksheet("passwords")
-        worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='decode')])
+        worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode="encode")])
         print(f"Password added successfully\n")
 
 def password_visible():
