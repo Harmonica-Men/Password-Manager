@@ -199,6 +199,22 @@ def get_passwords():
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='encode')])
         print(f"Password added successfully\n")
+
+def password_visble(password_bool):
+    """
+    Prompt the user for a Yes or No answer and return a boolean value.
+    If the input is neither Yes nor No, return False to indicate going back to the main menu. 
+    """
+    print(f"Password visiblity is set as {password_bool}")
+    user_input = input("Do wish to make password visible during password listing ?")
+    if user_input == 'yes' or user_input == 'y':
+        return True
+    elif user_input == 'no' or user_input == 'n':
+        return False
+    else:
+        print("Invalid input. Please enter 'Yes' or 'No'.")
+        return False                 
+
     
 def main():
     """
@@ -262,7 +278,10 @@ def main():
 
             case '5':
                 print("Hide / unhide password ...")
-                password_hide = True
+                # password_hide = input("Make password visiible in password listing, Yes or No")
+                
+                    password_visble()
+            
                 
             case '6':
                 print(f"TY for using Password Manager\n")
