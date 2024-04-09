@@ -137,6 +137,9 @@ def list_passwords(num_entries=None, show_password=bool):
     # Convert the list of dictionaries into a DataFrame
     df = pd.DataFrame(new_data_dict_list)
 
+    # Add a new column for row numbers
+    df['Row Number'] = df.index + 1
+
     # Print the DataFrame without headers and from the second row 
     if num_entries:
         print(df.iloc[1:].head(num_entries).to_string(header=False, index=False))
@@ -217,6 +220,15 @@ def password_visible():
             print("Invalid input. Please enter 'Yes' or 'No'.")
             # user_input = False
 
+def menu_option_1():
+    """
+    Function to handle menu option 1: Create new entry
+    """
+    print('Menu option 1')
+    print("Creating new entry...")
+    get_passwords()
+
+
 def menu_option_2():
     """
     Function to handle menu option 2: List passwords
@@ -273,12 +285,10 @@ def main():
 
         match user_choice:
             case '1':
-                print('Menu option 1')
-                print("Creating new entry...")
-                get_passwords()
-
+                menu_option_1() # add or create new enteries
+                
             case '2':
-                menu_option_2()
+                menu_option_2() # list hidden passwords
                 
             case '3':
                 key = input("Enter the key for password: ")
