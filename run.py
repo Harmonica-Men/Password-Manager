@@ -2,6 +2,7 @@ import gspread
 import pandas as pd
 import string
 import random
+import pyperclip
 
 from google.oauth2.service_account import Credentials
 
@@ -306,12 +307,38 @@ def password_visible():
             #
             # user_input = False
 
-def copy_password_entry(df, index):
+
+
+def copy_password_entry(index_number):
     """
     Copy the password entry from the specified index in the DataFrame.
     """
-    password_entry = df.iloc[index]["Password"]
+
+    worksheet_to_update = SHEET.worksheet("passwords")
+    data = worksheet_to_update.get_all_values()
+
+    # Convert the data into a list of arrays
+    data_list = [row for row in data]
+
+    # Decrypt the passwords using a Vigenère cipher
+
+    for row in data_list:
+        row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
+
+
+    # print (data_list)
+    # print (index_number)
+
+    password_entry = data_list[int(index_number)][2]
+
+    print(password_entry)    
+
+    pyperclip.copy(password_entry)
+
+    input ("press any key to continue ...")
+
     return password_entry
+
 
 
 
@@ -371,6 +398,21 @@ def menu_option_3():
 
     emptyblock()
 
+def menu_option_4():
+    """
+    Copy/paste password by entery number
+    """
+
+    emptyblock()
+    print(f"Menu option 4\n")
+    print(f"Copy/paste password ...\n")
+
+    index_number = input(f"Enter password index number copy/paste into clipboard?")
+    print (index_number)
+
+    copy_password_entry(index_number)
+    # copy_password_entry(df,index_number)
+
        
 def main():
     """
@@ -414,9 +456,8 @@ def main():
                 menu_option_3() # update key
                                 
             case '4':
-                print("Setting password complexity...")
-
-            
+                menu_option_4() # copy / paste password
+                            
             case '5':
                 emptyblock()
                 print(f"TY for using Password Manager\n")
