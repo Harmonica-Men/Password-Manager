@@ -298,14 +298,13 @@ def main():
                 
             case '3':
                 while True:
-                    key = input(f"Enter the key, {key} , for password: ")
+                    key = input(f"The old key: {key} \nEnter new key: ")
                     if key == "":
-                        break
+                        break  # Break out of the inner loop and return to the main loop
                     elif len(key) < 3 or len(key) > 8:
-                        print("Key must be at least eight characters long.")
+                        print("Key must be between 3 and 8 characters long.")
                     else:
-                        return key
-
+                        break  # Break out of the inner loop and return to the main loop
                                 
             case '4':
                 print("Setting password complexity...")
