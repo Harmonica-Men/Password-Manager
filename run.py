@@ -5,6 +5,10 @@ import random
 
 from google.oauth2.service_account import Credentials
 
+global key 
+    
+key = "KEY"
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -226,7 +230,7 @@ def password_visible():
             return False
         else:
             return True
-            print("Invalid input. Please enter 'Yes' or 'No'.")
+            #print("Invalid input. Please enter 'Yes' or 'No'.")
             # user_input = False
 
 def menu_option_1():
@@ -234,9 +238,10 @@ def menu_option_1():
     Function to handle menu option 1: Create new entry
     """
     emptyblock()
-    print('Menu option 1')
-    print("Creating new entry...")
+    print(f'Menu option 1\n')
+    print(f'Creating new entry...\n')
     get_passwords()
+    emptyblock()
 
 
 def menu_option_2():
@@ -244,8 +249,8 @@ def menu_option_2():
     Function to handle menu option 2: List passwords
     """
     emptyblock()
-    print("Menu option 2")
-    print("List passwords...")
+    print(f"Menu option 2\n")
+    print(f"List passwords...\n")
     
     num_entries = input("Enter the number of entries to display (leave empty to display all): ")
 
@@ -259,15 +264,14 @@ def menu_option_2():
         num_entries = None  # Show all entries if input is empty
         
     list_passwords(num_entries, password_visible())
+    emptyblock()
 
 def menu_option_3():
     """
     Update the key for password encryption/decryption.
     """
 
-    global key 
-    
-    key = "KEY"
+    global key  # Declare key as global
 
     emptyblock()
     print(f"Menu option 3\n")
@@ -281,14 +285,21 @@ def menu_option_3():
             print("Key must be between 3 and 8 characters long.")
         else:
             break  # Break out of the inner loop and return to the main loop
+
+    emptyblock()
+
        
 def main():
     """
     Run all program functions
     """
+    global key 
     
-    menu = """
+    key = "KEY"
 
+    emptyblock()    
+    menu = """
+    
 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
@@ -327,11 +338,13 @@ def main():
 
             
             case '5':
+                emptyblock()
                 print(f"TY for using Password Manager\n")
                 print(f"Bye bye ...\n")
                 break
 
             case _:
+                emptyblock()               
                 print("Invalid choice. Please enter a number between 1 and 5.")
     
     
