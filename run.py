@@ -113,7 +113,7 @@ def update_password_data(data_dict):
         print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
 
 
-def list_all_entries(num_entries=None, show_password=bool):
+def list_passwords(num_entries=None, show_password=bool):
     """
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
@@ -200,21 +200,25 @@ def get_passwords():
         worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='encode')])
         print(f"Password added successfully\n")
 
-def password_visble(password_bool):
+def password_visible(password_bool):
     """
     Prompt the user for a Yes or No answer and return a boolean value.
     If the input is neither Yes nor No, return False to indicate going back to the main menu. 
     """
-    print(f"Password visiblity is set as {password_bool}")
-    user_input = input("Do wish to make password visible during password listing ?")
-    if user_input == 'yes' or user_input == 'y':
-        return True
-    elif user_input == 'no' or user_input == 'n':
-        return False
+    if password_bool:
+        visiblity = "Visible"
     else:
-        print("Invalid input. Please enter 'Yes' or 'No'.")
-        return False                 
-
+        visiblity = "Hidden"
+    print(f"Password visiblity is set as {visiblity}")
+    while True:
+        user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
+        if user_input == 'yes' or user_input == 'y':
+            return True
+        elif user_input == 'no' or user_input == 'n':
+            return False
+        else:
+            print("Invalid input. Please enter 'Yes' or 'No'.")
+            return False                 
     
 def main():
     """
@@ -267,7 +271,7 @@ def main():
                 else:
                     num_entries = None  # Show all entries if input is empty
                     
-                list_all_entries(num_entries,True)
+                list_passwords(num_entries,password_visible(password_hide))
                 
             case '3':
                 key = input("Enter the key for password: ")
@@ -280,7 +284,7 @@ def main():
                 print("Hide / unhide password ...")
                 # password_hide = input("Make password visiible in password listing, Yes or No")
                 
-                    password_visble()
+                password_visible(password_hide)
             
                 
             case '6':
