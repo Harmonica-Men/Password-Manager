@@ -205,13 +205,7 @@ def password_visible(password_bool):
     Prompt the user for a Yes or No answer and return a boolean value.
     If the input is neither Yes nor No, return False to indicate going back to the main menu. 
     """
-    if password_bool:
-        visiblity = "Visible"
-    else:
-        visiblity = "Hidden"
-
-    print(f"Password visiblity is set as {visiblity}\n")
-    
+        
     while True:
         user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
         if user_input == 'yes' or user_input == 'y':
