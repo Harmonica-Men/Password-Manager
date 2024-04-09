@@ -143,7 +143,7 @@ def list_passwords(num_entries=None, show_password=bool):
     else:
         print(df.to_string(header=False, index=False))
 
-
+    
 def get_passwords():
     """
     Get user data password information: site, login, password
@@ -209,17 +209,20 @@ def password_visible(password_bool):
         visiblity = "Visible"
     else:
         visiblity = "Hidden"
-    print(f"Password visiblity is set as {visiblity}")
+
+    print(f"Password visiblity is set as {visiblity}\n")
+    
     while True:
         user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
         if user_input == 'yes' or user_input == 'y':
-            return True
-        elif user_input == 'no' or user_input == 'n':
             return False
+        elif user_input == 'no' or user_input == 'n':
+            return True
         else:
+            return True
             print("Invalid input. Please enter 'Yes' or 'No'.")
-            return False                 
-    
+            # user_input = False
+       
 def main():
     """
     Run all program functions
@@ -235,7 +238,7 @@ def main():
     Password Manager (1.01)
 
     
-    Menu:
+*** Menu ***
 
     1. create new entry
     2. list passwords
@@ -266,7 +269,7 @@ def main():
                     try:
                         num_entries = int(num_entries)
                     except ValueError:
-                        print("Invalid input. Please enter a valid number.")
+                        print(f"Invalid input. Please enter a valid number.\n")
                         return
                 else:
                     num_entries = None  # Show all entries if input is empty
@@ -285,6 +288,9 @@ def main():
                 # password_hide = input("Make password visiible in password listing, Yes or No")
                 
                 password_visible(password_hide)
+                
+                print("")
+                print(f"Password visiblity is set as {password_hide}\n")
             
                 
             case '6':
