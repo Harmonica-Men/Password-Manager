@@ -297,9 +297,16 @@ def main():
                 menu_option_2() # list hidden passwords
                 
             case '3':
-                key = input("Enter the key for password: ")
-                print(f"Decipher key set to: {key}")
-                
+                while True:
+                    key = input(f"Enter the key, {key} , for password: ")
+                    if key == "":
+                        break
+                    elif len(key) < 8:
+                        print("Key must be at least eight characters long.")
+                    else:
+                        return key
+
+                                
             case '4':
                 print("Setting password complexity...")
 
