@@ -233,6 +233,7 @@ def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
+    emptyblock()
     print('Menu option 1')
     print("Creating new entry...")
     get_passwords()
@@ -242,8 +243,9 @@ def menu_option_2():
     """
     Function to handle menu option 2: List passwords
     """
+    emptyblock()
     print("Menu option 2")
-    print("Listing passwords...")
+    print("List passwords...")
     
     num_entries = input("Enter the number of entries to display (leave empty to display all): ")
 
@@ -267,7 +269,10 @@ def menu_option_3():
     
     key = "KEY"
 
-    
+    emptyblock()
+    print(f"Menu option 3\n")
+    print(f"Change cipher key ...\n")
+
     while True:
         key = input(f"The old key: {key} \nEnter new key: ")
         if key == "":
