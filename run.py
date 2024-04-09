@@ -159,28 +159,25 @@ def list_passwords(num_entries=None, show_password=bool):
         print(df.iloc[1:].to_string(header=False, index=False))
 
     
+def get_login():
+    """
+    Prompt the user to enter login or email.
+    Returns the entered login if not empty.
+    """
+    while True:
+        login = input("Enter login or email: ")
+        if not login:  # Check if the input string is empty
+            print("Empty input login")
+        else:
+            return login  # Return the entered login if not empty
+
 def get_passwords():
     """
     Get user data password information: site, login, password
     """
 
-    def get_login():
-        """
-        Prompt the user to enter login or email.
-        Returns the entered login if not empty.
-        """
-        while True:
-            login = input("Enter login or email: ")
-            if not login:  # Check if the input string is empty
-                print("Empty input login")
-            else:
-                return login  # Return the entered login if not empty
-
-
     emptyblock()
     print(f"Please enter password data\n")
-
-
 
     while True:
         site = input("Enter site or platform: ")
@@ -199,8 +196,11 @@ def get_passwords():
             else:
                 print("Invalid choice. Please enter 'Yes' or 'No'")
                 continue  # Continue the loop to prompt for choice again
+        else:
+            login = get_login()  # Prompt for login using the get_login function
+            break
 
-        get_login()
+        login = get_login()  # Prompt for login using the get_login function
 
         while True:
             password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
@@ -232,6 +232,7 @@ def get_passwords():
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='encode')])
         print(f"Password added successfully\n")
+
 
 
 def password_visible():
