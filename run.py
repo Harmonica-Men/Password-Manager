@@ -308,7 +308,6 @@ def password_visible():
             # user_input = False
 
 
-
 def copy_password_entry(index_number):
     """
     Copy the password entry from the specified index in the DataFrame.
@@ -325,19 +324,11 @@ def copy_password_entry(index_number):
     for row in data_list:
         row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
 
-
-    # print (data_list)
-    # print (index_number)
-
     password_entry = data_list[int(index_number)][2]
-
-    print(password_entry)    
 
     pyperclip.copy(password_entry)
 
-    input ("press any key to continue ...")
 
-    return password_entry
 
 
 
@@ -407,11 +398,11 @@ def menu_option_4():
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")
 
-    index_number = input(f"Enter password index number copy/paste into clipboard?")
-    print (index_number)
-
+    index_number = input(f"Enter password index number copy/paste into clipboard? : ")
+    
     copy_password_entry(index_number)
-    # copy_password_entry(df,index_number)
+    
+    emptyblock()
 
        
 def main():
