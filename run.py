@@ -171,6 +171,21 @@ def get_login():
         else:
             return login  # Return the entered login if not empty
 
+def option_password():
+    while True:
+        password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
+        if password_option == 'yes' or password_option == 'y':
+            password = generate_random_password()  # Generate random password
+            return password
+            # break
+        elif password_option == 'no' or password_option == 'n':
+            password = input("Enter password: ")
+            return password
+            # break
+        else:
+            print("Invalid input. Please enter 'Yes' or 'No'.")
+
+
 def get_passwords():
     """
     Get user data password information: site, login, password
@@ -190,7 +205,10 @@ def get_passwords():
             print("Site already exists")
             choice = input("Do you want to change the site? (Yes/No): ").lower()
             if choice == 'yes' or choice == 'y':
-                continue  # Continue the loop to prompt for site again
+                login = get_login()
+                password = option_password()                
+                break
+                #continue  # Continue the loop to prompt for site again
             elif choice == 'no' or choice == 'n':
                 return  # Exit the function if site should not be changed
             else:
@@ -198,18 +216,7 @@ def get_passwords():
                 continue  # Continue the loop to prompt for choice again
         else:
             login = get_login()  # Prompt for login using the get_login function
-            
-            while True:
-                password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
-                if password_option == 'yes' or password_option == 'y':
-                    password = generate_random_password()  # Generate random password
-                    break
-                elif password_option == 'no' or password_option == 'n':
-                    password = input("Enter password: ")
-                    break
-                else:
-                    print("Invalid input. Please enter 'Yes' or 'No'.")
-
+            password = option_password()
             if not password:
                 print("Empty input password")
                 return  # Break out of the function if password is empty
@@ -338,7 +345,7 @@ def main():
 
     1. create new entry
     2. list passwords
-    3. set decipher key
+    3. set cipher key
     4. set password complexity
     5. quit
     
