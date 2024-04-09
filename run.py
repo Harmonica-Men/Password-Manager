@@ -206,8 +206,18 @@ def get_passwords():
             choice = input("Do you want to change the site? (Yes/No): ").lower()
             if choice == 'yes' or choice == 'y':
                 login = get_login()
-                password = option_password()                
-                break
+                password = option_password()        
+
+                data_dict = {'site': site, 'login': login, 'password': password}
+
+                update_password_data(data_dict)
+
+                # print(data_dict)
+
+                input('Press any key to continue ... ') 
+
+                return       
+                
                 #continue  # Continue the loop to prompt for site again
             elif choice == 'no' or choice == 'n':
                 return  # Exit the function if site should not be changed
