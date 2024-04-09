@@ -198,25 +198,22 @@ def get_passwords():
                 continue  # Continue the loop to prompt for choice again
         else:
             login = get_login()  # Prompt for login using the get_login function
-            break
+            
+            while True:
+                password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
+                if password_option == 'yes' or password_option == 'y':
+                    password = generate_random_password()  # Generate random password
+                    break
+                elif password_option == 'no' or password_option == 'n':
+                    password = input("Enter password: ")
+                    break
+                else:
+                    print("Invalid input. Please enter 'Yes' or 'No'.")
 
-        login = get_login()  # Prompt for login using the get_login function
-
-        while True:
-            password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
-            if password_option == 'yes' or password_option == 'y':
-                password = generate_random_password()  # Generate random password
-                break
-            elif password_option == 'no' or password_option == 'n':
-                password = input("Enter password: ")
-                break
-            else:
-                print("Invalid input. Please enter 'Yes' or 'No'.")
-
-        if not password:
-            print("Empty input password")
-            return  # Break out of the function if password is empty
-        break  # Break out of the outer while loop after both site, login, and password are provided
+            if not password:
+                print("Empty input password")
+                return  # Break out of the function if password is empty
+            break  # Break out of the outer while loop after both site, login, and password are provided
 
     data_dict = {'site': site, 'login': login, 'password': password}
 
