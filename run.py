@@ -352,17 +352,24 @@ def copy_password_entry(index_number):
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
 
-    # Convert the data into a list of arrays
-    data_list = [row for row in data]
+    max_row = len(data)
 
-    # Decrypt the passwords using a Vigenère cipher
+    if int(index_number) <= max_row:
 
-    for row in data_list:
-        row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
+        # Convert the data into a list of arrays
+        data_list = [row for row in data]
 
-    password_entry = data_list[int(index_number)][2]
+        # Decrypt the passwords using a Vigenère cipher
 
-    pyperclip.copy(password_entry)
+        for row in data_list:
+            row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
+
+        password_entry = data_list[int(index_number)][2]
+
+        pyperclip.copy(password_entry)
+
+    else:
+        print(f"Your index exceed the maximum of rows {max_row} in this\n")
 
 
 def menu_option_1():
