@@ -112,6 +112,11 @@ def update_password_data(data_dict):
     else:
         print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
 
+# Print emtpy block of lines
+def emptyblock():
+    for _ in range(5):
+        print("\n" * 5)
+
 
 def list_passwords(num_entries=None, show_password=bool):
     """
@@ -140,12 +145,9 @@ def list_passwords(num_entries=None, show_password=bool):
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
 
-    # Print emtpy block of lines
+    emptyblock()
+
     
-    for _ in range(5):
-        print("\n" * 5)
-
-
     # Print the DataFrame without headers and from the second row 
     if num_entries:
         print(df.iloc[1:].head(num_entries).to_string(header=False, index=False))
@@ -157,7 +159,8 @@ def get_passwords():
     """
     Get user data password information: site, login, password
     """
-    
+
+    emptyblock()
     print(f"Please enter password data\n")
 
     while True:
@@ -254,6 +257,19 @@ def menu_option_2():
         num_entries = None  # Show all entries if input is empty
         
     list_passwords(num_entries, password_visible())
+
+def menu_option_3():
+    """
+    Update the key for password encryption/decryption.
+    """
+    while True:
+        key = input(f"The old key: {key} \nEnter new key: ")
+        if key == "":
+            break  # Break out of the inner loop and return to the main loop
+        elif len(key) < 3 or len(key) > 8:
+            print("Key must be between 3 and 8 characters long.")
+        else:
+            break  # Break out of the inner loop and return to the main loop
        
 def main():
     """
@@ -297,14 +313,7 @@ def main():
                 menu_option_2() # list hidden passwords
                 
             case '3':
-                while True:
-                    key = input(f"The old key: {key} \nEnter new key: ")
-                    if key == "":
-                        break  # Break out of the inner loop and return to the main loop
-                    elif len(key) < 3 or len(key) > 8:
-                        print("Key must be between 3 and 8 characters long.")
-                    else:
-                        break  # Break out of the inner loop and return to the main loop
+                menu_option_3() # update key
                                 
             case '4':
                 print("Setting password complexity...")
