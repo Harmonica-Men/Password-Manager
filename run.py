@@ -284,7 +284,7 @@ def get_passwords():
             print("Invalid choice. Please enter 'Yes' or 'No'")
     else:
         worksheet_to_update = SHEET.worksheet("passwords")
-        worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='encode')])
+        worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode='decode')])
         print(f"Password added successfully\n")
 
 def password_visible():
