@@ -283,17 +283,8 @@ def main():
             case '4':
                 print("Setting password complexity...")
 
-            case '5':
-                print("Hide / unhide password ...")
-                # password_hide = input("Make password visiible in password listing, Yes or No")
-                
-                password_visible(password_hide)
-                
-                print("")
-                print(f"Password visiblity is set as {password_hide}\n")
             
-                
-            case '6':
+            case '5':
                 print(f"TY for using Password Manager\n")
                 print(f"Bye bye ...\n")
                 break
