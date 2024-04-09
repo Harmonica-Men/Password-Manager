@@ -262,6 +262,12 @@ def menu_option_3():
     """
     Update the key for password encryption/decryption.
     """
+
+    global key 
+    
+    key = "KEY"
+
+    
     while True:
         key = input(f"The old key: {key} \nEnter new key: ")
         if key == "":
@@ -276,10 +282,6 @@ def main():
     Run all program functions
     """
     
-    global key 
-    
-    key = "KEY"
-
     menu = """
 
 
