@@ -313,10 +313,7 @@ def main():
     2. list passwords
     3. set decipher key
     4. set password complexity
-    5. hide / unhide password
-
-    6. quit
-
+    5. quit
     
     Please enter your choice (1-5): """
 
