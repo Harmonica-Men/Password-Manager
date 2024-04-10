@@ -3,6 +3,7 @@ import pandas as pd
 import string
 import random
 import pyperclip
+import os
 
 from google.oauth2.service_account import Credentials
 
@@ -21,8 +22,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
-import string
-import random
+
 
 def generate_random_password(length=12):
     """
@@ -125,9 +125,7 @@ def update_password_data(data_dict):
     """
     Update existing password data in the passwords worksheet.
     """
-    #print(f"/n")
-    #print (data_dict)
-    
+       
     if all(key in data_dict for key in ['site', 'login', 'password']):  # Check if all required keys are present
         worksheet = SHEET.worksheet("passwords")
         column_a_values = worksheet.col_values(1)
@@ -157,16 +155,10 @@ def list_passwords(num_entries=None, show_password=bool):
     data_list = [row for row in data]
 
     # Decrypt the passwords using a Vigenère cipher
-    # Decrypt the passwords using a Vigenère cipher
     if not show_password:
         data_list = [[row[0], row[1], vigenere_cipher(row[2], key, mode='decode')] for row in data_list]
 
-    # if show_password:
-    #    pass
-    # else:
-    #    for row in data_list:
-    #        row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
-
+   
     # Convert the list of arrays into a list of dictionaries
     new_data_dict_list = [{"Row Number": i, "Site": row[0], "Login": row[1], "Password": row[2]} for i, row in enumerate(data_list)]
 
@@ -176,7 +168,6 @@ def list_passwords(num_entries=None, show_password=bool):
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
 
-    emptyblock()
 
     
     # Print the DataFrame without headers and from the second row 
@@ -229,8 +220,6 @@ def get_passwords():
     """
     Get user data password information: site, login, password
     """
-
-    emptyblock()
     print(f"Please enter password data\n")
 
     while True:
@@ -329,18 +318,18 @@ def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
-    emptyblock()
+    
     print(f'Menu option 1\n')
     print(f'Creating new entry...\n')
     get_passwords()
-    emptyblock()
+  
 
 
 def menu_option_2():
     """
     Function to handle menu option 2: List passwords
     """
-    emptyblock()
+    
     print(f"Menu option 2\n")
     print(f"List passwords...\n")
     
@@ -356,7 +345,7 @@ def menu_option_2():
         num_entries = None  # Show all entries if input is empty
         
     list_passwords(num_entries, password_visible())
-    emptyblock()
+   
 
 def menu_option_3():
     """
@@ -364,8 +353,7 @@ def menu_option_3():
     """
 
     global key  # Declare key as global
-
-    emptyblock()
+  
     print(f"Menu option 3\n")
     print(f"Change cipher key ...\n")
 
@@ -378,14 +366,11 @@ def menu_option_3():
         else:
             break  # Break out of the inner loop and return to the main loop
 
-    emptyblock()
-
 def menu_option_4():
     """
     Copy/paste password by entery number
     """
-
-    emptyblock()
+    
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")
 
@@ -393,7 +378,6 @@ def menu_option_4():
     
     copy_password_entry(index_number)
 
-    emptyblock()
 
        
 def main():
@@ -404,7 +388,7 @@ def main():
     
     key = "KEY"
 
-    emptyblock()    
+   
     menu = """
     
 
@@ -429,25 +413,30 @@ def main():
 
         match user_choice:
             case '1':
+                os.system("clear")
                 menu_option_1() # add or create new enteries
                 
             case '2':
+                os.system("clear")
                 menu_option_2() # list hidden passwords
                 
+                
             case '3':
+                os.system("clear")
                 menu_option_3() # update key
                                 
             case '4':
+                os.system("clear")
                 menu_option_4() # copy / paste password
                             
             case '5':
-                emptyblock()
+                os.system("clear")
                 print(f"TY for using Password Manager\n")
                 print(f"Bye bye ...\n")
                 break
 
             case _:
-                emptyblock()               
+                              
                 print("Invalid choice. Please enter a number between 1 and 5.")
     
 # Main program    
