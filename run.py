@@ -6,6 +6,9 @@ import pyperclip
 import os
 
 from google.oauth2.service_account import Credentials
+from colorama import Fore, Style, init
+
+init(autoreset=True)
 
 global key 
     
@@ -139,8 +142,7 @@ def update_password_data(data_dict):
 
 # Print emtpy block of lines
 def emptyblock():
-    for _ in range(5):
-        print("\n" * 5)
+    print("\n" * 2)
 
 
 def list_passwords(num_entries=None, show_password=bool):
@@ -185,13 +187,15 @@ def get_login():
     consecutive_empty_logins = 0
 
     while True:
-        login = input("Enter login or email: ")
+        login = input("Enter login or email:   ")
         if not login:  # Check if the input string is empty
             consecutive_empty_logins += 1
             if consecutive_empty_logins >= 3:
-                # print("No data processed.")
+                print(Fore.RED + f"You enter 3 times blank input \n")
+                print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
                 return login
-            print("Empty input login")
+            print(Fore.RED + f"Empty input login \n")
+            print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
         else:
             return login  # Return the entered login if not empty
 
@@ -200,19 +204,22 @@ def option_password():
     consecutive_empty_password_option = 0
 
     while True:
-        password_option = input("Do you want to auto-generate a password? (Yes/No): ").lower()
-        if password_option == 'yes' or password_option == 'y' or password_option == 'Y':
+        password_option = input ("Do you want to auto-generate a new password? " + Fore.CYAN + "(Yes/No)" + Fore.WHITE + ": ").lower()
+        
+        if password_option == 'yes' or password_option == 'y': 
             password = generate_random_password()  # Generate random password
             return password
             # break
-        elif password_option == 'no' or password_option == 'n' or password_option == 'N':
-            password = input("Enter password: ")
+        elif password_option == 'no' or password_option == 'n':
+            password = input("Enter password:         ")
             return password
             # break
         else:
             consecutive_empty_password_option += 1
-            print("Invalid input. Please enter 'Yes' or 'No'.")
+            print(Fore.RED + f"Invalid input. Please enter " + Fore.CYAN + "(Yes/No)\n")
             if consecutive_empty_password_option >= 3:
+                print(Fore.RED + f"You enter 3 times blank input \n")
+                print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
                 break
 
 
@@ -220,21 +227,23 @@ def get_passwords():
     """
     Get user data password information: site, login, password
     """
-    print(f"Please enter password data\n")
 
     while True:
         site = input("Enter site or platform: ")
         if not site:  # Check if the input string is empty
-            print("Empty input site")
+            print(Fore.RED + "Empty input site")
             return  # Break out of the function if site is empty
 
         # Check if site already exists
         if check_value_in_column_a(site.lower()):
-            print("Site already exists")
-            choice = input("Do you want to change the site? (Yes/No): ").lower()
-            if choice == 'yes' or choice == 'y' or choice == 'Y':
+            print(Fore.RED + "Site already exists !!")
+            choice = input(f"Do you want to change the site? " + Fore.CYAN + "(Yes/No)").lower()
+            print(Style.RESET_ALL)
+            if choice == 'yes' or choice == 'y':
                 login = get_login()
                 if len(login) == 0:
+                    print(Fore.RED + f"Empty input ... \n")
+                    print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
                     return
                 else:
                     password = option_password()        
@@ -245,9 +254,10 @@ def get_passwords():
                 return  # Break out of the funcion
             
             elif choice == 'no' or choice == 'n' or choice == 'N':
+                print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
                 return  # Exit the function if site should not be changed
             else:
-                print("Invalid choice. Please enter 'Yes' or 'No'")
+                # print(Fore.RED + f"Invalid choice. Please enter " + Fore.CYAN + "(Yes\No)")
                 continue  # Continue the loop to prompt for choice again
         else:
             login = get_login()  # Prompt for login using the get_login function
@@ -268,11 +278,16 @@ def get_passwords():
         elif choice == 'no' or choice == 'n' or choice == 'N':
             print(f"No changes made to password data\n")
         else:
-            print("Invalid choice. Please enter 'Yes' or 'No'")
+            print(Fore.RED + "Invalid choice. Please enter 'Yes' or 'No'")
     else:
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.append_row([site, login, vigenere_cipher(password,key,mode="encode")])
-        print(f"Password added successfully\n")
+        emptyblock()
+        print(Fore.GREEN + f"Password added successfully\n")
+        emptyblock
+        input(f"Press Enter to continue ... \n")
+        # print(Style.RESET_ALL)
+        os.system("clear")
 
 def password_visible():
     """
@@ -287,7 +302,7 @@ def password_visible():
         elif user_input == 'yes' or user_input == 'Y' or user_input == 'y':
             return False
         else:
-            print("Invalid input. Please enter 'Yes' or 'No'.")
+            print(Fore.RED + "Invalid input. Please enter 'Yes' or 'No'.")
             return True
 
 def copy_password_entry(index_number):
@@ -311,18 +326,25 @@ def copy_password_entry(index_number):
         password_entry = data_list[int(index_number)][2]
         pyperclip.copy(password_entry)
     else:
-        print(f"Your index exceed the maximum of rows {max_row} in this\n")
+        print(Fore.RED + f"Your index exceed the maximum of rows {max_row} in this\n")
 
 
 def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
+
+    M_option1 = """
     
-    print(f'Menu option 1\n')
-    print(f'Creating new entry...\n')
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    
+*** Menu Option 1 - Creating a new entry... 
+"""
+    print(M_option1)
     get_passwords()
-  
+
 
 
 def menu_option_2():
@@ -330,16 +352,19 @@ def menu_option_2():
     Function to handle menu option 2: List passwords
     """
     
-    print(f"Menu option 2\n")
-    print(f"List passwords...\n")
+    print(f"Menu Option 2\n")
+    print(f"\n")
+    print(f"List passwords ...\n")
+    print(f"\n")
+    emptyblock()
     
-    num_entries = input("Enter the number of entries to display (leave empty to display all): ")
+    num_entries = input(f"Enter the number of entries to display " + Fore.CYAN + " (leave empty to display all): ")
 
     if num_entries.strip():  # Check if input is not empty
         try:
             num_entries = int(num_entries)
         except ValueError:
-            print("Invalid input. Please enter a valid number.")
+            print(Fore.RED + "Invalid input. Please enter a valid number.")
             return
     else:
         num_entries = None  # Show all entries if input is empty
@@ -362,7 +387,7 @@ def menu_option_3():
         if key == "":
             break  # Break out of the inner loop and return to the main loop
         elif len(key) < 3 or len(key) > 8:
-            print("Key must be between 3 and 8 characters long.")
+            print(Fore.RED + "Key must be between 3 and 8 characters long.")
         else:
             break  # Break out of the inner loop and return to the main loop
 
@@ -373,12 +398,10 @@ def menu_option_4():
     
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")
-
+    
     index_number = input(f"Enter password index number copy/paste into clipboard? : ")
     
     copy_password_entry(index_number)
-
-
        
 def main():
     """
@@ -387,20 +410,15 @@ def main():
     global key 
     
     key = "KEY"
-
-   
     menu = """
     
-
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-
     
 *** Menu ***
 
-    1. create new entry
+    1. create a new entry
     2. list passwords
     3. set cipher key
     4. copy / paste password 
@@ -412,22 +430,25 @@ def main():
         user_choice = input(menu)
 
         match user_choice:
+            # add or create new enteries
             case '1':
                 os.system("clear")
-                menu_option_1() # add or create new enteries
+                menu_option_1() 
                 
+            # list hidden passwords
             case '2':
                 os.system("clear")
-                menu_option_2() # list hidden passwords
+                menu_option_2() 
                 
-                
+            # update key
             case '3':
                 os.system("clear")
-                menu_option_3() # update key
+                menu_option_3() 
                                 
+            # copy / paste password
             case '4':
                 os.system("clear")
-                menu_option_4() # copy / paste password
+                menu_option_4() 
                             
             case '5':
                 os.system("clear")
