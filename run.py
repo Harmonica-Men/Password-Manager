@@ -136,9 +136,14 @@ def update_password_data(data_dict):
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.update_cell(row_index, 2, data_dict['login'])  # Update login value (column B)
         worksheet_to_update.update_cell(row_index, 3, data_dict['password'])  # Update password value (column C)
-        print("Password data updated successfully")
+        # emptyblock()
+        # print(Fore.GREEN + f"Password data updated successfully\n")
+        # emptyblock()
+        # os.system("clear")
     else:
-        print("Invalid password data format. Please provide 'site', 'login', and 'password' keys.")
+        emptyblock()
+        print(f"Invalid password data format. Please provide 'site', 'login', and 'password' keys.\n")
+        emptyblock
 
 # Print emtpy block of lines
 def emptyblock():
@@ -170,14 +175,11 @@ def list_passwords(num_entries=None, show_password=bool):
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
 
-
-    
     # Print the DataFrame without headers and from the second row 
     if num_entries:
         print(df.iloc[1:].head(num_entries).to_string(header=False, index=False))
     else:
         print(df.iloc[1:].to_string(header=False, index=False))
-
     
 def get_login():
     """
@@ -190,12 +192,14 @@ def get_login():
         login = input("Enter login or email:   ")
         if not login:  # Check if the input string is empty
             consecutive_empty_logins += 1
-            if consecutive_empty_logins >= 3:
-                print(Fore.RED + f"You enter 3 times blank input \n")
-                print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
-                return login
+            if consecutive_empty_logins >= 1:
+                # print(Fore.RED + f"You enter 1 times blank input \n")
+                # print("test")
+                return 
+            
             print(Fore.RED + f"Empty input login \n")
-            print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
+
+            # print(Fore.RED + f" data processed! Exiting ... Back to main menu \n")
         else:
             return login  # Return the entered login if not empty
 
@@ -216,12 +220,15 @@ def option_password():
             # break
         else:
             consecutive_empty_password_option += 1
-            print(Fore.RED + f"Invalid input. Please enter " + Fore.CYAN + "(Yes/No)\n")
+            print(Fore.RED + f"Invalid input. Please enter (Yes/No)\n")
             if consecutive_empty_password_option >= 3:
                 print(Fore.RED + f"You enter 3 times blank input \n")
-                print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
+                print(Fore.RED + f"No data processed ! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
                 break
-
 
 def get_passwords():
     """
@@ -231,41 +238,77 @@ def get_passwords():
     while True:
         site = input("Enter site or platform: ")
         if not site:  # Check if the input string is empty
-            print(Fore.RED + "Empty input site")
+            print(Fore.RED + "Empty input site or platfrom !!")
+            print(Fore.RED + f"No data processed! \n")
+            print(Fore.RED + f"Exiting ... Back to main menu \n")
+            emptyblock
+            input(f"Press Enter to continue ... \n")
+            os.system("clear")
             return  # Break out of the function if site is empty
 
         # Check if site already exists
         if check_value_in_column_a(site.lower()):
-            print(Fore.RED + "Site already exists !!")
-            choice = input(f"Do you want to change the site? " + Fore.CYAN + "(Yes/No)").lower()
+            print(Fore.RED + f"Site already exists !!\n")
+            choice = input(f"Do you want to change the site? " + Fore.CYAN + "(Yes/No)" + Fore.WHITE + ": ").lower()
             print(Style.RESET_ALL)
             if choice == 'yes' or choice == 'y':
                 login = get_login()
-                if len(login) == 0:
-                    print(Fore.RED + f"Empty input ... \n")
-                    print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
+                if login == None:
+                    print(Fore.RED + f"The login input is empty ! \n")
+                    print(Fore.RED + f"No data processed ! \n")
+                    print(Fore.RED + f"Exiting ... Back to main menu \n")
+                    emptyblock
+                    input(f"Press Enter to continue ... \n")
+                    os.system("clear")
                     return
                 else:
                     password = option_password()        
 
-                print(password)
+                # print(password)
                 data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,key,mode="encode")}
                 update_password_data(data_dict)
-                return  # Break out of the funcion
+
+                emptyblock()
+                print(Fore.GREEN + f"Password added successfully\n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+
+                return  
             
-            elif choice == 'no' or choice == 'n' or choice == 'N':
-                print(Fore.RED + f"No data processed! Exiting ... Back to main menu \n")
-                return  # Exit the function if site should not be changed
+            elif choice == 'no' or choice == 'n':
+                print(Fore.RED + f"No data processed ! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                return  
             else:
                 # print(Fore.RED + f"Invalid choice. Please enter " + Fore.CYAN + "(Yes\No)")
-                continue  # Continue the loop to prompt for choice again
+                continue  
         else:
-            login = get_login()  # Prompt for login using the get_login function
-            if len(login) == 0:
-                return
+            # Prompt for login using the get_login function
+            login = get_login()  
+            # print("Login ", login)
+            if login == None:
+                print(Fore.RED + f"The login input is empty !\n")
+                print(Fore.RED + f"No data processed ! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                return  
+            
             
             password = option_password()
             if not password:
+                print(Fore.RED + f"Empty password input ... \n")
+                print(Fore.RED + f"No data processed ! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                
                 return  # Break out of the function if password is empty
             break  # Break out of the outer while loop after both site, login, and password are provided
 
@@ -410,6 +453,9 @@ def main():
     global key 
     
     key = "KEY"
+
+    os.system("clear")
+
     menu = """
     
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
