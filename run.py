@@ -406,20 +406,39 @@ def menu_option_3():
     print(f"Change cipher key ...\n")
 
     while True:
-        key = input(f"The old key: {key} \nEnter new key: ")
-        if key == "":
-            break  
-        elif len(key) < 3 or len(key) > 8:
-            key = old_key
-            print(Fore.RED + f"Key must be between 3 and 8 characters long.\n")
-            print(Fore.RED + f"No data processed! \n")
-            print(Fore.RED + f"Exiting ... Back to main menu \n")
-            emptyblock
-            input(f"Press Enter to continue ... \n")
-            os.system("clear")
-            return
+        print(f"The old key: " + Fore.CYAN + key)
+        key = input(f"Enter the new: ")
+
+        if len(key) == 0 or len(key) > 8:
+            
+            if len(key) > 8:
+                key = old_key
+                emptyblock()
+                print(Fore.RED + f"cipher key is to long (max 8 charaters)\n")
+                print(Fore.RED + f"No data processed! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                return
+            else:
+                key = old_key
+                emptyblock()
+                print(Fore.RED + f"cipher key is empty \n")
+                print(Fore.RED + f"No data processed! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                return
         else:
-            break  
+            break
+
+    emptyblock()
+    print(Fore.GREEN + f"Cipher Key updated successfully\n")
+    emptyblock()
+    input(f"Press Enter to continue ... \n")
+    os.system("clear")
 
 def menu_option_4():
     """
