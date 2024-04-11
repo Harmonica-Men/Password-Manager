@@ -500,9 +500,7 @@ def menu_option_5():
         default_user = input(f"The default user login: {default_user} \nEnter new user login : ")
                              
         if len(default_user) <= 0:
-            default_user = old_user
-            print('test')
-            default_user = old_user
+            default_user = old_user            
             print(Fore.RED + f"You entered nothing\n")
             print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
