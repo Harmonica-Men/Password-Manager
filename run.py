@@ -7,7 +7,7 @@ import os
 
 from pyperclip import PyperclipException
 from google.oauth2.service_account import Credentials
-from colorama import Fore, Style, init
+from colorama import Fore, init
 
 init(autoreset=True)
 
@@ -362,17 +362,21 @@ def copy_password_entry(index_number):
         
         try:
             pyperclip.copy(password_entry)
-            emptyblock()
-            print(Fore.GREEN + f"Password is copied into the clipboard.\n")
-            emptyblock
-            input(f"Press Enter to continue...\n")
-            os.system("clear")
+           # emptyblock()
+           # print(Fore.GREEN + f"Password is copied into the clipboard.\n")
+           # emptyblock
+           # input(f"Press Enter to continue...\n")
+           # os.system("clear")
         except PyperclipException as e:
-            print(Fore.RED + "Failed to copy password entry to clipboard. Please check your clipboard settings.\n")
-            print(Fore.RED + "The program will continue running.\n")
+            print(Fore.RED + "Failed to copy password entry to clipboard\n")
+            #print(Fore.RED + "The program will continue running.\n")
+            print(f"\n")
+            print(Fore.RED + f"No data processed ! \n")
+            print(Fore.RED + f"Exiting ... Back to main menu \n")
             emptyblock
-            input(f"Press Enter to continue...\n")
+            input(f"Press Enter to continue ... \n")
             os.system("clear")
+            return
    
         # pyperclip.copy(password_entry)
     else:
