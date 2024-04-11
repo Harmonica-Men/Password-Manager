@@ -428,14 +428,13 @@ def menu_option_5():
 
     while True:
         key = input(f"The default user login: {key} \nEnter new user login : ")
-        if key == "":
-            break  # Break out of the inner loop and return to the main loop
-        elif len(key) < 3 or len(key) > 8:
-            print(Fore.RED + "Key must be between 3 and 8 characters long.")
+        if default_user == "":
+            break 
+        elif len(default_user) < 3 or len(default_user) > 8:
+            print(Fore.RED + "default user login must be between 3 and 8 characters long.")
         else:
-            break  # Break out of the inner loop and return to the main loop
-    
-       
+            break 
+           
 def main():
     """
     Run all program functions
