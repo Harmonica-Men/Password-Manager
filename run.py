@@ -206,6 +206,7 @@ def option_password():
             password = generate_random_password()  # Generate random password
             print(Fore.RED + f"Password must be at least 6 characters long!\n")
             print(Fore.RED + "Password is now auto-generated")
+            return password
         else:
             return password 
 
@@ -270,7 +271,7 @@ def get_passwords():
                 os.system("clear")
                 return  
             else:
-                print(Fore.RED + f"Invalid choice ! back to main menu  \n")
+                print(Fore.RED + f"Invalid choice ! back to main menu  \n")                
                 # print(Fore.CYAN + "(Yes\No or Enter)")
                 return  
         else:
@@ -357,6 +358,12 @@ def copy_password_entry(index_number):
         pyperclip.copy(password_entry)
     else:
         print(Fore.RED + f"Your index exceed the maximum of rows {max_row} in this\n")
+
+    emptyblock()
+    print(Fore.GREEN + f"Password is copied into the clipboard \n")
+    emptyblock
+    input(f"Press Enter to continue ... \n")
+    os.system("clear")
 
 
 def menu_option_1():
