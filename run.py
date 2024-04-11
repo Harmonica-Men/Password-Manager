@@ -192,15 +192,22 @@ def get_login():
 
 
 def option_password():
-
-    password = input("Enter password: (press ENTER to auto-generate a new password) : ")
-
-    if not password:
-        password = generate_random_password()  # Generate random password          
-        print(Fore.GREEN + f"Using auto-generated password\n")  
-        return password
-    else:
-        return password        
+    """
+    Prompt the user to enter a password or auto-generate one.
+    Returns the entered or generated password if it meets the requirements, otherwise prompts the user again.
+    """
+    while True:
+        password = input("Enter password (press ENTER to auto-generate a new password): ")
+        if not password:
+            password = generate_random_password()  # Generate random password
+            print(Fore.GREEN + "Using auto-generated password\n")
+            return password
+        elif len(password) < 6:
+            password = generate_random_password()  # Generate random password
+            print(Fore.RED + f"Password must be at least 6 characters long!\n")
+            print(Fore.RED + "Password is now auto-generated")
+        else:
+            return password 
 
 def get_passwords():
     """
@@ -218,16 +225,16 @@ def get_passwords():
             os.system("clear")
             return  # Break out of the function if site is empty
         
-        if len(site) > 20:
+        if len(site) > 12:
             print(f"\n")
-            print(Fore.RED + f"Site or platform input strinh cannot be greater than 20 characters!\n")
+            print(Fore.RED + f"Site or platform input strinh cannot be greater than 12 characters!\n")
             continue
 
         # Check if site already exists
         if check_value_in_column_a(site.lower()):
             print(Fore.RED + f"Site already exists !!\n")
             print("Do you want to change the site?")
-            choice = input(f"Yes/No or press ENTER to return\n").lower()
+            choice = input(f"Yes/No or press ENTER to return Main menu \n").lower()
             
             # print(Style.RESET_ALL)
             if choice == 'yes' or choice == 'y':
@@ -263,8 +270,9 @@ def get_passwords():
                 os.system("clear")
                 return  
             else:
-                # print(Fore.RED + f"Invalid choice. Please enter " + Fore.CYAN + "(Yes\No)")
-                continue  
+                print(Fore.RED + f"Invalid choice ! back to main menu  \n")
+                # print(Fore.CYAN + "(Yes\No or Enter)")
+                return  
         else:
             # Prompt for login using the get_login function
             login = get_login()  
