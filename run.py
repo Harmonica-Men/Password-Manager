@@ -475,7 +475,7 @@ def menu_option_4():
         input(f"Press Enter to continue ... \n")
         os.system("clear")
     else:
-        print(check_if_number(index_number))
+        # print(check_if_number(index_number))
         # input("Press Enter to continue...")
         if check_if_number(index_number):
             copy_password_entry(int(index_number))
