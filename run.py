@@ -5,6 +5,7 @@ import random
 import pyperclip
 import os
 
+from pyperclip import PyperclipException
 from google.oauth2.service_account import Credentials
 from colorama import Fore, Style, init
 
@@ -13,6 +14,8 @@ init(autoreset=True)
 global key 
     
 key = "KEY"
+
+EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism for your system. For more information, please visit https://pyperclip.readthedocs.io/en/latest/index.html#not-implemented-error"
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
