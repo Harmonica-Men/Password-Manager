@@ -361,6 +361,13 @@ def copy_password_entry(index_number):
         pyperclip.copy(password_entry)
     else:
         print(Fore.RED + f"Your index exceed the maximum of rows {max_row} in this\n")
+        print(f"\n")
+        print(Fore.RED + f"No data processed ! \n")
+        print(Fore.RED + f"Exiting ... Back to main menu \n")
+        emptyblock
+        input(f"Press Enter to continue ... \n")
+        os.system("clear")
+        return
 
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
@@ -588,6 +595,11 @@ def main():
                             
             case '6':
                 os.system("clear")
+                 # Copy an empty string to clear the clipboard 
+                
+                clear_clipboard()
+                pyperclip.copy('')
+
                 print(f"TY for using Password Manager\n")
                 print(f"Bye bye ...\n")
                 break
