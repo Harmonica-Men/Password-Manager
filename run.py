@@ -200,10 +200,11 @@ def option_password():
     password = input("Enter password: (press ENTER to auto-generate a new password) : ")
 
     if not password:
+        password = generate_random_password()  # Generate random password          
+        print(Fore.GREEN + f"Using auto-generated password\n")  
         return password
     else:
-        password = generate_random_password()  # Generate random password          
-        print(Fore.GREEN + f"Using auto-generated password\n")          
+        return password        
 
 def get_passwords():
     """
@@ -224,7 +225,7 @@ def get_passwords():
         # Check if site already exists
         if check_value_in_column_a(site.lower()):
             print(Fore.RED + f"Site already exists !!\n")
-            choice = input(f"Do you want to change the site? " + Fore.CYAN + "(Yes/No)" + Fore.WHITE + ": ").lower()
+            choice = input(f"Do you want to change the site? " + Fore.CYAN + "Yes/No or Enter " + Fore.WHITE + ": ").lower()
             print(Style.RESET_ALL)
             if choice == 'yes' or choice == 'y':
                 login = get_login()
