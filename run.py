@@ -150,7 +150,7 @@ def list_passwords(show_password=bool):
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
     """
-    print(show_password)
+    #print(show_password)
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
 
@@ -217,6 +217,11 @@ def get_passwords():
             input(f"Press Enter to continue ... \n")
             os.system("clear")
             return  # Break out of the function if site is empty
+        
+        if len(site) > 20:
+            print(f"\n")
+            print(Fore.RED + f"Site or platform input strinh cannot be greater than 20 characters!\n")
+            continue
 
         # Check if site already exists
         if check_value_in_column_a(site.lower()):
@@ -312,7 +317,7 @@ def password_visible() -> bool:
     """
     print("Do you wish to make passwords visible during password listing?")
     while True:
-        choice = input("Yes/No or press ENTER to return: ").lower()
+        choice = input("Press Yes/No or ENTER : ").lower()
         if not choice:  # If the user presses Enter without input
             return False
         elif choice == 'yes' or choice == 'y':
