@@ -490,29 +490,48 @@ def menu_option_4():
 
 def menu_option_5():
     global default_user
+
+    old_user = default_user
   
     print(f"Menu option 5\n")
     print(f"Change default user login ...\n")
 
     while True:
         default_user = input(f"The default user login: {default_user} \nEnter new user login : ")
-        if default_user == "":
+        # if not default_user:          
+        print(f" default user:  {default_user} \n")  
+        print(f" default user:  {len(default_user)} \n") 
+                     
+        if len(default_user) <= 0:
+            default_user = old_user
+            print('test')
+            default_user = old_user
+            print(Fore.RED + f"You entered nothing\n")
             print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
             emptyblock
             input(f"Press Enter to continue ... \n")
             os.system("clear")
-            break 
-        elif len(default_user) > 12:
-            print(Fore.RED + f"default user login must be smaller then 12 characters long.\n")
-            print(Fore.RED + f"No data processed! \n")
-            print(Fore.RED + f"Exiting ... Back to main menu \n")
-            emptyblock
-            input(f"Press Enter to continue ... \n")
-            os.system("clear")
-            return
+            break
         else:
-            break 
+            if len(default_user) >= 12:
+                default_user = old_user
+                print(Fore.RED + f"default user login must be smaller then 12 characters long.\n")
+                print(Fore.RED + f"No data processed! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                break
+            else:
+                emptyblock()
+                print(Fore.GREEN + f"Default password added successfully\n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                break
+
+        
            
 def main():
     """
