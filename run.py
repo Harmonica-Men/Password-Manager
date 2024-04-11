@@ -416,11 +416,25 @@ def menu_option_4():
     """
     
     print(f"Menu option 4\n")
-    print(f"Copy/paste password ...\n")
-    
+    print(f"Copy/paste password ...\n")   
     index_number = input(f"Enter password index number copy/paste into clipboard? : ")
-    
     copy_password_entry(index_number)
+
+def menu_option_5():
+    global default_user
+  
+    print(f"Menu option 5\n")
+    print(f"Change default user login ...\n")
+
+    while True:
+        key = input(f"The default user login: {key} \nEnter new user login : ")
+        if key == "":
+            break  # Break out of the inner loop and return to the main loop
+        elif len(key) < 3 or len(key) > 8:
+            print(Fore.RED + "Key must be between 3 and 8 characters long.")
+        else:
+            break  # Break out of the inner loop and return to the main loop
+    
        
 def main():
     """
@@ -446,9 +460,10 @@ def main():
     2. list passwords
     3. set cipher key
     4. copy / paste password 
-    5. quit
+    5. change default user login
+    6. quit
     
-    Please enter your choice (1-5): """
+    Please enter your choice (1-6): """
 
     while True:
         user_choice = input(menu)
@@ -473,15 +488,19 @@ def main():
             case '4':
                 os.system("clear")
                 menu_option_4() 
-                            
+
+            # set default_user
             case '5':
+                os.system("clear")
+                menu_option_5()
+                            
+            case '6':
                 os.system("clear")
                 print(f"TY for using Password Manager\n")
                 print(f"Bye bye ...\n")
                 break
 
-            case _:
-                              
+            case _:                          
                 print("Invalid choice. Please enter a number between 1 and 5.")
     
 # Main program    
