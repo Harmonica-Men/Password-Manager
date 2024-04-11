@@ -515,7 +515,11 @@ def main():
                 break
 
             case _:                          
-                print("Invalid choice. Please enter a number between 1 and 5.")
+                print(Fore.RED + f"Invalid choice. Please enter a number between 1 and 5.\n")
+                emptyblock()
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
+                
     
 # Main program    
 if __name__ == "__main__":
