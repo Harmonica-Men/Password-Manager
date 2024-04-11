@@ -55,8 +55,6 @@ def generate_random_password(length=12):
     # Shuffle the password to ensure randomness
     random.shuffle(password)
 
-    
-
     return ''.join(password)
 
 
@@ -565,7 +563,7 @@ def main():
     Please enter your choice (1-6): """
 
     while True:
-        userchoice = input(f"menu {menu} \n")
+        userchoice = input(f"{menu} \n")
 
         if userchoice == '1':
             os.system("clear")
