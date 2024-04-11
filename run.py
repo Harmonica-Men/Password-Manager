@@ -404,11 +404,13 @@ def menu_option_3():
     while True:
         key = input(f"The old key: {key} \nEnter new key: ")
         if key == "":
-            break  # Break out of the inner loop and return to the main loop
+            break  
         elif len(key) < 3 or len(key) > 8:
-            print(Fore.RED + "Key must be between 3 and 8 characters long.")
+            print(Fore.RED + f"Key must be between 3 and 8 characters long.\n")
+           
+            return
         else:
-            break  # Break out of the inner loop and return to the main loop
+            break  
 
 def menu_option_4():
     """
@@ -427,11 +429,22 @@ def menu_option_5():
     print(f"Change default user login ...\n")
 
     while True:
-        key = input(f"The default user login: {key} \nEnter new user login : ")
+        default_user = input(f"The default user login: {default_user} \nEnter new user login : ")
         if default_user == "":
+            print(Fore.RED + f"No data processed! \n")
+            print(Fore.RED + f"Exiting ... Back to main menu \n")
+            emptyblock
+            input(f"Press Enter to continue ... \n")
+            os.system("clear")
             break 
         elif len(default_user) < 3 or len(default_user) > 8:
-            print(Fore.RED + "default user login must be between 3 and 8 characters long.")
+            print(Fore.RED + f"default user login must be between 3 and 8 characters long.\n")
+            print(Fore.RED + f"No data processed! \n")
+            print(Fore.RED + f"Exiting ... Back to main menu \n")
+            emptyblock
+            input(f"Press Enter to continue ... \n")
+            os.system("clear")
+            return
         else:
             break 
            
