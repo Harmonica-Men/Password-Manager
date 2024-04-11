@@ -597,7 +597,7 @@ def main():
                 os.system("clear")
                  # Copy an empty string to clear the clipboard 
                 
-                clear_clipboard()
+                #clear_clipboard()
                 pyperclip.copy('')
 
                 print(f"TY for using Password Manager\n")
