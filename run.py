@@ -362,8 +362,17 @@ def copy_password_entry(index_number):
         
         try:
             pyperclip.copy(password_entry)
+            emptyblock()
+            print(Fore.GREEN + f"Password is copied into the clipboard.\n")
+            emptyblock
+            input(f"Press Enter to continue...\n")
+            os.system("clear")
         except PyperclipException as e:
-            raise PyperclipException("Failed to copy password entry to clipboard") from e
+            print(Fore.RED + "Failed to copy password entry to clipboard. Please check your clipboard settings.\n")
+            print(Fore.RED + "The program will continue running.\n")
+            emptyblock
+            input(f"Press Enter to continue...\n")
+            os.system("clear")
    
         # pyperclip.copy(password_entry)
     else:
