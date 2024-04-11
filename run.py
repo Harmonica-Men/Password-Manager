@@ -183,7 +183,7 @@ def get_login():
     Returns the entered login if not empty.
     """
     while True:
-        login = input(f"Enter login or email (press Enter for '{default_user}'): ")
+        login = input(f"Enter login or email (press Enter for '{default_user}'): \n")
         if not login:  # Check if the input string is empty
             print(Fore.GREEN + f"Using default login: {default_user}\n")
             return default_user
@@ -197,10 +197,10 @@ def option_password():
     Returns the entered or generated password if it meets the requirements, otherwise prompts the user again.
     """
     while True:
-        password = input("Enter password (press ENTER to auto-generate a new password): ")
+        password = input(f"Enter password (press ENTER to auto-generate a new password\n): ")
         if not password:
             password = generate_random_password()  # Generate random password
-            print(Fore.GREEN + "Using auto-generated password\n")
+            print(Fore.GREEN + "Using auto-generated password")
             return password
         elif len(password) < 6:
             password = generate_random_password()  # Generate random password
@@ -305,7 +305,7 @@ def get_passwords():
     data_dict = {'site': site, 'login': login, 'password': password}
 
     if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
-        choice = input("Password data already exists. Do you want to alter it? (Yes/No): ").lower()
+        choice = input(f"Password data already exists. Do you want to alter it? (Yes/No): \n").lower()
         if choice == 'yes' or choice == 'y' or choice == 'Y':
             update_password_data(data_dict)
         elif choice == 'no' or choice == 'n' or choice == 'N':
@@ -328,7 +328,7 @@ def password_visible() -> bool:
     """
     print("Do you wish to make passwords visible during password listing?")
     while True:
-        choice = input("Press Yes/No or ENTER : ").lower()
+        choice = input(f"Press Yes/No or ENTER : \n").lower()
         if not choice:  # If the user presses Enter without input
             return False
         elif choice == 'yes' or choice == 'y':
@@ -472,7 +472,7 @@ def menu_option_4():
     
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")   
-    index_number = input(f"Enter password index number copy/paste into clipboard? : ")
+    index_number = input(f"Enter password index number copy/paste into clipboard? : \n")
     if not index_number:
         emptyblock()
         print(Fore.RED + f"You enter nothing\n")
