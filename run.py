@@ -346,8 +346,7 @@ def copy_password_entry(index_number):
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
     max_row = len(data)
-
-    print(index_number)
+    
     if int(index_number) <= max_row:
 
         # Convert the data into a list of arrays
