@@ -369,15 +369,16 @@ def copy_password_entry(index_number):
     os.system("clear")
 
 def check_if_number(input_str):
-    """
-    Check if the input is a number or a string.
-    
-    """
     # Check if the input is a number
     if isinstance(input_str, (int, float)):
         return True
-    else: 
-        return False
+    
+    # Check if the input is a string containing only digits
+    if input_str.isdigit():
+        return True
+    
+    # If the input is neither a number nor a string containing only digits
+    return False
 
 def menu_option_1():
     """
@@ -474,9 +475,9 @@ def menu_option_4():
         input(f"Press Enter to continue ... \n")
         os.system("clear")
     else:
-        print(check_if_number(int(index_number)))
-        input("Press Enter to continue...")
-        if check_if_number(int(index_number)):
+        print(check_if_number(index_number))
+        # input("Press Enter to continue...")
+        if check_if_number(index_number):
             copy_password_entry(int(index_number))
         else:
             emptyblock()
