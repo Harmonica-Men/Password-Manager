@@ -150,7 +150,7 @@ def emptyblock():
     print("\n" * 2)
 
 
-def list_passwords(num_entries=None, show_password=bool):
+def list_passwords(show_password=bool):
     """
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
@@ -176,10 +176,7 @@ def list_passwords(num_entries=None, show_password=bool):
     df = df[['Row Number', 'Site', 'Login', 'Password']]
 
     # Print the DataFrame without headers and from the second row 
-    if num_entries:
-        print(df.iloc[1:].head(num_entries).to_string(header=False, index=False))
-    else:
-        print(df.iloc[1:].to_string(header=False, index=False))
+    print(df.iloc[1:].to_string(header=False, index=False))
     
 def get_login():
     """
@@ -377,20 +374,8 @@ def menu_option_2():
     print(f"\n")
     print(f"List passwords ...\n")
     print(f"\n")
-    emptyblock()
-    
-    num_entries = input(f"Enter the number of entries to display " + Fore.CYAN + " (leave empty to display all): ")
-
-    if num_entries.strip():  # Check if input is not empty
-        try:
-            num_entries = int(num_entries)
-        except ValueError:
-            print(Fore.RED + "Invalid input. Please enter a valid number.")
-            return
-    else:
-        num_entries = None  # Show all entries if input is empty
-        
-    list_passwords(num_entries, password_visible())
+       
+    list_passwords(password_visible())
    
 
 def menu_option_3():
