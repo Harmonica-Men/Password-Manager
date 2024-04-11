@@ -565,9 +565,9 @@ def main():
     Please enter your choice (1-6): """
 
     while True:
-        user_choice = input(menu)
+        userchoice = input(menu)
 
-        match user_choice:
+        match userchoice:
             # add or create new enteries
             case '1':
                 os.system("clear")
