@@ -164,7 +164,6 @@ def list_passwords(show_password=bool):
     # Decrypt the passwords using a Vigenère cipher
     if not show_password:
         data_list = [[row[0], row[1], vigenere_cipher(row[2], key, mode='decode')] for row in data_list]
-
    
     # Convert the list of arrays into a list of dictionaries
     new_data_dict_list = [{"Row Number": i, "Site": row[0], "Login": row[1], "Password": row[2]} for i, row in enumerate(data_list)]
@@ -177,6 +176,10 @@ def list_passwords(show_password=bool):
 
     # Print the DataFrame without headers and from the second row 
     print(df.iloc[1:].to_string(header=False, index=False))
+
+    emptyblock
+    input(f"Press Enter to continue ... \n")
+    os.system("clear")
     
 def get_login():
     """
@@ -312,16 +315,18 @@ def password_visible():
     Prompt the user for a Yes or No answer and return a boolean value.
     If the input is neither Yes nor No, return False to indicate going back to the main menu. 
     """
-        
+    
+    print(f"Do wish to make password visible during password listing ? \n")
+    
     while True:
-        user_input = input("Do wish to make password visible during password listing ? 'Yes' or 'no'")
-        if user_input == 'no' or user_input == 'N' or user_input == 'n':
+        user_input = (f"Yes/No or press ENTER to return : \n").lower
+        if user_input == 'no' or user_input == 'n':
             return True
-        elif user_input == 'yes' or user_input == 'Y' or user_input == 'y':
+        elif user_input == 'yes' or user_input == 'y':
             return False
-        else:
-            print(Fore.RED + "Invalid input. Please enter 'Yes' or 'No'.")
-            return True
+        #else:
+       #     print(Fore.RED + "Invalid input. Yes/No or press ENTER to return : \n")
+       #     return True
 
 def copy_password_entry(index_number):
     """
