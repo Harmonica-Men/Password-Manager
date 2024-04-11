@@ -336,7 +336,8 @@ def password_visible() -> bool:
         elif choice == 'no' or choice == 'n':
             return False
         else:
-            print("Invalid input. Please enter 'Yes' or 'No' or press Enter to return.")
+            emptyblock()
+            print(f"Invalid input")
 
 def copy_password_entry(index_number):
     """
@@ -367,6 +368,16 @@ def copy_password_entry(index_number):
     input(f"Press Enter to continue ... \n")
     os.system("clear")
 
+def check_if_number(input_str):
+    """
+    Check if the input is a number or a string.
+    
+    """
+    # Check if the input is a number
+    if isinstance(input_str, (int, float)):
+        return True
+    else: 
+        return False
 
 def menu_option_1():
     """
@@ -463,6 +474,7 @@ def menu_option_4():
         input(f"Press Enter to continue ... \n")
         os.system("clear")
     else:
+        print(check_input(index_number))
         copy_password_entry(int(index_number))
         
 
