@@ -498,10 +498,7 @@ def menu_option_5():
 
     while True:
         default_user = input(f"The default user login: {default_user} \nEnter new user login : ")
-        # if not default_user:          
-        print(f" default user:  {default_user} \n")  
-        print(f" default user:  {len(default_user)} \n") 
-                     
+                             
         if len(default_user) <= 0:
             default_user = old_user
             print('test')
