@@ -567,50 +567,41 @@ def main():
     while True:
         userchoice = input(f"menu {menu} \n")
 
-        match userchoice:
-            # add or create new enteries
-            case '1':
-                os.system("clear")
-                menu_option_1() 
-                
-            # list hidden passwords
-            case '2':
-                os.system("clear")
-                menu_option_2() 
-                
-            # update key
-            case '3':
-                os.system("clear")
-                menu_option_3() 
-                                
-            # copy / paste password
-            case '4':
-                os.system("clear")
-                menu_option_4() 
+        if userchoice == '1':
+            os.system("clear")
+            menu_option_1() 
 
-            # set default_user
-            case '5':
-                os.system("clear")
-                menu_option_5()
-                            
-            case '6':
-                os.system("clear")
-                 # Copy an empty string to clear the clipboard 
-                
-                #clear_clipboard()
-                pyperclip.copy('')
+        elif userchoice == '2':
+            os.system("clear")
+            menu_option_2() 
 
-                print(f"TY for using Password Manager\n")
-                print(f"Bye bye ...\n")
-                break
+        elif userchoice == '3':
+            os.system("clear")
+            menu_option_3() 
 
-            case _:      
-                emptyblock()                    
-                print(Fore.RED + f"Invalid choice. Please enter a number between 1 and 5.\n")
-                emptyblock()
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
-                
+        elif userchoice == '4':
+            os.system("clear")
+            menu_option_4() 
+
+        elif userchoice == '5':
+            os.system("clear")
+            menu_option_5()
+
+        elif userchoice == '6':
+            os.system("clear")
+            # Copy an empty string to clear the clipboard 
+            pyperclip.copy('')
+            print(f"Thank you for using Password Manager\n")
+            print(f"Goodbye ...\n")
+            break
+
+        else:
+            emptyblock()                    
+            print(Fore.RED + f"Invalid choice. Please enter a number between 1 and 5.\n")
+            emptyblock()
+            input(f"Press Enter to continue ... \n")
+            os.system("clear")
+
     
 # Main program    
 if __name__ == "__main__":
