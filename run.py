@@ -565,7 +565,7 @@ def main():
     Please enter your choice (1-6): """
 
     while True:
-        userchoice = input(menu)
+        userchoice = input(f"menu {menu} \n")
 
         match userchoice:
             # add or create new enteries
