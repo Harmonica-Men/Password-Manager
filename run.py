@@ -225,8 +225,10 @@ def get_passwords():
         # Check if site already exists
         if check_value_in_column_a(site.lower()):
             print(Fore.RED + f"Site already exists !!\n")
-            choice = input(f"Do you want to change the site? " + Fore.CYAN + "Yes/No or Enter " + Fore.WHITE + ": ").lower()
-            print(Style.RESET_ALL)
+            print("Do you want to change the site?")
+            choice = input(f"Yes/No or press ENTER to return\n").lower()
+            
+            # print(Style.RESET_ALL)
             if choice == 'yes' or choice == 'y':
                 login = get_login()
                 if login == None:
@@ -437,8 +439,8 @@ def menu_option_5():
             input(f"Press Enter to continue ... \n")
             os.system("clear")
             break 
-        elif len(default_user) < 3 or len(default_user) > 8:
-            print(Fore.RED + f"default user login must be between 3 and 8 characters long.\n")
+        elif len(default_user) > 12:
+            print(Fore.RED + f"default user login must be smaller then 12 characters long.\n")
             print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
             emptyblock
