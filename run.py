@@ -136,10 +136,6 @@ def update_password_data(data_dict):
         worksheet_to_update = SHEET.worksheet("passwords")
         worksheet_to_update.update_cell(row_index, 2, data_dict['login'])  # Update login value (column B)
         worksheet_to_update.update_cell(row_index, 3, data_dict['password'])  # Update password value (column C)
-        # emptyblock()
-        # print(Fore.GREEN + f"Password data updated successfully\n")
-        # emptyblock()
-        # os.system("clear")
     else:
         emptyblock()
         print(f"Invalid password data format. Please provide 'site', 'login', and 'password' keys.\n")
@@ -149,12 +145,12 @@ def update_password_data(data_dict):
 def emptyblock():
     print("\n" * 2)
 
-
 def list_passwords(show_password=bool):
     """
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
     """
+    print(show_password)
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
 
@@ -162,9 +158,9 @@ def list_passwords(show_password=bool):
     data_list = [row for row in data]
 
     # Decrypt the passwords using a Vigenère cipher
-    if not show_password:
+    if show_password:
         data_list = [[row[0], row[1], vigenere_cipher(row[2], key, mode='decode')] for row in data_list]
-   
+      
     # Convert the list of arrays into a list of dictionaries
     new_data_dict_list = [{"Row Number": i, "Site": row[0], "Login": row[1], "Password": row[2]} for i, row in enumerate(data_list)]
 
@@ -307,25 +303,24 @@ def get_passwords():
         print(Fore.GREEN + f"Password added successfully\n")
         emptyblock
         input(f"Press Enter to continue ... \n")
-        # print(Style.RESET_ALL)
         os.system("clear")
 
-def password_visible():
+def password_visible() -> bool:
     """
     Prompt the user for a Yes or No answer and return a boolean value.
     If the input is neither Yes nor No, return False to indicate going back to the main menu. 
     """
-    
-    print(f"Do wish to make password visible during password listing ?")
+    print("Do you wish to make passwords visible during password listing?")
     while True:
-        visiblity = input(f"Yes/No or press ENTER to return: \n").lower
-        if not visiblity:
-            if visiblity == 'no' or visiblity == 'n':
-                return True
-            elif visiblity == 'yes' or visiblity == 'y':
-                return False
-        else:
+        choice = input("Yes/No or press ENTER to return: ").lower()
+        if not choice:  # If the user presses Enter without input
+            return False
+        elif choice == 'yes' or choice == 'y':
             return True
+        elif choice == 'no' or choice == 'n':
+            return False
+        else:
+            print("Invalid input. Please enter 'Yes' or 'No' or press Enter to return.")
 
 def copy_password_entry(index_number):
     """
