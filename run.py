@@ -316,17 +316,16 @@ def password_visible():
     If the input is neither Yes nor No, return False to indicate going back to the main menu. 
     """
     
-    print(f"Do wish to make password visible during password listing ? \n")
-    
+    print(f"Do wish to make password visible during password listing ?")
     while True:
-        user_input = (f"Yes/No or press ENTER to return : \n").lower
-        if user_input == 'no' or user_input == 'n':
+        visiblity = input(f"Yes/No or press ENTER to return: \n").lower
+        if not visiblity:
+            if visiblity == 'no' or visiblity == 'n':
+                return True
+            elif visiblity == 'yes' or visiblity == 'y':
+                return False
+        else:
             return True
-        elif user_input == 'yes' or user_input == 'y':
-            return False
-        #else:
-       #     print(Fore.RED + "Invalid input. Yes/No or press ENTER to return : \n")
-       #     return True
 
 def copy_password_entry(index_number):
     """
