@@ -221,7 +221,7 @@ def option_password():
         else:
             consecutive_empty_password_option += 1
             print(Fore.RED + f"Invalid input. Please enter (Yes/No)\n")
-            if consecutive_empty_password_option >= 3:
+            if consecutive_empty_password_option >= 1:
                 print(Fore.RED + f"You enter 3 times blank input \n")
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
@@ -291,10 +291,9 @@ def get_passwords():
             login = get_login()  
             # print("Login ", login)
             if login == None:
-                with Fore.RED:
-                    print(f"The login input is empty !\n")
-                    print(f"No data processed ! \n")
-                    print(f"Exiting ... Back to main menu \n")
+                print(Fore.RED + f"The login input is empty !\n")
+                print(Fore.RED + f"No data processed ! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
                 emptyblock
                 input(f"Press Enter to continue ... \n")
                 os.system("clear")
