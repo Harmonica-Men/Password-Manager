@@ -186,49 +186,24 @@ def get_login():
     Prompt the user to enter login or email.
     Returns the entered login if not empty.
     """
-    consecutive_empty_logins = 0
-
     while True:
-        login = input("Enter login or email:   ")
+        login = input(f"Enter login or email (press Enter for '{default_user}'): ")
         if not login:  # Check if the input string is empty
-            consecutive_empty_logins += 1
-            if consecutive_empty_logins >= 1:
-                # print(Fore.RED + f"You enter 1 times blank input \n")
-                # print("test")
-                return 
-            
-            print(Fore.RED + f"Empty input login \n")
-
-            # print(Fore.RED + f" data processed! Exiting ... Back to main menu \n")
+            print(Fore.GREEN + f"Using default login: {default_user}\n")
+            return default_user
         else:
             return login  # Return the entered login if not empty
 
+
 def option_password():
 
-    consecutive_empty_password_option = 0
+    password = input("Enter password: (press ENTER to auto-generate a new password) : ")
 
-    while True:
-        password_option = input ("Do you want to auto-generate a new password? " + Fore.CYAN + "(Yes/No)" + Fore.WHITE + ": ").lower()
-        
-        if password_option == 'yes' or password_option == 'y': 
-            password = generate_random_password()  # Generate random password
-            return password
-            # break
-        elif password_option == 'no' or password_option == 'n':
-            password = input("Enter password:         ")
-            return password
-            # break
-        else:
-            consecutive_empty_password_option += 1
-            print(Fore.RED + f"Invalid input. Please enter (Yes/No)\n")
-            if consecutive_empty_password_option >= 1:
-                print(Fore.RED + f"You enter 3 times blank input \n")
-                print(Fore.RED + f"No data processed ! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
-                break
+    if not password:
+        return password
+    else:
+        password = generate_random_password()  # Generate random password          
+        print(Fore.GREEN + f"Using auto-generated password\n")          
 
 def get_passwords():
     """
@@ -451,12 +426,14 @@ def main():
     Run all program functions
     """
     global key 
-    
+    global default_user
+
+    default_user = "testuser1"
     key = "KEY"
-
+    
     os.system("clear")
-
     menu = """
+
     
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
