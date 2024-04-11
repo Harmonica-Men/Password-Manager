@@ -359,7 +359,13 @@ def copy_password_entry(index_number):
             row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
 
         password_entry = data_list[int(index_number)][2]
-        pyperclip.copy(password_entry)
+        
+        try:
+            pyperclip.copy(password_entry)
+        except PyperclipException as e:
+            raise PyperclipException("Failed to copy password entry to clipboard") from e
+   
+        # pyperclip.copy(password_entry)
     else:
         print(Fore.RED + f"Your index exceed the maximum of rows {max_row} in this\n")
         print(f"\n")
@@ -591,7 +597,7 @@ def main():
         elif userchoice == '6':
             os.system("clear")
             # Copy an empty string to clear the clipboard 
-            pyperclip.copy('')
+            # pyperclip.copy('')
             print(f"Thank you for using Password Manager\n")
             print(f"Goodbye ...\n")
             break
