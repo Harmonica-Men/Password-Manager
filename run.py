@@ -399,6 +399,8 @@ def menu_option_3():
     """
 
     global key  # Declare key as global
+
+    old_key = key
   
     print(f"Menu option 3\n")
     print(f"Change cipher key ...\n")
@@ -408,8 +410,13 @@ def menu_option_3():
         if key == "":
             break  
         elif len(key) < 3 or len(key) > 8:
+            key = old_key
             print(Fore.RED + f"Key must be between 3 and 8 characters long.\n")
-           
+            print(Fore.RED + f"No data processed! \n")
+            print(Fore.RED + f"Exiting ... Back to main menu \n")
+            emptyblock
+            input(f"Press Enter to continue ... \n")
+            os.system("clear")
             return
         else:
             break  
@@ -514,7 +521,8 @@ def main():
                 print(f"Bye bye ...\n")
                 break
 
-            case _:                          
+            case _:      
+                emptyblock()                    
                 print(Fore.RED + f"Invalid choice. Please enter a number between 1 and 5.\n")
                 emptyblock()
                 input(f"Press Enter to continue ... \n")
