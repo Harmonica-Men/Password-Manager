@@ -237,7 +237,6 @@ def get_passwords():
             print("Do you want to change the site?")
             choice = input(f"Yes/No or press ENTER to return Main menu \n").lower()
             
-            # print(Style.RESET_ALL)
             if choice == 'yes' or choice == 'y':
                 login = get_login()
                 if login == None:
@@ -251,7 +250,6 @@ def get_passwords():
                 else:
                     password = option_password()        
 
-                # print(password)
                 data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,key,mode="encode")}
                 update_password_data(data_dict)
 
@@ -271,8 +269,12 @@ def get_passwords():
                 os.system("clear")
                 return  
             else:
-                print(Fore.RED + f"Invalid choice ! back to main menu  \n")                
-                # print(Fore.CYAN + "(Yes\No or Enter)")
+                print(Fore.RED + f"Invalid choice !!\n")                
+                print(Fore.RED + f"No data processed ! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                emptyblock
+                input(f"Press Enter to continue ... \n")
+                os.system("clear")
                 return  
         else:
             # Prompt for login using the get_login function
@@ -345,6 +347,7 @@ def copy_password_entry(index_number):
     data = worksheet_to_update.get_all_values()
     max_row = len(data)
 
+    print(index_number)
     if int(index_number) <= max_row:
 
         # Convert the data into a list of arrays
@@ -452,7 +455,17 @@ def menu_option_4():
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")   
     index_number = input(f"Enter password index number copy/paste into clipboard? : ")
-    copy_password_entry(index_number)
+    if not index_number:
+        emptyblock()
+        print(Fore.RED + f"You enter nothing\n")
+        print(f"\n")
+        print(Fore.RED + f"Exiting ... Back to main menu \n")
+        emptyblock
+        input(f"Press Enter to continue ... \n")
+        os.system("clear")
+    else:
+        copy_password_entry(int(index_number))
+        
 
 def menu_option_5():
     global default_user
