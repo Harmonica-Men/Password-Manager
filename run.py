@@ -605,23 +605,38 @@ def menu_option_5():
                 Press_Enter()
                 break
 
-def check_master_password(master_password):
 
-    worksheet_to_update = SHEET.worksheet("masterpassword")
-    data = worksheet_to_update.cell(2, 1).value
-    print (data)
-    Press_Enter()
-
-
-def option_menu_6():
-
+def menu_option_6():
     while True:
+        print("Master Password")
         master_password = input("Enter master password: ")
-        if len(master_password) < 6:
-            print("Master password must be at least 6 characters long.")
+        if len(master_password) <= 0:
+            # default_user = old_user
+            print(Fore.RED + f"You entered nothing\n")
+            print(Fore.RED + f"No data processed! \n")
+            print(Fore.RED + f"Exiting ... \n")
+            Press_Enter()
+            return False
         else:
-            pass
-        check_master_password(master_password)
+            if len(master_password) >= 12:
+                # default_user = old_user
+                print(Fore.RED + "default user login must be smaller")
+                print(Fore.RED + f" then 12 characters long.\n")
+                print(Fore.RED + f"No data processed! \n")
+                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                Press_Enter()
+                break
+            else:
+                worksheet_to_update = SHEET.worksheet("masterpassword")
+                stored_password = worksheet_to_update.cell(2, 1).value
+                if master_password == stored_password:
+                    print(Fore.GREEN + "Master password correct. Exiting loop.")
+                    return True
+                else:
+                    print("Master password incorrect.")
+                    Press_Enter()
+                    return False
+               
 
 def main():
     """
@@ -631,7 +646,7 @@ def main():
     global default_user
     default_user = "fve"
     key = "KEY"
-    
+    menu_loop = menu_option_6()
     menu = """
 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -648,38 +663,42 @@ def main():
     7. quit
     Please enter your choice (1-7): """
 
-    while True:
-        user_choice = input(f"{menu} \n")
-        if user_choice == '1':
-            os.system("clear")
-            menu_option_1()
-        elif user_choice == '2':
-            os.system("clear")
-            menu_option_2()
-        elif user_choice == '3':
-            os.system("clear")
-            menu_option_3()
-        elif user_choice == '4':
-            os.system("clear")
-            menu_option_4()
-        elif user_choice == '5':
-            os.system("clear")
-            menu_option_5()
-        elif user_choice == '6':
-            os.system("clear")
-            menu_option_6()
-        elif user_choice == '7':
-            os.system("clear")
-            # Copy an empty string to clear the clipboard
-            # pyperclip.copy('')
-            print(f"Thank you for using Password Manager\n")
-            print(f"Goodbye ...\n")
-            break
-        else:
-            emptyblock()
-            print(Fore.RED + "Invalid choice.")
-            print(Fore.RED + f" Please enter a number between 1 and 7.\n")
-            Press_Enter()
+    if menu_loop == True:
+        while True:
+            user_choice = input(f"{menu} \n")
+            if user_choice == '1':
+                os.system("clear")
+                menu_option_1()
+            elif user_choice == '2':
+                os.system("clear")
+                menu_option_2()
+            elif user_choice == '3':
+                os.system("clear")
+                menu_option_3()
+            elif user_choice == '4':
+                os.system("clear")
+                menu_option_4()
+            elif user_choice == '5':
+                os.system("clear")
+                menu_option_5()
+            elif user_choice == '6':
+                os.system("clear")
+                menu_loop == menu_option_6()
+            elif user_choice == '7':
+                os.system("clear")
+                # Copy an empty string to clear the clipboard
+                # pyperclip.copy('')
+                print(f"Thank you for using Password Manager\n")
+                print(f"Goodbye ...\n")
+                break
+            else:
+                emptyblock()
+                print(Fore.RED + "Invalid choice.")
+                print(Fore.RED + f" Please enter a number between 1 and 7.\n")
+                Press_Enter()
+    else:
+        print("Master password incorrect")
+            
 
 # Main program
 if __name__ == "__main__":
