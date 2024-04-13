@@ -605,6 +605,23 @@ def menu_option_5():
                 Press_Enter()
                 break
 
+def check_master_password(master_password):
+
+    worksheet_to_update = SHEET.worksheet("masterpassword")
+    data = worksheet_to_update.cell(2, 1).value
+    print (data)
+    Press_Enter()
+
+
+def option_menu_6():
+
+    while True:
+        master_password = input("Enter master password: ")
+        if len(master_password) < 6:
+            print("Master password must be at least 6 characters long.")
+        else:
+            pass
+    check_master_password(master_password)
 
 def main():
     """
@@ -627,8 +644,9 @@ def main():
     3. set cipher key
     4. copy / paste password
     5. change default user login
-    6. quit
-    Please enter your choice (1-6): """
+    6. change master password
+    7. quit
+    Please enter your choice (1-7): """
 
     while True:
         user_choice = input(f"{menu} \n")
@@ -649,6 +667,9 @@ def main():
             menu_option_5()
         elif user_choice == '6':
             os.system("clear")
+            menu_option_6()
+        elif user_choice == '7':
+            os.system("clear")
             # Copy an empty string to clear the clipboard
             # pyperclip.copy('')
             print(f"Thank you for using Password Manager\n")
@@ -657,7 +678,7 @@ def main():
         else:
             emptyblock()
             print(Fore.RED + "Invalid choice.")
-            print(Fore.RED + f" Please enter a number between 1 and 5.\n")
+            print(Fore.RED + f" Please enter a number between 1 and 7.\n")
             Press_Enter()
 
 # Main program
