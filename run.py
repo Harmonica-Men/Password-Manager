@@ -188,7 +188,7 @@ def vigenere_cipher(text, key, mode='encode'):
         raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
     alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     alphabet2 = '0123456789 !"#$%&()*+,-./:;<=>?@[]^_`{|}~'
-    alphabet == alphabet1 + alphabet2
+    alphabet = alphabet1 + alphabet2
     text = text.upper()
     key = key.upper()
     # Initialize the result string
