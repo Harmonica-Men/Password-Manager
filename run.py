@@ -61,7 +61,7 @@ def vigenere_cipher(text, key, mode='encode'):
         raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
     alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     alphabet2 = '0123456789 !"#$%&()*+,-./:;<=>?@[]^_`{|}~'
-    alphabet == alphabet1 + alphabet2
+    alphabet = alphabet1 + alphabet2
     text = text.upper()
     key = key.upper()
     # Initialize the result string
@@ -134,7 +134,7 @@ from pyperclip import PyperclipException
 from google.oauth2.service_account import Credentials
 from colorama import Fore, init
 init(autoreset=True)
-global key
+#global key
 key = "KEY"
 
 EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
@@ -352,7 +352,7 @@ def get_passwords():
             choice = input(f"return Main menu \n").lower()
             if choice == 'yes' or choice == 'y':
                 login = get_login()
-                if login None:
+                if login is None:
                     print(Fore.RED + f"The login input is empty ! \n")
                     print(Fore.RED + f"No data processed ! \n")
                     print(Fore.RED + f"Exiting ... Back to main menu \n")
@@ -391,7 +391,7 @@ def get_passwords():
                 return
         else:
             login = get_login()
-            if login None:
+            if login is None:
                 print(Fore.RED + f"The login input is empty !\n")
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
