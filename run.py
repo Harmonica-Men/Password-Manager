@@ -621,7 +621,7 @@ def option_menu_6():
             print("Master password must be at least 6 characters long.")
         else:
             pass
-    check_master_password(master_password)
+        check_master_password(master_password)
 
 def main():
     """
