@@ -154,6 +154,15 @@ def emptyblock():
     print("\n" * 2)
 
 
+def Press_Enter():
+    """
+    Pauze the program, until pressed ENTER
+    """
+    emptyblock()
+    input(f"Press Enter to continue ... \n")
+    os.system("clear")
+
+
 def generate_random_password(length=12):
     """
     Generate a random password
@@ -284,10 +293,7 @@ def list_passwords(show_password=bool):
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
     print(df.iloc[1:].to_string(header=False, index=False))
-    emptyblock()
-    input(f"Press Enter to continue ... \n")
-    os.system("clear")
-
+    Press_Enter()
 
 def get_login():
     """
@@ -336,9 +342,8 @@ def get_passwords():
             print(Fore.RED + "Empty input site or platfrom !!")
             print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
-            emptyblock
-            input(f"Press Enter to continue ... \n")
-            os.system("clear")
+            Press_Enter()
+            
             return
         if len(site) > 12:
             print(f"\n")
@@ -370,24 +375,18 @@ def get_passwords():
                     update_password_data(data_dict)
                 emptyblock()
                 print(Fore.GREEN + f"Password added successfully\n")
-                emptyblock()
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 return
             elif choice == 'no' or choice == 'n':
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock()
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 return
             else:
                 print(Fore.RED + f"Invalid choice !!\n")
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock()
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 return
         else:
             login = get_login()
@@ -395,38 +394,32 @@ def get_passwords():
                 print(Fore.RED + f"The login input is empty !\n")
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 return
             password = option_password()
             if not password:
                 print(Fore.RED + f"Empty password input ... \n")
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
-    data_dict = {'site': site, 'login': login, 'password': password}
-    if check_value_in_column_a(data_dict['site']):
-        print(f"Password data already exists.")
-        choice = input(f" Do you want to alter it? (Yes/No): \n").lower()
-        if choice == 'yes' or choice == 'y' or choice == 'Y':
-            update_password_data(data_dict)
-        elif choice == 'no' or choice == 'n' or choice == 'N':
-            print(f"No changes made to password data\n")
+                Press_Enter
+        data_dict = {'site': site, 'login': login, 'password': password}
+        if check_value_in_column_a(data_dict['site']):
+            print(f"Password data already exists.")
+            choice = input(f" Do you want to alter it? (Yes/No): \n").lower()
+            if choice == 'yes' or choice == 'y' or choice == 'Y':
+                update_password_data(data_dict)
+            elif choice == 'no' or choice == 'n' or choice == 'N':
+                print(f"No changes made to password data\n")
+            else:
+                print(Fore.RED + "Invalid choice. Please enter 'Yes' or 'No'")
         else:
-            print(Fore.RED + "Invalid choice. Please enter 'Yes' or 'No'")
-    else:
-        worksheet_to_update = SHEET.worksheet("passwords")
-        encrypted_password = vigenere_cipher(password, key, mode="encode")
-        row_data = [site, login, encrypted_password]
-        worksheet_to_update.append_row(row_data)
-        emptyblock()
-        print(Fore.GREEN + f"Password added successfully\n")
-        emptyblock
-        input(f"Press Enter to continue ... \n")
-        os.system("clear")
+            worksheet_to_update = SHEET.worksheet("passwords")
+            encrypted_password = vigenere_cipher(password, key, mode="encode")
+            row_data = [site, login, encrypted_password]
+            worksheet_to_update.append_row(row_data)
+            emptyblock()
+            print(Fore.GREEN + f"Password added successfully\n")
+            Press_Enter()
 
 
 def password_visible() -> bool:
@@ -480,15 +473,11 @@ def copy_password_entry(index_number):
         print(f"\n")
         print(Fore.RED + f"No data processed ! \n")
         print(Fore.RED + f"Exiting ... Back to main menu \n")
-        emptyblock
-        input(f"Press Enter to continue ... \n")
-        os.system("clear")
+        Press_Enter()
         return
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
-    emptyblock
-    input(f"Press Enter to continue ... \n")
-    os.system("clear")
+    Press_Enter()
 
 
 def check_if_number(input_str):
@@ -544,9 +533,7 @@ def menu_option_3():
                 print(Fore.RED + f"cipher key is to long (max 8 charaters)\n")
                 print(Fore.RED + f"No data processed! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 return
             else:
                 key = old_key
@@ -554,17 +541,13 @@ def menu_option_3():
                 print(Fore.RED + f"cipher key is empty \n")
                 print(Fore.RED + f"No data processed! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 return
         else:
             break
     emptyblock()
     print(Fore.GREEN + f"Cipher Key updated successfully\n")
-    emptyblock()
-    input(f"Press Enter to continue ... \n")
-    os.system("clear")
+    Press_Enter()
 
 
 def menu_option_4():
@@ -580,9 +563,7 @@ def menu_option_4():
         print(Fore.RED + f"You enter nothing\n")
         print(f"\n")
         print(Fore.RED + f"Exiting ... Back to main menu \n")
-        emptyblock
-        input(f"Press Enter to continue ... \n")
-        os.system("clear")
+        Press_Enter()
     else:
         if check_if_number(index_number):
             copy_password_entry(int(index_number))
@@ -591,9 +572,7 @@ def menu_option_4():
             print(Fore.RED + f"Invalid input\n")
             print(f"\n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
-            emptyblock
-            input(f"Press Enter to continue ... \n")
-            os.system("clear")
+            Press_Enter()
 
 
 def menu_option_5():
@@ -609,9 +588,7 @@ def menu_option_5():
             print(Fore.RED + f"You entered nothing\n")
             print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
-            emptyblock
-            input(f"Press Enter to continue ... \n")
-            os.system("clear")
+            Press_Enter()
             break
         else:
             if len(default_user) >= 12:
@@ -620,16 +597,12 @@ def menu_option_5():
                 print(Fore.RED + f" then 12 characters long.\n")
                 print(Fore.RED + f"No data processed! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 break
             else:
                 emptyblock()
                 print(Fore.GREEN + f"Default password added successfully\n")
-                emptyblock
-                input(f"Press Enter to continue ... \n")
-                os.system("clear")
+                Press_Enter()
                 break
 
 
@@ -641,9 +614,7 @@ def main():
     global default_user
     default_user = "fve"
     key = "KEY"
-    os.system("clear")
-    print("menu")
-    input(f"Press Enter to continue ... \n")
+    
     menu = """
 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -687,9 +658,7 @@ def main():
             emptyblock()
             print(Fore.RED + "Invalid choice.")
             print(Fore.RED + f" Please enter a number between 1 and 5.\n")
-            emptyblock()
-            input(f"Press Enter to continue ... \n")
-            os.system("clear")
+            Press_Enter()
 
 # Main program
 if __name__ == "__main__":
