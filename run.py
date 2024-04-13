@@ -1,22 +1,18 @@
+
 import gspread
 import pandas as pd
 import string
 import random
 import pyperclip
 import os
-
 from pyperclip import PyperclipException
 from google.oauth2.service_account import Credentials
 from colorama import Fore, init
-
 init(autoreset=True)
-
-global key 
-    
+global key
 key = "KEY"
 
-EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism for your system. For more information, please visit https://pyperclip.readthedocs.io/en/latest/index.html#not-implemented-error"
-
+EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -29,10 +25,9 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
 
-
 def generate_random_password(length=12):
     """
-    Generate a random password of the specified length meeting complexity requirements.
+    Generate a random password
     """
     categories = [
         string.ascii_lowercase,
@@ -40,12 +35,8 @@ def generate_random_password(length=12):
         string.digits,
         string.punctuation
     ]
-
     password = []
-
-    # Ensure the password contains characters from at least three of the five categories
     selected_categories = random.sample(categories, k=3)
-
     # Select at least one character from each selected category
     for category in selected_categories:
         password.append(random.choice(category))
@@ -57,66 +48,53 @@ def generate_random_password(length=12):
 
     # Shuffle the password to ensure randomness
     random.shuffle(password)
-
     return ''.join(password)
 
 
 def vigenere_cipher(text, key, mode='encode'):
     """
-    Apply Vigenère Cipher to the given text using the provided key.       
+    Apply Vigenère Cipher to the given text using the provided key.
     """
-   
     if mode not in ['encode', 'decode']:
         raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
-    
-    # Define the alphabet including both uppercase letters and symbolic characters
-    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
-
-    # Convert both text and key to uppercase
+    alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    alphabet2 = '0123456789 !"#$%&()*+,-./:;<=>?@[]^_`{|}~'
+    alphabet == alphabet1 + alphabet2
     text = text.upper()
     key = key.upper()
-    
     # Initialize the result string
     result = ''
-    
     # Set the appropriate shift direction based on the mode
     if mode == 'encode':
         shift_factor = 1
     else:
         shift_factor = -1
-    
     # Iterate through each character in the text
     for i, char in enumerate(text):
         # Skip characters not present in the alphabet
         if char not in alphabet:
             result += char
             continue
-                
-        # Determine the position of the current key character
-        try: 
-            key_char = key[i % len(key)] 
-        except ZeroDivisionError: 
-            print(f"Key Value Error: Cannot divide by zero.\n") 
+        try:
+            key_char = key[i % len(key)]
+        except ZeroDivisionError:
+            print(f"Key Value Error:"+" Cannot divide by zero.\n")
             print(f"Return to menu ... \n")
             break
-
         key_char = key[i % len(key)]
         key_pos = alphabet.index(key_char)
-        
         # Apply the Vigenère Cipher shift
         char_pos = alphabet.index(char)
         shifted_pos = (char_pos + shift_factor * key_pos) % len(alphabet)
-        
         # Append the shifted character to the result string
         result += alphabet[shifted_pos]
-    
     return result
+
 
 def check_value_in_column_a(data_array):
     """
     Check if the given data array already exists in the passwords worksheet.
     Only for column A
-
     """
     worksheet_to_update = SHEET.worksheet("passwords")
     column_a_values = worksheet_to_update.col_values(1)  # Check Column A
@@ -124,12 +102,10 @@ def check_value_in_column_a(data_array):
         return True
     return False
 
-
 def update_password_data(data_dict):
     """
     Update existing password data in the passwords worksheet.
     """
-       
     if all(key in data_dict for key in ['site', 'login', 'password']):  # Check if all required keys are present
         worksheet = SHEET.worksheet("passwords")
         column_a_values = worksheet.col_values(1)
@@ -142,16 +118,17 @@ def update_password_data(data_dict):
         print(f"Invalid password data format. Please provide 'site', 'login', and 'password' keys.\n")
         emptyblock
 
+
 # Print emtpy block of lines
 def emptyblock():
     print("\n" * 2)
+
 
 def list_passwords(show_password=bool):
     """
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
     """
-    #print(show_password)
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
 
@@ -161,7 +138,6 @@ def list_passwords(show_password=bool):
     # Decrypt the passwords using a Vigenère cipher
     if show_password:
         data_list = [[row[0], row[1], vigenere_cipher(row[2], key, mode='decode')] for row in data_list]
-      
     # Convert the list of arrays into a list of dictionaries
     new_data_dict_list = [{"Row Number": i, "Site": row[0], "Login": row[1], "Password": row[2]} for i, row in enumerate(data_list)]
 
@@ -170,13 +146,12 @@ def list_passwords(show_password=bool):
 
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
-
     # Print the DataFrame without headers and from the second row 
     print(df.iloc[1:].to_string(header=False, index=False))
-
-    emptyblock
+    emptyblock()
     input(f"Press Enter to continue ... \n")
     os.system("clear")
+    
     
 def get_login():
     """
@@ -190,7 +165,6 @@ def get_login():
             return default_user
         else:
             return login  # Return the entered login if not empty
-
 
 def option_password():
     """
@@ -237,7 +211,6 @@ def get_passwords():
             print(Fore.RED + f"Site already exists !!\n")
             print("Do you want to change the site?")
             choice = input(f"Yes/No or press ENTER to return Main menu \n").lower()
-            
             if choice == 'yes' or choice == 'y':
                 login = get_login()
                 if login == None:
@@ -249,23 +222,23 @@ def get_passwords():
                     os.system("clear")
                     return
                 else:
-                    password = option_password()        
-
-                data_dict = {'site': site, 'login': login, 'password': vigenere_cipher(password,key,mode="encode")}
-                update_password_data(data_dict)
-
+                    password = option_password()
+                    data_dict = {}
+                    data_dict['site'] = site
+                    data_dict['login'] = login
+                    encrypted_password = vigenere_cipher(password, key, mode="encode")
+                    data_dict['password'] = encrypted_password
+                    update_password_data(data_dict)
                 emptyblock()
                 print(Fore.GREEN + f"Password added successfully\n")
-                emptyblock
+                emptyblock()
                 input(f"Press Enter to continue ... \n")
                 os.system("clear")
-
-                return  
-            
+                return
             elif choice == 'no' or choice == 'n':
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
+                emptyblock()
                 input(f"Press Enter to continue ... \n")
                 os.system("clear")
                 return  
@@ -273,7 +246,7 @@ def get_passwords():
                 print(Fore.RED + f"Invalid choice !!\n")                
                 print(Fore.RED + f"No data processed ! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                emptyblock
+                emptyblock()
                 input(f"Press Enter to continue ... \n")
                 os.system("clear")
                 return  
@@ -288,9 +261,7 @@ def get_passwords():
                 emptyblock
                 input(f"Press Enter to continue ... \n")
                 os.system("clear")
-                return  
-            
-            
+                return
             password = option_password()
             if not password:
                 print(Fore.RED + f"Empty password input ... \n")
@@ -299,12 +270,7 @@ def get_passwords():
                 emptyblock
                 input(f"Press Enter to continue ... \n")
                 os.system("clear")
-                
-                return  # Break out of the function if password is empty
-            break  # Break out of the outer while loop after both site, login, and password are provided
-
     data_dict = {'site': site, 'login': login, 'password': password}
-
     if check_value_in_column_a(data_dict['site']):  # Check if value exists in column A (site)
         choice = input(f"Password data already exists. Do you want to alter it? (Yes/No): \n").lower()
         if choice == 'yes' or choice == 'y' or choice == 'Y':
@@ -321,7 +287,6 @@ def get_passwords():
         emptyblock
         input(f"Press Enter to continue ... \n")
         os.system("clear")
-
 def password_visible() -> bool:
     """
     Prompt the user for a Yes or No answer and return a boolean value.
@@ -344,41 +309,28 @@ def copy_password_entry(index_number):
     """
     Copy the password entry from the specified index in the DataFrame.
     """
-
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
     max_row = len(data)
-    
     if int(index_number) <= max_row:
-
         # Convert the data into a list of arrays
         data_list = [row for row in data]
-
         # Decrypt the passwords using a Vigenère cipher
         for row in data_list:
-            row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable 
-
+            row[2] = vigenere_cipher(row[2], key, mode='decode')  # decrypt the third variable
         password_entry = data_list[int(index_number)][2]
-        
         try:
             pyperclip.copy(password_entry)
-           # emptyblock()
-           # print(Fore.GREEN + f"Password is copied into the clipboard.\n")
-           # emptyblock
-           # input(f"Press Enter to continue...\n")
-           # os.system("clear")
         except PyperclipException as e:
             print(Fore.RED + "Failed to copy password entry to clipboard\n")
             #print(Fore.RED + "The program will continue running.\n")
             print(f"\n")
             print(Fore.RED + f"No data processed ! \n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
-            emptyblock
+            emptyblock()
             input(f"Press Enter to continue ... \n")
             os.system("clear")
             return
-   
-        # pyperclip.copy(password_entry)
     else:
         print(Fore.RED + f"Your index exceed the maximum of rows {max_row} in this\n")
         print(f"\n")
@@ -388,7 +340,6 @@ def copy_password_entry(index_number):
         input(f"Press Enter to continue ... \n")
         os.system("clear")
         return
-
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
     emptyblock
@@ -411,7 +362,6 @@ def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
-
     M_option1 = """
     
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -423,39 +373,28 @@ def menu_option_1():
     print(M_option1)
     get_passwords()
 
-
-
 def menu_option_2():
     """
     Function to handle menu option 2: List passwords
     """
-    
     print(f"Menu Option 2\n")
     print(f"\n")
     print(f"List passwords ...\n")
     print(f"\n")
-       
     list_passwords(password_visible())
-   
 
 def menu_option_3():
     """
     Update the key for password encryption/decryption.
     """
-
     global key  # Declare key as global
-
     old_key = key
-  
     print(f"Menu option 3\n")
-    print(f"Change cipher key ...\n")
-
+    print(f"Change")
     while True:
         print(f"The old key: " + Fore.CYAN + key)
         key = input(f"Enter the new: ")
-
         if len(key) == 0 or len(key) > 8:
-            
             if len(key) > 8:
                 key = old_key
                 emptyblock()
@@ -478,7 +417,6 @@ def menu_option_3():
                 return
         else:
             break
-
     emptyblock()
     print(Fore.GREEN + f"Cipher Key updated successfully\n")
     emptyblock()
@@ -489,7 +427,6 @@ def menu_option_4():
     """
     Copy/paste password by entery number
     """
-    
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")   
     index_number = input(f"Enter password index number copy/paste into clipboard? : \n")
@@ -512,8 +449,6 @@ def menu_option_4():
             emptyblock
             input(f"Press Enter to continue ... \n")
             os.system("clear")
-
-        
 
 def menu_option_5():
     global default_user
@@ -552,8 +487,6 @@ def menu_option_5():
                 input(f"Press Enter to continue ... \n")
                 os.system("clear")
                 break
-
-        
            
 def main():
     """
@@ -561,10 +494,8 @@ def main():
     """
     global key 
     global default_user
-
-    default_user = "testuser1"
+    default_user = "fve"
     key = "KEY"
-    
     os.system("clear")
     menu = """
 
@@ -585,44 +516,35 @@ def main():
     Please enter your choice (1-6): """
 
     while True:
-        userchoice = input(f"{menu} \n")
-
-        if userchoice == '1':
+        user_choice = input(f"{menu} \n")
+        if user_choice == '1':
             os.system("clear")
-            menu_option_1() 
-
-        elif userchoice == '2':
+            menu_option_1()
+        elif user_choice == '2':
             os.system("clear")
-            menu_option_2() 
-
-        elif userchoice == '3':
+            menu_option_2()
+        elif user_choice == '3':
             os.system("clear")
-            menu_option_3() 
-
-        elif userchoice == '4':
+            menu_option_3()
+        elif user_choice == '4':
             os.system("clear")
-            menu_option_4() 
-
-        elif userchoice == '5':
+            menu_option_4()
+        elif user_choice == '5':
             os.system("clear")
             menu_option_5()
-
-        elif userchoice == '6':
+        elif user_choice == '6':
             os.system("clear")
             # Copy an empty string to clear the clipboard 
             # pyperclip.copy('')
             print(f"Thank you for using Password Manager\n")
             print(f"Goodbye ...\n")
             break
-
         else:
             emptyblock()                    
             print(Fore.RED + f"Invalid choice. Please enter a number between 1 and 5.\n")
             emptyblock()
             input(f"Press Enter to continue ... \n")
             os.system("clear")
-
-    
 # Main program    
 if __name__ == "__main__":
     main()
