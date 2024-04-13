@@ -642,6 +642,8 @@ def main():
     default_user = "fve"
     key = "KEY"
     os.system("clear")
+    print("menu")
+    input(f"Press Enter to continue ... \n")
     menu = """
 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -690,5 +692,6 @@ def main():
             os.system("clear")
 
 # Main program
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
+
