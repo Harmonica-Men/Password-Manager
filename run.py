@@ -651,21 +651,27 @@ def menu_option_6(update_bool):
                 stored_password = worksheet_to_update.cell(2, 1).value
                 if master_password == stored_password:
                     
-                    # print(Fore.GREEN + "Master password correct. ")
                     if update_bool:
                         Press_Enter()
                         return True
                     else:
-                        print(Fore.GREEN + "Master password correct. ")
+                        print(Fore.GREEN + "Master password is the same. ")
+                        print(Fore.GREEN + "Nothing updated. ")
                         Press_Enter()
-                        worksheet_to_update = SHEET.worksheet("masterpasswords")
-                        encrypted_password = vigenere_cipher(master_password, key, mode="encode")
-                        row_data = [encrypted_password]
-                        worksheet_to_update.append_row(row_data)
+                        return False
                 else:
+                    if update_bool == False:
+                        print(Fore.GREEN + "Master password is updated ")
+                        encrypted_password = vigenere_cipher(master_password, key, mode="encode")
+                        print(encrypted_password)
+                        Press_Enter()
+                        worksheet_to_update = SHEET.worksheet("masterpassword")
+                        worksheet_to_update.update_cell(2,1,encrypted_password)
+                    
                     print(Fore.RED + f"Master password incorrect.\n")
                     print(f"\n")
                     print(Fore.RED + f"Exiting ... ")
+                    Press_Enter()
                     return False
                
 
