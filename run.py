@@ -514,6 +514,7 @@ def menu_option_1():
 
 *** Menu Option 1 - Creating a new entry...
 """
+    mylogo()
     print(M_option1)
     get_passwords()
 
@@ -522,6 +523,7 @@ def menu_option_2():
     """
     Function to handle menu option 2: List passwords
     """
+    mylogo()
     print(f"Menu Option 2\n")
     print(f"\n")
     print(f"List passwords ...\n")
@@ -535,6 +537,7 @@ def menu_option_3():
     """
     global key  # Declare key as global
     old_key = key
+    mylogo()
     print(f"Menu option 3\n")
     print(f"Change")
     while True:
@@ -568,6 +571,7 @@ def menu_option_4():
     """
     Copy/paste password by entery number
     """
+    mylogo()
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")
     print("Enter password index")
@@ -592,6 +596,7 @@ def menu_option_4():
 def menu_option_5():
     global default_user
     old_user = default_user
+    mylogo()
     print(f"Menu option 5\n")
     print(f"Change default user login ...\n")
     while True:
