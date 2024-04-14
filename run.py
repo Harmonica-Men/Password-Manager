@@ -647,17 +647,20 @@ def menu_option_6(update_bool):
                 Press_Enter()
                 break
             else:
-                # worksheet_to_update = SHEET.worksheet("masterpassword")
-                # testvalue = worksheet_to_update.cell(2, 1).value
-                # testvalue = vigenere_cipher(testvalue, key, mode="decode")
-                # print(testvalue)
-                # print(update_bool)
+                worksheet_to_update = SHEET.worksheet("masterpassword")
+                testvalue = worksheet_to_update.cell(2, 1).value
+                print(testvalue)
+                
+                testvalue = vigenere_cipher(testvalue, key, mode="decode")
+                
                 
                 if update_bool:
                     worksheet_to_update = SHEET.worksheet("masterpassword")
                     stored_password = worksheet_to_update.cell(2, 1).value
+                    print(stored_password)
                     stored_password = vigenere_cipher(stored_password, key, mode="decode")
                     print(stored_password)
+                    Press_Enter()
                 else:
                     stored_password = vigenere_cipher(master_password, key, mode="encode")
                 
@@ -674,7 +677,7 @@ def menu_option_6(update_bool):
                 else:
                     if update_bool == False:
                         print(Fore.GREEN + "Master password is updated ")
-                        encrypted_password = vigenere_cipher(master_password, key, mode="decode")
+                        encrypted_password = vigenere_cipher(master_password, key, mode="encode")
                         print(encrypted_password)
                         Press_Enter()
                         worksheet_to_update = SHEET.worksheet("masterpassword")
