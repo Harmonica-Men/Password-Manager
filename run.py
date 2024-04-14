@@ -357,11 +357,10 @@ def get_passwords():
             print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
             Press_Enter()
-            
             return
         if len(site) > 12:
             print(f"\n")
-            print(f"Site or platform input strinh cannot")
+            print(f"Site or platform input string cannot")
             print(Fore.RED + f" be greater than 12 characters!\n")
             continue
         if check_value_in_column_a(site.lower()):
@@ -625,9 +624,10 @@ def menu_option_5():
                 break
 
 
-def menu_option_6():
+def menu_option_6(update_bool):
     
     mylogo()
+    print(update_bool)
     while True:
         print(f"Master Password\n")
         master_password = input("Enter master password: ")
@@ -650,8 +650,18 @@ def menu_option_6():
                 worksheet_to_update = SHEET.worksheet("masterpassword")
                 stored_password = worksheet_to_update.cell(2, 1).value
                 if master_password == stored_password:
-                    print(Fore.GREEN + "Master password correct. Exiting loop.")
-                    return True
+                    
+                    # print(Fore.GREEN + "Master password correct. ")
+                    if update_bool:
+                        Press_Enter()
+                        return True
+                    else:
+                        print(Fore.GREEN + "Master password correct. ")
+                        Press_Enter()
+                        worksheet_to_update = SHEET.worksheet("masterpasswords")
+                        encrypted_password = vigenere_cipher(master_password, key, mode="encode")
+                        row_data = [encrypted_password]
+                        worksheet_to_update.append_row(row_data)
                 else:
                     print(Fore.RED + f"Master password incorrect.\n")
                     print(f"\n")
@@ -667,7 +677,7 @@ def main():
     global default_user
     default_user = "fve"
     key = "KEY"
-    menu_loop = menu_option_6()
+    menu_loop = menu_option_6(True)
     menu = """
 
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -704,7 +714,7 @@ def main():
                 menu_option_5()
             elif user_choice == '6':
                 os.system("clear")
-                menu_loop == menu_option_6()
+                menu_loop == menu_option_6(False)
             elif user_choice == '7':
                 os.system("clear")
                 # Copy an empty string to clear the clipboard
