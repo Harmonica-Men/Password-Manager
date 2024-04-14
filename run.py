@@ -627,8 +627,8 @@ def menu_option_6():
         else:
             if len(master_password) >= 12:
                 # default_user = old_user
-                print(Fore.RED + "default user login must be smaller")
-                print(Fore.RED + f" then 12 characters long.\n")
+                print(Fore.RED + "Enter master password less")
+                print(Fore.RED + " then 12 characters long.\n")
                 print(Fore.RED + f"No data processed! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
                 Press_Enter()
