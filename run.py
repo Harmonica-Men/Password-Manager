@@ -607,15 +607,22 @@ def menu_option_5():
 
 
 def menu_option_6():
+    logo = """
+
+
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+"""
+    print(logo)
     while True:
-        print("Master Password")
+        print(f"Master Password\n")
         master_password = input("Enter master password: ")
         if len(master_password) <= 0:
             # default_user = old_user
             print(Fore.RED + f"You entered nothing\n")
             print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... \n")
-            Press_Enter()
             return False
         else:
             if len(master_password) >= 12:
@@ -633,8 +640,9 @@ def menu_option_6():
                     print(Fore.GREEN + "Master password correct. Exiting loop.")
                     return True
                 else:
-                    print("Master password incorrect.")
-                    Press_Enter()
+                    print(Fore.RED + f"Master password incorrect.\n")
+                    print(f"\n")
+                    print(Fore.RED + f"Exiting ... ")
                     return False
                
 
@@ -697,7 +705,7 @@ def main():
                 print(Fore.RED + f" Please enter a number between 1 and 7.\n")
                 Press_Enter()
     else:
-        print("Master password incorrect")
+        print("Bye ... Have a nice day ...")
             
 
 # Main program
