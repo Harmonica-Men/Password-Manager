@@ -272,7 +272,7 @@ def list_passwords(show_password=bool):
     data = worksheet_to_update.get_all_values()
     # Convert the data into a list of arrays
     data_list = [row for row in data]
-
+    
     # Decrypt the passwords using a Vigenère cipher
     if show_password:
         decrypted_data_list = []
@@ -280,6 +280,7 @@ def list_passwords(show_password=bool):
             decrypted_password = vigenere_cipher(row[2], key, mode='decode')
             decrypted_row = [row[0], row[1], decrypted_password]
             decrypted_data_list.append(decrypted_row)
+        data_list = decrypted_data_list
     new_data_dict_list = []
     for i, row in enumerate(data_list):
         new_data_dict = {}  # Maak een lege dictionary
