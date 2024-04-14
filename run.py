@@ -5,6 +5,7 @@ import string
 import random
 import pyperclip
 import os
+
 from pyperclip import PyperclipException
 from google.oauth2.service_account import Credentials
 from colorama import Fore, init
@@ -26,6 +27,18 @@ SHEET = GSPREAD_CLIENT.open('password_manager')
 
 def emptyblock():
     print("\n" * 2)
+
+def mylogo():
+
+    logo = """
+
+
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
+    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    """
+
+    print(logo)
 
 def generate_random_password(length=12):
     """
@@ -608,14 +621,8 @@ def menu_option_5():
 
 
 def menu_option_6():
-    logo = """
-
-
- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-"""
-    print(logo)
+    
+    mylogo()
     while True:
         print(f"Master Password\n")
         master_password = input("Enter master password: ")
