@@ -31,14 +31,13 @@ def emptyblock():
 
 
 def mylogo():
-    logo = """ V1.00
-
+    logo = """
+        
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
+|P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|  V1.00
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-
-"""
+    """
     print(logo)
 
 
@@ -553,9 +552,9 @@ def main():
     default_user = "fve"
     key = "KEY"
     menu_loop = menu_option_6(True)
-    print(mylogo)
+    mylogo()
     menu = """
-    *** Menu ***
+*** Menu ***
 
     0. delete a record in password list
     1. create a new entry
@@ -565,8 +564,8 @@ def main():
     5. change default user login
     6. change master password
     7. quit
-    
-    Please enter your choice (1-7): """
+
+Please enter your choice (1-7): """
     if menu_loop:
         while True:
             user_choice = input(f"{menu} \n")
