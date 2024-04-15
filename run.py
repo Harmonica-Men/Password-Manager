@@ -31,12 +31,10 @@ def emptyblock():
 
 
 def mylogo():
-    logo = """
-        
+    logo = """        
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|  V1.00
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
     """
     print(logo)
 
@@ -222,6 +220,7 @@ def option_password():
         
 def line_exit(info):
     print(Fore.RED + info)
+    emptyblock()
     print(Fore.RED + f"No data processed ! \n")
     print(Fore.RED + f"Exiting ... Back to main menu \n")
     Press_Enter()
@@ -232,12 +231,11 @@ def get_passwords():
     Get user data password information: site, login, password
     """
     while True:
-        site = input("Enter site or platform: ")
+        site = input(f"Enter site or platform: \n")
         if not site:  # Check if the input string is empty
             line_exit("Empty input site or platfrom !!")
             return
         if len(site) > 12:
-            print(f"\n")
             print(f"Site or platform input string cannot")
             print(Fore.RED + f" be greater than 12 characters!\n")
             continue
@@ -373,11 +371,13 @@ def delete_password_entry(index_number):
     if int(index_number) <= max_row:
         worksheet_to_update.delete_rows(index_number)
         print(Fore.GREEN + f"Password entry index {index_number} is deleted")
+        Press_Enter()
+
     else:
         print(Fore.RED + f"Your index exceed the maximum")
         print(Fore.RED + f"of rows {max_row} in this\n")
-        print(f"\n")
-        line_exit()
+        #print(f"\n")
+        line_exit("")
         return
 
 
@@ -385,10 +385,9 @@ def menu_option_0():
     """
     Function to handle menu option 0: delete record in password list
     """
-    mylogo()
     print(f"Menu option 0\n")
     print(f"delete record in password list\n")
-    print("Enter password index")
+    print(f"Enter password index\n")
     index_number = input(f"number of record to be deleted? : \n")
     if not index_number:
         line_exit("You entered nothing")
@@ -403,8 +402,7 @@ def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
-    mylogo()
-    print("Menu Option 1 - Creating a new entry...")
+    print(f"Menu Option 1 - Creating a new entry...\n")
     get_passwords()
 
 
@@ -412,7 +410,6 @@ def menu_option_2():
     """
     Function to handle menu option 2: List passwords
     """
-    mylogo()
     print(f"Menu Option 2\n")
     print(f"\n")
     print(f"List passwords ...\n")
@@ -426,7 +423,6 @@ def menu_option_3():
     """
     global key  # Declare key as global
     old_key = key
-    mylogo()
     print(f"Menu option 3\n")
     print(f"Change")
     while True:
@@ -451,7 +447,6 @@ def menu_option_4():
     """
     Copy/paste password by entery number
     """
-    mylogo()
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")
     print("Enter password index")
@@ -468,7 +463,6 @@ def menu_option_4():
 def menu_option_5():
     global default_user
     old_user = default_user
-    mylogo()
     print(f"Menu option 5\n")
     print(f"Change default user login ...\n")
     while True:
@@ -508,6 +502,7 @@ def menu_option_6(update_bool):
             emptyblock()
             print(Fore.GREEN + f"DEMO version allowed to continue \n")
             Press_Enter()
+            os.system("clear")
             return True
         else:
             if len(master_password) >= 12:
@@ -527,6 +522,7 @@ def menu_option_6(update_bool):
                         print(Fore.RED + "Master password is the same. ")
                         print(Fore.RED + "Nothing updated. ")
                         Press_Enter()
+                        os.system("clear")
                         return False
                 else:
                     if update_bool:
@@ -557,7 +553,7 @@ def main():
 *** Menu ***
 
     0. delete a record in password list
-    1. create a new entry
+    1. update / create a new entry
     2. list passwords
     3. set cipher key
     4. copy / paste password
@@ -565,7 +561,7 @@ def main():
     6. change master password
     7. quit
 
-Please enter your choice (1-7): """
+Please enter your choice (0-7): """
     if menu_loop:
         while True:
             user_choice = input(f"{menu} \n")
