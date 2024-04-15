@@ -543,6 +543,7 @@ def menu_option_6(update_bool):
     while True:
         print(f"Master Password: \n")
         if update_bool:
+            print(f"Press ENTER to bypass (DEMO)\n")
             master_password = input("Enter master password: ")
         else:
             master_password = input("Enter new master password: ")
