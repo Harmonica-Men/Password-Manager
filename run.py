@@ -629,7 +629,10 @@ def menu_option_6(update_bool):
     mylogo()
     while True:
         print(f"Master Password: \n")
-        master_password = input("Enter master password: ")
+        if update_bool:
+            master_password = input("Enter master password: ")
+        else:
+            master_password = input("Enter new master password: ")
         if len(master_password) <= 0:
             print(Fore.RED + f"You entered nothing\n")
             print(Fore.RED + f"No data processed! \n")
@@ -643,31 +646,43 @@ def menu_option_6(update_bool):
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
                 break
             else:
-                if update_bool:
-                    worksheet_to_update = SHEET.worksheet("masterpassword")
-                    stored_password = worksheet_to_update.cell(2, 1).value
-                    print(stored_password)
-                    stored_password = vigenere_cipher(stored_password, key, mode="decode")
-                    print(stored_password)
-                else:
-                    stored_password = vigenere_cipher(master_password, key, mode="encode")
+                worksheet_to_update = SHEET.worksheet("masterpassword")
+                stored_password = worksheet_to_update.cell(2, 1).value
+                stored_password = vigenere_cipher(stored_password, key, mode="decode")
+
+                #if update_bool:
+                    
+                    # stored_password = vigenere_cipher(stored_password, key, mode="decode")
+                #    print(master_password)
+                #    print(f"\n")
+                #    print(stored_password)
+                #    print("debug1")
+                #    Press_Enter()
+                    
+                # else:
+                    # stored_password = vigenere_cipher(master_password, key, mode="encode")
+                #    print(master_password)
+                #    print(f"\n")
+                #    print(stored_password)
+                #    print("debug2")
+                #    Press_Enter()
                 
                 if master_password == stored_password:
                     if update_bool:
                         return True
                     else:
-                        print(Fore.GREEN + "Master password is the same. ")
-                        print(Fore.GREEN + "Nothing updated. ")
+                        print(Fore.RED + "Master password is the same. ")
+                        print(Fore.RED + "Nothing updated. ")
                         Press_Enter()
                         return False
                 else:
                     if update_bool == False:
                         print(Fore.GREEN + "Master password is updated ")
                         encrypted_password = vigenere_cipher(master_password, key, mode="encode")
-                        print(encrypted_password)
                         worksheet_to_update = SHEET.worksheet("masterpassword")
                         worksheet_to_update.update_cell(2,1,encrypted_password)
-                    
+                        Press_Enter()
+                        
                     print(Fore.RED + f"Master password incorrect.\n")
                     print(f"\n")
                     print(Fore.RED + f"Exiting ... ")
