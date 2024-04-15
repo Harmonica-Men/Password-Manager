@@ -501,8 +501,11 @@ def check_if_number(input_str):
         return True
     return False
 
-menu_option_0()
-def menu_option_1():
+
+def menu_option_0():
+    """
+    Function to handle menu option 0: delete record in password list
+    """
     mylogo()
     print("delete record in password list")
     Press_Enter()
@@ -685,7 +688,7 @@ def main():
  |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 *** Menu ***
-
+    0. delete a record in password list
     1. create a new entry
     2. list passwords
     3. set cipher key
