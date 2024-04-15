@@ -31,11 +31,14 @@ def emptyblock():
 
 
 def mylogo():
-    logo = """
+    logo = """ V1.00
+
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"""
-    print(f"\n")
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+
+"""
     print(logo)
 
 
@@ -58,7 +61,7 @@ def generate_random_password(length=12):
         string.digits,
         string.punctuation
     ]
-    
+
     password = []
     selected_categories = random.sample(categories, k=3)
     # Select at least one character from each selected category
@@ -535,7 +538,7 @@ def menu_option_6(update_bool):
     os.system("clear")
     mylogo()
     while True:
-        print(f"Master Password: \n")
+        #print(f"Master Password: \n")
         if update_bool:
             print(f"Press ENTER to bypass (DEMO)\n")
             master_password = input("Enter master password: ")
