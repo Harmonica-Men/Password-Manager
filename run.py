@@ -492,7 +492,6 @@ def menu_option_6(update_bool):
     os.system("clear")
     mylogo()
     while True:
-        #print(f"Master Password: \n")
         if update_bool:
             print(f"Press ENTER to bypass (DEMO)\n")
             master_password = input("Enter master password: ")
@@ -516,8 +515,6 @@ def menu_option_6(update_bool):
                 password = worksheet_to_update.cell(2, 1).value
                 password = vigenere_cipher(password, key, mode="decode")
                 if master_password == password:
-                    # print(password)
-                    # Press_Enter()
                     if update_bool:
                         return True
                     else:
@@ -526,8 +523,6 @@ def menu_option_6(update_bool):
                         Press_Enter()
                         return False
                 else:
-                    # print(update_bool)
-                    # Press_Enter()
                     if update_bool:
                         print(Fore.RED + f"Master password incorrect.\n")
                         print(Fore.RED + f"Exiting ... \n")
@@ -535,7 +530,6 @@ def menu_option_6(update_bool):
                         return False
                     else:                                              
                         mystr = vigenere_cipher(master_password, key, mode="encode")
-                        print(mystr)
                         worksheet_to_update = SHEET.worksheet("masterpassword")
                         worksheet_to_update.update_cell(2, 1, mystr)
                         print(Fore.GREEN + "Master password is updated ")
