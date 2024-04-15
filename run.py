@@ -151,21 +151,23 @@ def list_passwords(show_password=bool):
     If num_entries is None, all entries will be displayed.
     """
     worksheet_to_update = SHEET.worksheet("passwords")
-    data = worksheet_to_update.get_all_values()
+    worksheet_data_old = worksheet_to_update.get_all_values()
     # Convert the data into a list of arrays
-    data_list = [row for row in data]
-    
+    old_data_list = [row for row in worksheet_data_old]
     # Decrypt the passwords using a Vigenère cipher
     if show_password:
         decrypted_data_list = []
-        for row in data_list:
+        for row in old_data_list:
             decrypted_password = vigenere_cipher(row[2], key, mode='decode')
             decrypted_row = [row[0], row[1], decrypted_password]
             decrypted_data_list.append(decrypted_row)
-        data_list = decrypted_data_list
+        new_data_list = decrypted_data_list
+        # print(old_data_list)        
+        # print(new_data_list)
+        # Press_Enter()
     new_data_dict_list = []
-    for i, row in enumerate(data_list):
-        new_data_dict = {}  # Maak een lege dictionary
+    for i, row in enumerate(new_data_list):
+        new_data_dict = {}  
         new_data_dict["Row Number"] = i
         new_data_dict["Site"] = row[0]
         new_data_dict["Login"] = row[1]
@@ -177,6 +179,8 @@ def list_passwords(show_password=bool):
     df = df[['Row Number', 'Site', 'Login', 'Password']]
     print(df.iloc[1:].to_string(header=False, index=False))
     Press_Enter()
+
+
 def get_login():
     """
     Prompt the user to enter login or email.
@@ -190,6 +194,8 @@ def get_login():
             return default_user
         else:
             return login
+
+
 def option_password():
     """
     Prompt the user to enter a password or auto-generate one.
@@ -210,6 +216,8 @@ def option_password():
             return password
         else:
             return password
+
+
 def get_passwords():
     """
     Get user data password information: site, login, password
@@ -297,6 +305,8 @@ def get_passwords():
             emptyblock()
             print(Fore.GREEN + f"Password added successfully\n")
             Press_Enter()
+
+
 def password_visible() -> bool:
     """
     Prompt the user for a Yes or No answer and return a boolean value.
@@ -315,6 +325,8 @@ def password_visible() -> bool:
         else:
             emptyblock()
             print(f"Invalid input")
+
+
 def copy_password_entry(index_number):
     """
     Copy the password entry from the specified index in the DataFrame.
@@ -351,6 +363,8 @@ def copy_password_entry(index_number):
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
     Press_Enter()
+
+
 def check_if_number(input_str):
     # Check if the input is a number
     if isinstance(input_str, (int, float)):
@@ -359,7 +373,8 @@ def check_if_number(input_str):
         return True
     return False
 
-def delete_password_entry(index_number):    
+
+def delete_password_entry(index_number):
     """
     Delete the password entry from the specified index in the DataFrame.
     """
@@ -370,7 +385,7 @@ def delete_password_entry(index_number):
 
     if int(index_number) <= max_row:
         worksheet_to_update.delete_rows(index_number)
-        print(Fore.GREEN + f"Password entry at index {index_number} is deleted")
+        print(Fore.GREEN + f"Password entry index {index_number} is deleted")
     else:
         print(Fore.RED + f"Your index exceed the maximum")
         print(Fore.RED + f"of rows {max_row} in this\n")
@@ -379,7 +394,6 @@ def delete_password_entry(index_number):
         print(Fore.RED + f"Exiting ... Back to main menu \n")
         Press_Enter()
         return
-
 
 
 def menu_option_0():
@@ -415,6 +429,8 @@ def menu_option_1():
     mylogo()
     print("Menu Option 1 - Creating a new entry...")
     get_passwords()
+
+
 def menu_option_2():
     """
     Function to handle menu option 2: List passwords
@@ -425,6 +441,7 @@ def menu_option_2():
     print(f"List passwords ...\n")
     print(f"\n")
     list_passwords(password_visible())
+
 
 def menu_option_3():
     """
@@ -460,6 +477,8 @@ def menu_option_3():
     emptyblock()
     print(Fore.GREEN + f"Cipher Key updated successfully\n")
     Press_Enter()
+
+
 def menu_option_4():
     """
     Copy/paste password by entery number
@@ -484,6 +503,8 @@ def menu_option_4():
             print(f"\n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
             Press_Enter()
+
+
 def menu_option_5():
     global default_user
     old_user = default_user
@@ -514,6 +535,8 @@ def menu_option_5():
                 print(Fore.GREEN + f"Default password added successfully\n")
                 Press_Enter()
                 break
+
+
 def menu_option_6(update_bool):
     os.system("clear")
     mylogo()
@@ -525,7 +548,7 @@ def menu_option_6(update_bool):
             master_password = input("Enter new master password: ")
         if len(master_password) <= 0:
             emptyblock()
-            print(Fore.GREEN + f"But for demostrational purposes your allowed to continue \n")
+            print(Fore.GREEN + f"DEMO version allowed to continue \n")
             Press_Enter()
             return True
         else:
@@ -537,9 +560,9 @@ def menu_option_6(update_bool):
                 break
             else:
                 worksheet_to_update = SHEET.worksheet("masterpassword")
-                stored_password = worksheet_to_update.cell(2, 1).value
-                stored_password = vigenere_cipher(stored_password, key, mode="decode")
-                if master_password == stored_password:
+                password = worksheet_to_update.cell(2, 1).value
+                password = vigenere_cipher(password, key, mode="decode")
+                if master_password == password:
                     if update_bool:
                         return True
                     else:
@@ -548,18 +571,20 @@ def menu_option_6(update_bool):
                         Press_Enter()
                         return False
                 else:
-                    if update_bool == False:
+                    if update_bool:
+                        pass
+                    else:
                         print(Fore.GREEN + "Master password is updated ")
-                        encrypted_password = vigenere_cipher(master_password, key, mode="encode")
+                        password = vigenere_cipher(password, key, mode="encode")
                         worksheet_to_update = SHEET.worksheet("masterpassword")
-                        worksheet_to_update.update_cell(2,1,encrypted_password)
+                        worksheet_to_update.update_cell(2, 1, password)
                         Press_Enter()
-                        
                     print(Fore.RED + f"Master password incorrect.\n")
                     print(f"\n")
                     print(Fore.RED + f"Exiting ... ")
                     return False
-               
+
+
 def main():
     """
     Run all program functions
@@ -583,7 +608,7 @@ def main():
     6. change master password
     7. quit
     Please enter your choice (1-7): """
-    if menu_loop == True:
+    if menu_loop:
         while True:
             user_choice = input(f"{menu} \n")
             if user_choice == '0':
@@ -616,12 +641,13 @@ def main():
                 break
             else:
                 emptyblock()
-                print(Fore.RED + "Invalid choice.")                
+                print(Fore.RED + "Invalid choice.")
                 print(Fore.RED + f" Please enter a number between 0 and 7.\n")
                 Press_Enter()
     else:
         print("Bye ... Have a nice day ...")
-            
+
+
 # Main program
 if __name__ == "__main__":
     main()
