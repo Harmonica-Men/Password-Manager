@@ -774,8 +774,8 @@ def main():
                 os.system("clear")
                 # Copy an empty string to clear the clipboard
                 # pyperclip.copy('')
-                print(f"Thank you for using Password Manager\n")
-                print(f"Goodbye ...\n")
+                # print(f"Thank you for using Password Manager\n")
+                # print(f"Goodbye ...\n")
                 break
             else:
                 emptyblock()
