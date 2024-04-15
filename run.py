@@ -216,6 +216,11 @@ def option_password():
             return password
         else:
             return password
+        
+def line_exit(info):
+    print(Fore.RED + info)
+    print(Fore.RED + f"No data processed ! \n")
+    print(Fore.RED + f"Exiting ... Back to main menu \n")
 
 
 def get_passwords():
@@ -263,9 +268,7 @@ def get_passwords():
                 Press_Enter()
                 return
             elif choice == 'no' or choice == 'n':
-                print(Fore.RED + f"No data processed ! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
-                Press_Enter()
+                line_exit("")
                 return
             else:
                 print(Fore.RED + f"Invalid choice !!\n")
