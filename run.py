@@ -32,10 +32,10 @@ def emptyblock():
 
 def mylogo():
     logo = """
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
-    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-    """
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+"""
+    print(f"\n")
     print(logo)
 
 
@@ -58,6 +58,7 @@ def generate_random_password(length=12):
         string.digits,
         string.punctuation
     ]
+    
     password = []
     selected_categories = random.sample(categories, k=3)
     # Select at least one character from each selected category
@@ -221,6 +222,7 @@ def line_exit(info):
     print(Fore.RED + info)
     print(Fore.RED + f"No data processed ! \n")
     print(Fore.RED + f"Exiting ... Back to main menu \n")
+    Press_Enter()
 
 
 def get_passwords():
@@ -230,10 +232,7 @@ def get_passwords():
     while True:
         site = input("Enter site or platform: ")
         if not site:  # Check if the input string is empty
-            print(Fore.RED + "Empty input site or platfrom !!")
-            print(Fore.RED + f"No data processed! \n")
-            print(Fore.RED + f"Exiting ... Back to main menu \n")
-            Press_Enter()
+            line_exit("Empty input site or platfrom !!")
             return
         if len(site) > 12:
             print(f"\n")
@@ -248,12 +247,9 @@ def get_passwords():
             if choice == 'yes' or choice == 'y':
                 login = get_login()
                 if login is None:
-                    print(Fore.RED + f"The login input is empty ! \n")
-                    print(Fore.RED + f"No data processed ! \n")
-                    print(Fore.RED + f"Exiting ... Back to main menu \n")
-                    emptyblock
-                    input(f"Press Enter to continue ... \n")
-                    os.system("clear")
+                    line_exit("The login input is empty ! ")
+                    #input(f"Press Enter to continue ... \n")
+                    #os.system("clear")
                     return
                 else:
                     password = option_password()
@@ -279,17 +275,12 @@ def get_passwords():
         else:
             login = get_login()
             if login is None:
-                print(Fore.RED + f"The login input is empty !\n")
-                print(Fore.RED + f"No data processed ! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
-                Press_Enter()
+                line_exit("The login input is empty !")
                 return
             password = option_password()
             if not password:
-                print(Fore.RED + f"Empty password input ... \n")
-                print(Fore.RED + f"No data processed ! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
-                Press_Enter
+                line_exit("Empty password input ...")
+                
         data_dict = {'site': site, 'login': login, 'password': password}
         if check_value_in_column_a(data_dict['site']):
             print(f"Password data already exists.")
