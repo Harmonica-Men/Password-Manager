@@ -1,45 +1,34 @@
-
 import gspread
 import pandas as pd
 import string
 import random
 import pyperclip
 import os
-
 from pyperclip import PyperclipException
 from google.oauth2.service_account import Credentials
 from colorama import Fore, init
 init(autoreset=True)
 global key
 key = "KEY"
-
 EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 ]
-
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
-
 def emptyblock():
     print("\n" * 2)
-
 def mylogo():
-
     logo = """
-
-
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     """
-
     print(logo)
-
 def generate_random_password(length=12):
     """
     Generate a random password
@@ -55,17 +44,13 @@ def generate_random_password(length=12):
     # Select at least one character from each selected category
     for category in selected_categories:
         password.append(random.choice(category))
-
     # Select remaining characters randomly
     for _ in range(length - 3):
         category = random.choice(categories)
         password.append(random.choice(category))
-
     # Shuffle the password to ensure randomness
     random.shuffle(password)
     return ''.join(password)
-
-
 def vigenere_cipher(text, key, mode='encode'):
     """
     Apply Vigenère Cipher to the given text using the provided key.
@@ -103,9 +88,7 @@ def vigenere_cipher(text, key, mode='encode'):
         shifted_pos = (char_pos + shift_factor * key_pos) % len(alphabet)
         # Append the shifted character to the result string
         result += alphabet[shifted_pos]
-
     return result
-
 def check_value_in_column_a(data_array):
     """
     Check if the given data array already exists in the passwords worksheet.
@@ -116,8 +99,6 @@ def check_value_in_column_a(data_array):
     if data_array in column_a_values:
         return True
     return False
-
-
 def update_password_data(data_dict):
     """
     Update existing password data in the passwords worksheet.
@@ -149,24 +130,18 @@ from colorama import Fore, init
 init(autoreset=True)
 #global key
 key = "KEY"
-
 EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 ]
-
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
-
-
 def emptyblock():
     print("\n" * 2)
-
-
 def Press_Enter():
     """
     Pauze the program, until pressed ENTER
@@ -174,8 +149,6 @@ def Press_Enter():
     emptyblock()
     input(f"Press Enter to continue ... \n")
     os.system("clear")
-
-
 def generate_random_password(length=12):
     """
     Generate a random password
@@ -191,17 +164,13 @@ def generate_random_password(length=12):
     # Select at least one character from each selected category
     for category in selected_categories:
         password.append(random.choice(category))
-
     # Select remaining characters randomly
     for _ in range(length - 3):
         category = random.choice(categories)
         password.append(random.choice(category))
-
     # Shuffle the password to ensure randomness
     random.shuffle(password)
     return ''.join(password)
-
-
 def vigenere_cipher(text, key, mode='encode'):
     """
     Apply Vigenère Cipher to the given text using the provided key.
@@ -239,10 +208,7 @@ def vigenere_cipher(text, key, mode='encode'):
         shifted_pos = (char_pos + shift_factor * key_pos) % len(alphabet)
         # Append the shifted character to the result string
         result += alphabet[shifted_pos]
-
     return result
-
-
 def check_value_in_column_a(data_array):
     """
     Check if the given data array already exists in the passwords worksheet.
@@ -253,8 +219,6 @@ def check_value_in_column_a(data_array):
     if data_array in column_a_values:
         return True
     return False
-
-
 def update_password_data(data_dict):
     """
     Update existing password data in the passwords worksheet.
@@ -274,8 +238,6 @@ def update_password_data(data_dict):
         print(f"Invalid password data format.")
         print(" Please provide 'site', 'login'")
         print(", and 'password' keys.\n")
-
-
 def list_passwords(show_password=bool):
     """
     List the specified number of entries in the passwords worksheet.
@@ -308,7 +270,6 @@ def list_passwords(show_password=bool):
     df = df[['Row Number', 'Site', 'Login', 'Password']]
     print(df.iloc[1:].to_string(header=False, index=False))
     Press_Enter()
-
 def get_login():
     """
     Prompt the user to enter login or email.
@@ -322,8 +283,6 @@ def get_login():
             return default_user
         else:
             return login
-
-
 def option_password():
     """
     Prompt the user to enter a password or auto-generate one.
@@ -344,8 +303,6 @@ def option_password():
             return password
         else:
             return password
-
-
 def get_passwords():
     """
     Get user data password information: site, login, password
@@ -433,8 +390,6 @@ def get_passwords():
             emptyblock()
             print(Fore.GREEN + f"Password added successfully\n")
             Press_Enter()
-
-
 def password_visible() -> bool:
     """
     Prompt the user for a Yes or No answer and return a boolean value.
@@ -453,8 +408,6 @@ def password_visible() -> bool:
         else:
             emptyblock()
             print(f"Invalid input")
-
-
 def copy_password_entry(index_number):
     """
     Copy the password entry from the specified index in the DataFrame.
@@ -491,8 +444,6 @@ def copy_password_entry(index_number):
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
     Press_Enter()
-
-
 def check_if_number(input_str):
     # Check if the input is a number
     if isinstance(input_str, (int, float)):
@@ -503,7 +454,7 @@ def check_if_number(input_str):
 
 def delete_password_entry(index_number):    
     """
-    Copy the password entry from the specified index in the DataFrame.
+    Delete the password entry from the specified index in the DataFrame.
     """
 
     worksheet_to_update = SHEET.worksheet("passwords")
@@ -521,18 +472,12 @@ def delete_password_entry(index_number):
         print(Fore.RED + f"Exiting ... Back to main menu \n")
         Press_Enter()
         return
-      
+
 
 
 def menu_option_0():
     """
     Function to handle menu option 0: delete record in password list
-    """
-    mylogo()
-    print("delete record in password list")
-
-    """
-    Copy/paste password by entery number
     """
     mylogo()
     print(f"Menu option 0\n")
@@ -554,7 +499,7 @@ def menu_option_0():
             print(f"\n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
             Press_Enter()
-    
+
 
 def menu_option_1():
     """
@@ -563,8 +508,6 @@ def menu_option_1():
     mylogo()
     print("Menu Option 1 - Creating a new entry...")
     get_passwords()
-
-
 def menu_option_2():
     """
     Function to handle menu option 2: List passwords
@@ -575,7 +518,6 @@ def menu_option_2():
     print(f"List passwords ...\n")
     print(f"\n")
     list_passwords(password_visible())
-
 
 def menu_option_3():
     """
@@ -611,8 +553,6 @@ def menu_option_3():
     emptyblock()
     print(Fore.GREEN + f"Cipher Key updated successfully\n")
     Press_Enter()
-
-
 def menu_option_4():
     """
     Copy/paste password by entery number
@@ -637,8 +577,6 @@ def menu_option_4():
             print(f"\n")
             print(Fore.RED + f"Exiting ... Back to main menu \n")
             Press_Enter()
-
-
 def menu_option_5():
     global default_user
     old_user = default_user
@@ -669,8 +607,6 @@ def menu_option_5():
                 print(Fore.GREEN + f"Default password added successfully\n")
                 Press_Enter()
                 break
-
-
 def menu_option_6(update_bool):
     os.system("clear")
     mylogo()
@@ -681,9 +617,6 @@ def menu_option_6(update_bool):
         else:
             master_password = input("Enter new master password: ")
         if len(master_password) <= 0:
-            print(Fore.RED + f"You entered nothing\n")
-            # print(Fore.RED + f"No data processed! \n")
-            print(Fore.RED + f"Exiting ... \n")
             emptyblock()
             print(Fore.GREEN + f"But for demostrational purposes your allowed to continue \n")
             Press_Enter()
@@ -720,7 +653,6 @@ def menu_option_6(update_bool):
                     print(Fore.RED + f"Exiting ... ")
                     return False
                
-
 def main():
     """
     Run all program functions
@@ -731,7 +663,6 @@ def main():
     key = "KEY"
     menu_loop = menu_option_6(True)
     menu = """
-
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
  |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -745,7 +676,6 @@ def main():
     6. change master password
     7. quit
     Please enter your choice (1-7): """
-
     if menu_loop == True:
         while True:
             user_choice = input(f"{menu} \n")
@@ -774,18 +704,17 @@ def main():
                 os.system("clear")
                 # Copy an empty string to clear the clipboard
                 # pyperclip.copy('')
-                # print(f"Thank you for using Password Manager\n")
-                # print(f"Goodbye ...\n")
+                print(f"Thank you for using Password Manager\n")
+                print(f"Goodbye ...\n")
                 break
             else:
                 emptyblock()
-                print(Fore.RED + "Invalid choice.")
+                print(Fore.RED + "Invalid choice.")                
                 print(Fore.RED + f" Please enter a number between 0 and 7.\n")
                 Press_Enter()
     else:
         print("Bye ... Have a nice day ...")
             
-
 # Main program
 if __name__ == "__main__":
     main()
