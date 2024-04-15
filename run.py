@@ -501,6 +501,28 @@ def check_if_number(input_str):
         return True
     return False
 
+def delete_password_entry(index_number):    
+    """
+    Copy the password entry from the specified index in the DataFrame.
+    """
+    
+    worksheet_to_update = SHEET.worksheet("passwords")
+    data = worksheet_to_update.get_all_values()
+    max_row = len(data)
+
+    if int(index_number) <= max_row:
+        worksheet_to_update.delete_rows(index_number)
+        print(Fore.GREEN + f"Password entry at index {index_number} is deleted")
+    else:
+        print(Fore.RED + f"Your index exceed the maximum")
+        print(Fore.RED + f"of rows {max_row} in this\n")
+        print(f"\n")
+        print(Fore.RED + f"No data processed ! \n")
+        print(Fore.RED + f"Exiting ... Back to main menu \n")
+        Press_Enter()
+        return
+      
+
 
 def menu_option_0():
     """
@@ -508,7 +530,30 @@ def menu_option_0():
     """
     mylogo()
     print("delete record in password list")
-    Press_Enter()
+
+    """
+    Copy/paste password by entery number
+    """
+    mylogo()
+    print(f"Menu option 4\n")
+    print(f"delete record in password list\n")
+    print("Enter password index")
+    index_number = input(f"number of record to be deleted? : \n")
+    if not index_number:
+        emptyblock()
+        print(Fore.RED + f"You enter nothing\n")
+        print(f"\n")
+        print(Fore.RED + f"Exiting ... Back to main menu \n")
+        Press_Enter()
+    else:
+        if check_if_number(index_number):
+            delete_password_entry(int(index_number))
+        else:
+            emptyblock()
+            print(Fore.RED + f"Invalid input\n")
+            print(f"\n")
+            print(Fore.RED + f"Exiting ... Back to main menu \n")
+            Press_Enter()
     
 
 def menu_option_1():
@@ -732,7 +777,7 @@ def main():
             else:
                 emptyblock()
                 print(Fore.RED + "Invalid choice.")
-                print(Fore.RED + f" Please enter a number between 1 and 7.\n")
+                print(Fore.RED + f" Please enter a number between 0 and 7.\n")
                 Press_Enter()
     else:
         print("Bye ... Have a nice day ...")
