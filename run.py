@@ -288,9 +288,9 @@ def get_passwords():
         if check_value_in_column_a(data_dict['site']):
             print(f"Password data already exists.")
             choice = input(f" Do you want to alter it? (Yes/No): \n").lower()
-            if choice == 'yes' or choice == 'y' or choice == 'Y':
+            if choice == 'yes' or choice == 'y':
                 update_password_data(data_dict)
-            elif choice == 'no' or choice == 'n' or choice == 'N':
+            elif choice == 'no' or choice == 'n':
                 print(f"No changes made to password data\n")
             else:
                 print(Fore.RED + "Invalid choice. Please enter 'Yes' or 'No'")
@@ -341,21 +341,12 @@ def copy_password_entry(index_number):
         try:
             pyperclip.copy(password_entry)
         except PyperclipException as e:
-            print(Fore.RED + "Failed to copy password entry to clipboard\n")
-            print(f"\n")
-            print(Fore.RED + f"No data processed ! \n")
-            print(Fore.RED + f"Exiting ... Back to main menu \n")
-            emptyblock()
-            input(f"Press Enter to continue ... \n")
-            os.system("clear")
+            line_exit("Failed to copy password entry to clipboard")
             return
     else:
         print(Fore.RED + f"Your index exceed the maximum")
         print(Fore.RED + f"of rows {max_row} in this\n")
-        print(f"\n")
-        print(Fore.RED + f"No data processed ! \n")
-        print(Fore.RED + f"Exiting ... Back to main menu \n")
-        Press_Enter()
+        line_exit()
         return
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
@@ -387,9 +378,7 @@ def delete_password_entry(index_number):
         print(Fore.RED + f"Your index exceed the maximum")
         print(Fore.RED + f"of rows {max_row} in this\n")
         print(f"\n")
-        print(Fore.RED + f"No data processed ! \n")
-        print(Fore.RED + f"Exiting ... Back to main menu \n")
-        Press_Enter()
+        line_exit()
         return
 
 
@@ -403,20 +392,12 @@ def menu_option_0():
     print("Enter password index")
     index_number = input(f"number of record to be deleted? : \n")
     if not index_number:
-        emptyblock()
-        print(Fore.RED + f"You enter nothing\n")
-        print(f"\n")
-        print(Fore.RED + f"Exiting ... Back to main menu \n")
-        Press_Enter()
+        line_exit("You entered nothing")
     else:
         if check_if_number(index_number):
             delete_password_entry(int(index_number))
         else:
-            emptyblock()
-            print(Fore.RED + f"Invalid input\n")
-            print(f"\n")
-            print(Fore.RED + f"Exiting ... Back to main menu \n")
-            Press_Enter()
+            line_exit("Invalid input")
 
 
 def menu_option_1():
@@ -453,21 +434,12 @@ def menu_option_3():
         print(f"The old key: " + Fore.CYAN + key)
         key = input(f"Enter the new: ")
         if len(key) == 0 or len(key) > 8:
+            key = old_key
             if len(key) > 8:
-                key = old_key
-                emptyblock()
-                print(Fore.RED + f"cipher key is to long (max 8 charaters)\n")
-                print(Fore.RED + f"No data processed! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
-                Press_Enter()
+                line_exit("cipher key is to long (max 8 charaters)")
                 return
             else:
-                key = old_key
-                emptyblock()
-                print(Fore.RED + f"cipher key is empty \n")
-                print(Fore.RED + f"No data processed! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
-                Press_Enter()
+                line_exit("cipher key is empty")
                 return
         else:
             break
@@ -486,20 +458,12 @@ def menu_option_4():
     print("Enter password index")
     index_number = input(f"number copy/paste into clipboard? : \n")
     if not index_number:
-        emptyblock()
-        print(Fore.RED + f"You enter nothing\n")
-        print(f"\n")
-        print(Fore.RED + f"Exiting ... Back to main menu \n")
-        Press_Enter()
+        line_exit("You entered nothing")
     else:
         if check_if_number(index_number):
             copy_password_entry(int(index_number))
         else:
-            emptyblock()
-            print(Fore.RED + f"Invalid input\n")
-            print(f"\n")
-            print(Fore.RED + f"Exiting ... Back to main menu \n")
-            Press_Enter()
+            line_exit("Invalid Input")
 
 
 def menu_option_5():
@@ -589,11 +553,10 @@ def main():
     default_user = "fve"
     key = "KEY"
     menu_loop = menu_option_6(True)
+    print(mylogo)
     menu = """
- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
- |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-*** Menu ***
+    *** Menu ***
+
     0. delete a record in password list
     1. create a new entry
     2. list passwords
@@ -602,6 +565,7 @@ def main():
     5. change default user login
     6. change master password
     7. quit
+    
     Please enter your choice (1-7): """
     if menu_loop:
         while True:
