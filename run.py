@@ -501,20 +501,19 @@ def check_if_number(input_str):
         return True
     return False
 
+menu_option_0()
+def menu_option_1():
+    mylogo()
+    print("delete record in password list")
+    Press_Enter()
+    
 
 def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
-    M_option1 = """
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|
-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-
-*** Menu Option 1 - Creating a new entry...
-"""
     mylogo()
-    print(M_option1)
+    print("Menu Option 1 - Creating a new entry...")
     get_passwords()
 
 
@@ -699,7 +698,10 @@ def main():
     if menu_loop == True:
         while True:
             user_choice = input(f"{menu} \n")
-            if user_choice == '1':
+            if user_choice == '0':
+                os.system("clear")
+                menu_option_0()
+            elif user_choice == '1':
                 os.system("clear")
                 menu_option_1()
             elif user_choice == '2':
