@@ -154,22 +154,22 @@ def list_passwords(show_password=bool):
     If num_entries is None, all entries will be displayed.
     """
     worksheet_to_update = SHEET.worksheet("passwords")
-    worksheet_data_old = worksheet_to_update.get_all_values()
+    data = worksheet_to_update.get_all_values()
     # Convert the data into a list of arrays
-    old_data_list = [row for row in worksheet_data_old]
+    data_list = [row for row in data]
     # Decrypt the passwords using a Vigenère cipher
     if show_password:
         decrypted_data_list = []
-        for row in old_data_list:
+        for row in data:
             decrypted_password = vigenere_cipher(row[2], key, mode='decode')
             decrypted_row = [row[0], row[1], decrypted_password]
             decrypted_data_list.append(decrypted_row)
-        new_data_list = decrypted_data_list
-        # print(old_data_list)        
-        # print(new_data_list)
-        # Press_Enter()
+        data_list = decrypted_data_list
+        #print("old data list : " + old_data_list)        
+        #print("new data list : " + new_data_list)
+        #Press_Enter()
     new_data_dict_list = []
-    for i, row in enumerate(new_data_list):
+    for i, row in enumerate(data_list):
         new_data_dict = {}  
         new_data_dict["Row Number"] = i
         new_data_dict["Site"] = row[0]
