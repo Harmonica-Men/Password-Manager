@@ -4,12 +4,16 @@ import string
 import random
 import pyperclip
 import os
+
 from pyperclip import PyperclipException
 from google.oauth2.service_account import Credentials
 from colorama import Fore, init
+
 init(autoreset=True)
+
 global key
 key = "KEY"
+
 EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -20,8 +24,12 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
+
+
 def emptyblock():
     print("\n" * 2)
+
+
 def mylogo():
     logo = """
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -29,6 +37,17 @@ def mylogo():
     +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     """
     print(logo)
+
+
+def Press_Enter():
+    """
+    Pauze the program, until pressed ENTER
+    """
+    emptyblock()
+    input(f"Press Enter to continue ... \n")
+    os.system("clear")
+
+
 def generate_random_password(length=12):
     """
     Generate a random password
@@ -51,6 +70,8 @@ def generate_random_password(length=12):
     # Shuffle the password to ensure randomness
     random.shuffle(password)
     return ''.join(password)
+
+
 def vigenere_cipher(text, key, mode='encode'):
     """
     Apply Vigenère Cipher to the given text using the provided key.
@@ -89,6 +110,8 @@ def vigenere_cipher(text, key, mode='encode'):
         # Append the shifted character to the result string
         result += alphabet[shifted_pos]
     return result
+
+
 def check_value_in_column_a(data_array):
     """
     Check if the given data array already exists in the passwords worksheet.
@@ -99,6 +122,8 @@ def check_value_in_column_a(data_array):
     if data_array in column_a_values:
         return True
     return False
+
+
 def update_password_data(data_dict):
     """
     Update existing password data in the passwords worksheet.
@@ -118,126 +143,8 @@ def update_password_data(data_dict):
         print(f"Invalid password data format.")
         print(" Please provide 'site', 'login'")
         print(", and 'password' keys.\n")
-import gspread
-import pandas as pd
-import string
-import random
-import pyperclip
-import os
-from pyperclip import PyperclipException
-from google.oauth2.service_account import Credentials
-from colorama import Fore, init
-init(autoreset=True)
-#global key
-key = "KEY"
-EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-]
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('password_manager')
-def emptyblock():
-    print("\n" * 2)
-def Press_Enter():
-    """
-    Pauze the program, until pressed ENTER
-    """
-    emptyblock()
-    input(f"Press Enter to continue ... \n")
-    os.system("clear")
-def generate_random_password(length=12):
-    """
-    Generate a random password
-    """
-    categories = [
-        string.ascii_lowercase,
-        string.ascii_uppercase,
-        string.digits,
-        string.punctuation
-    ]
-    password = []
-    selected_categories = random.sample(categories, k=3)
-    # Select at least one character from each selected category
-    for category in selected_categories:
-        password.append(random.choice(category))
-    # Select remaining characters randomly
-    for _ in range(length - 3):
-        category = random.choice(categories)
-        password.append(random.choice(category))
-    # Shuffle the password to ensure randomness
-    random.shuffle(password)
-    return ''.join(password)
-def vigenere_cipher(text, key, mode='encode'):
-    """
-    Apply Vigenère Cipher to the given text using the provided key.
-    """
-    if mode not in ['encode', 'decode']:
-        raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
-    alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    alphabet2 = '0123456789 !"#$%&()*+,-./:;<=>?@[]^_`{|}~'
-    alphabet = alphabet1 + alphabet2
-    text = text.upper()
-    key = key.upper()
-    # Initialize the result string
-    result = ''
-    # Set the appropriate shift direction based on the mode
-    if mode == 'encode':
-        shift_factor = 1
-    else:
-        shift_factor = -1
-    # Iterate through each character in the text
-    for i, char in enumerate(text):
-        # Skip characters not present in the alphabet
-        if char not in alphabet:
-            result += char
-            continue
-        try:
-            key_char = key[i % len(key)]
-        except ZeroDivisionError:
-            print(f"Key Value Error:"+" Cannot divide by zero.\n")
-            print(f"Return to menu ... \n")
-            break
-        key_char = key[i % len(key)]
-        key_pos = alphabet.index(key_char)
-        # Apply the Vigenère Cipher shift
-        char_pos = alphabet.index(char)
-        shifted_pos = (char_pos + shift_factor * key_pos) % len(alphabet)
-        # Append the shifted character to the result string
-        result += alphabet[shifted_pos]
-    return result
-def check_value_in_column_a(data_array):
-    """
-    Check if the given data array already exists in the passwords worksheet.
-    Only for column A
-    """
-    worksheet_to_update = SHEET.worksheet("passwords")
-    column_a_values = worksheet_to_update.col_values(1)  # Check Column A
-    if data_array in column_a_values:
-        return True
-    return False
-def update_password_data(data_dict):
-    """
-    Update existing password data in the passwords worksheet.
-    """
-    if all(key in data_dict for key in ['site', 'login', 'password']):
-        # Check if all required keys are present
-        worksheet = SHEET.worksheet("passwords")
-        column_a_values = worksheet.col_values(1)
-        row_index = column_a_values.index(data_dict['site'].lower()) + 1
-        worksheet_to_update = SHEET.worksheet("passwords")
-        worksheet_to_update.update_cell(row_index, 2, data_dict['login'])
-        # Update login value (column B)
-        worksheet_to_update.update_cell(row_index, 3, data_dict['password'])
-        # Update password value (column C)
-    else:
-        emptyblock()
-        print(f"Invalid password data format.")
-        print(" Please provide 'site', 'login'")
-        print(", and 'password' keys.\n")
+
+
 def list_passwords(show_password=bool):
     """
     List the specified number of entries in the passwords worksheet.
