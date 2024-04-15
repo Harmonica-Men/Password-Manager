@@ -204,8 +204,8 @@ def option_password():
     otherwise prompts the user again.
     """
     while True:
-        print(f"Enter password or ENTER")
-        password = input(f"auto-generate a new password\n): ")
+        print(f"Enter password or ENTER\n")
+        password = input(f"auto-generate a new password): \n")
         if not password:
             password = generate_random_password()  # Generate random password
             print(Fore.GREEN + "Using auto-generated password")
@@ -498,11 +498,11 @@ def menu_option_6(update_bool):
             master_password = input("Enter master password: ")
         else:
             master_password = input("Enter new master password: ")
+            print(master_password)
         if len(master_password) <= 0:
             emptyblock()
             print(Fore.GREEN + f"DEMO version allowed to continue \n")
             Press_Enter()
-            os.system("clear")
             return True
         else:
             if len(master_password) >= 12:
@@ -516,27 +516,31 @@ def menu_option_6(update_bool):
                 password = worksheet_to_update.cell(2, 1).value
                 password = vigenere_cipher(password, key, mode="decode")
                 if master_password == password:
+                    # print(password)
+                    # Press_Enter()
                     if update_bool:
                         return True
                     else:
                         print(Fore.RED + "Master password is the same. ")
                         print(Fore.RED + "Nothing updated. ")
                         Press_Enter()
-                        os.system("clear")
                         return False
                 else:
+                    # print(update_bool)
+                    # Press_Enter()
                     if update_bool:
-                        pass
-                    else:
-                        print(Fore.GREEN + "Master password is updated ")
-                        password = vigenere_cipher(password, key, mode="encode")
-                        worksheet_to_update = SHEET.worksheet("masterpassword")
-                        worksheet_to_update.update_cell(2, 1, password)
+                        print(Fore.RED + f"Master password incorrect.\n")
+                        print(Fore.RED + f"Exiting ... \n")
                         Press_Enter()
-                    print(Fore.RED + f"Master password incorrect.\n")
-                    print(f"\n")
-                    print(Fore.RED + f"Exiting ... ")
-                    return False
+                        return False
+                    else:                                              
+                        mystr = vigenere_cipher(master_password, key, mode="encode")
+                        print(mystr)
+                        worksheet_to_update = SHEET.worksheet("masterpassword")
+                        worksheet_to_update.update_cell(2, 1, mystr)
+                        print(Fore.GREEN + "Master password is updated ")
+                        Press_Enter()
+                        return False
 
 
 def main():
@@ -548,7 +552,6 @@ def main():
     default_user = "fve"
     key = "KEY"
     menu_loop = menu_option_6(True)
-    mylogo()
     menu = """
 *** Menu ***
 
@@ -563,7 +566,9 @@ def main():
 
 Please enter your choice (0-7): """
     if menu_loop:
+        
         while True:
+            mylogo()
             user_choice = input(f"{menu} \n")
             if user_choice == '0':
                 os.system("clear")
@@ -591,7 +596,7 @@ Please enter your choice (0-7): """
                 # Copy an empty string to clear the clipboard
                 # pyperclip.copy('')
                 print(f"Thank you for using Password Manager\n")
-                print(f"Goodbye ...\n")
+                print(f"bye bye ...\n")
                 break
             else:
                 emptyblock()
@@ -599,7 +604,11 @@ Please enter your choice (0-7): """
                 print(Fore.RED + f" Please enter a number between 0 and 7.\n")
                 Press_Enter()
     else:
-        print("Bye ... Have a nice day ...")
+        os.system("clear")
+        # Copy an empty string to clear the clipboard
+        # pyperclip.copy('')
+        # print(f"Thank you for using Password Manager\n")
+        # print(f"bye bye ...\n")
 
 
 # Main program
