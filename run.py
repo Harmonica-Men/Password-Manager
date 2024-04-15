@@ -169,16 +169,20 @@ def list_passwords(show_password=bool):
     new_data_dict_list = []
     for i, row in enumerate(data_list):
         new_data_dict = {}  
-        new_data_dict["Row Number"] = i
+        new_data_dict["Row Number"] = i + 1 
         new_data_dict["Site"] = row[0]
         new_data_dict["Login"] = row[1]
         new_data_dict["Password"] = row[2]
         new_data_dict_list.append(new_data_dict)
     # Convert the list of dictionaries into a DataFrame
     df = pd.DataFrame(new_data_dict_list)
+    #print(df)
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
-    print(df.iloc[1:].to_string(header=False, index=False))
+    # print('Row Number  ' + '  Site  ' + '  Login  ' + '  Password')
+    emptyblock()
+    print(df.iloc[0:].to_string(header=False, index=False))
+    # print(df.to_string(header=False, index=False))
     Press_Enter()
 
 
