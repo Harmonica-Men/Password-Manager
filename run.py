@@ -505,7 +505,7 @@ def delete_password_entry(index_number):
     """
     Copy the password entry from the specified index in the DataFrame.
     """
-    
+
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
     max_row = len(data)
@@ -535,7 +535,7 @@ def menu_option_0():
     Copy/paste password by entery number
     """
     mylogo()
-    print(f"Menu option 4\n")
+    print(f"Menu option 0\n")
     print(f"delete record in password list\n")
     print("Enter password index")
     index_number = input(f"number of record to be deleted? : \n")
@@ -682,9 +682,12 @@ def menu_option_6(update_bool):
             master_password = input("Enter new master password: ")
         if len(master_password) <= 0:
             print(Fore.RED + f"You entered nothing\n")
-            print(Fore.RED + f"No data processed! \n")
+            # print(Fore.RED + f"No data processed! \n")
             print(Fore.RED + f"Exiting ... \n")
-            return False
+            emptyblock()
+            print(Fore.GREEN + f"But for demostrational purposes your allowed to continue \n")
+            Press_Enter()
+            return True
         else:
             if len(master_password) >= 12:
                 print(Fore.RED + "Enter master password less")
