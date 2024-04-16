@@ -146,7 +146,7 @@ def update_password_data(data_dict):
         print(", and 'password' keys.\n")
 
 
-def list_passwords(show_password=bool):
+def list_passwords(show_password):
     """
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
@@ -363,11 +363,23 @@ def check_if_number(input_str):
     return False
 
 def check_worksheet_value0():
+    """
+    Checks if the worksheet has any values.
+    Returns True if the worksheet is not empty, False otherwise.
+    """
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
-    max_row = len(data)
-    print(max_row)
-    Press_Enter()
+    zero_value = len(data)
+    
+    if not zero_value:
+        iszero = False
+    else:
+        iszero = True
+    
+    print("Zero value:", zero_value)
+    print("Is zero:", iszero)
+    
+    return iszero
 
 
 def delete_password_entry(index_number):
@@ -379,15 +391,20 @@ def delete_password_entry(index_number):
     data = worksheet_to_update.get_all_values()
     max_row = len(data)
 
+#    print(check_worksheet_value0)
+#   Press_Enter()
+        
     if int(index_number) <= max_row:
         worksheet_to_update.delete_rows(index_number)
         print(Fore.GREEN + f"Password entry index {index_number} is deleted")
         Press_Enter()
 
     else:
-        print(Fore.RED + f"Your index exceed the maximum")
-        print(Fore.RED + f"of rows {max_row} in this\n")
-        #print(f"\n")
+        if max_row <= 0:
+            print(Fore.RED + f"there are no password enteries")
+        else:
+            print(Fore.RED + f"Your index exceed the maximum")
+            print(Fore.RED + f"of rows {max_row} in this\n")
         line_exit("")
         return
 
