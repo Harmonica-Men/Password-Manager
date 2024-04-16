@@ -33,7 +33,7 @@ def emptyblock():
 def mylogo():
     logo = """        
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|  V1.00
+|P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|  V1.00 DEMO
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
     """
     print(logo)
@@ -79,11 +79,10 @@ def vigenere_cipher(text, key, mode='encode'):
     """
     if mode not in ['encode', 'decode']:
         raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
-    alphabet1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    alphabet2 = ' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
-    alphabet = alphabet1 + alphabet2
-    text = text.upper()
-    key = key.upper()
+    alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+    
+    #text = text.upper()
+    #key = key.upper()
     # Initialize the result string
     result = ''
     # Set the appropriate shift direction based on the mode
