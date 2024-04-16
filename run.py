@@ -646,9 +646,13 @@ Please enter your choice (0-7): """
             elif user_choice == '7':
                 os.system("clear")
                 # Copy an empty string to clear the clipboard
-                # pyperclip.copy('')
                 print(f"Thank you for using Password Manager\n")
                 print(f"bye bye ...\n")
+                try:
+                    pyperclip.copy('')
+                except PyperclipException as e:
+                    pass
+                    #line_exit("Failed to copy password entry to clipboard")
                 break
             else:
                 emptyblock()
