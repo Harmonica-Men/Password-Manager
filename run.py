@@ -362,6 +362,13 @@ def check_if_number(input_str):
         return True
     return False
 
+def check_worksheet_value0():
+    worksheet_to_update = SHEET.worksheet("passwords")
+    data = worksheet_to_update.get_all_values()
+    max_row = len(data)
+    print(max_row)
+    Press_Enter()
+
 
 def delete_password_entry(index_number):
     """
@@ -397,6 +404,7 @@ def menu_option_0():
         line_exit("You entered nothing")
     else:
         if check_if_number(index_number):
+            
             delete_password_entry(int(index_number))
         else:
             line_exit("Invalid input")
