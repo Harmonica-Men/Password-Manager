@@ -517,6 +517,10 @@ def menu_option_5():
 
 
 def menu_option_6(update_bool):
+    """
+    menu option 6 has dual functionality to enter master password before 
+    using it in the menu option loop
+    """
     os.system("clear")
     mylogo()
     while True:
@@ -525,7 +529,7 @@ def menu_option_6(update_bool):
             master_password = input("Enter master password: ")
         else:
             master_password = input("Enter new master password: ")
-            print(master_password)
+           # print(master_password)
         if len(master_password) <= 0:
             emptyblock()
             print(Fore.GREEN + f"DEMO version allowed to continue \n")
