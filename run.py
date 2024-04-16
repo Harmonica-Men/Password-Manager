@@ -168,9 +168,6 @@ def list_passwords(show_password):
             decrypted_row = [row[0], row[1], decrypted_password]
             decrypted_data_list.append(decrypted_row)
         data_list = decrypted_data_list
-        #print("old data list : " + old_data_list)        
-        #print("new data list : " + new_data_list)
-        #Press_Enter()
     new_data_dict_list = []
     for i, row in enumerate(data_list):
         new_data_dict = {}  
@@ -181,13 +178,10 @@ def list_passwords(show_password):
         new_data_dict_list.append(new_data_dict)
     # Convert the list of dictionaries into a DataFrame
     df = pd.DataFrame(new_data_dict_list)
-    #print(df)
     # Reorder columns to have 'Row Number' as the first column
     df = df[['Row Number', 'Site', 'Login', 'Password']]
-    # print('Row Number  ' + '  Site  ' + '  Login  ' + '  Password')
     emptyblock()
     print(df.iloc[0:].to_string(header=False, index=False))
-    # print(df.to_string(header=False, index=False))
     Press_Enter()
 
 
@@ -260,8 +254,6 @@ def get_passwords():
                 login = get_login()
                 if login is None:
                     line_exit("The login input is empty ! ")
-                    #input(f"Press Enter to continue ... \n")
-                    #os.system("clear")
                     return
                 else:
                     password = option_password()
@@ -433,7 +425,6 @@ def menu_option_0():
     """
     mylogo()
     print(f"Menu option 0\n")
-    #print(f"delete record in password list\n")
     print(f"Delete password by index ... \n")
     index_number = input(f"number of record to be deleted?: ")
     if not index_number:
@@ -498,8 +489,7 @@ def menu_option_4():
     mylogo()
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")
-    #print(f"Enter password index\n")
-    index_number = input(f"number copy/paste into clipboard? : \n")
+    index_number = input(f"number copy/paste into clipboard?: \n")
     if not index_number:
         line_exit("You entered nothing")
     else:
@@ -647,7 +637,7 @@ Please enter your choice (0-7): """
                 os.system("clear")
                 # Copy an empty string to clear the clipboard
                 print(f"Thank you for using Password Manager\n")
-                print(f"bye bye ...\n")
+                print(f"Have a nica day ...\n")
                 try:
                     pyperclip.copy('')
                 except PyperclipException as e:
@@ -661,10 +651,6 @@ Please enter your choice (0-7): """
                 Press_Enter()
     else:
         os.system("clear")
-        # Copy an empty string to clear the clipboard
-        # pyperclip.copy('')
-        # print(f"Thank you for using Password Manager\n")
-        # print(f"bye bye ...\n")
 
 
 # Main program
