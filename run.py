@@ -390,9 +390,6 @@ def delete_password_entry(index_number):
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
     max_row = len(data)
-
-#    print(check_worksheet_value0)
-#   Press_Enter()
         
     if int(index_number) <= max_row:
         worksheet_to_update.delete_rows(index_number)
@@ -400,12 +397,12 @@ def delete_password_entry(index_number):
         Press_Enter()
 
     else:
-        if max_row <= 0:
+        print(int(index_number))
+        if int(max_row) <= 1:
             print(Fore.RED + f"there are no password enteries")
         else:
-            print(Fore.RED + f"Your index exceed the maximum")
-            print(Fore.RED + f"of rows {max_row} in this\n")
-        line_exit("")
+            printvalue = "Your index exceed the maximum of rows {max_row} in this"
+            line_exit(printvalue)
         return
 
 
