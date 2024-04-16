@@ -85,7 +85,7 @@ def vigenere_cipher(text, key, mode='encode'):
     """
     if mode not in ['encode', 'decode']:
         raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
-    alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+    alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$€%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
     
     #text = text.upper()
     #key = key.upper()
