@@ -27,10 +27,16 @@ SHEET = GSPREAD_CLIENT.open('password_manager')
 
 
 def emptyblock():
-    print("\n" * 2)
+    """
+    print a empty line
+    """
+    print("\n")
 
 
 def mylogo():
+    """
+    print the Password manager logo in ascii-art
+    """
     logo = """        
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|  V1.00 DEMO
@@ -48,7 +54,7 @@ def Press_Enter():
     os.system("clear")
 
 
-def generate_random_password(length=12):
+def generate_random_password(length=15):
     """
     Generate a random password
     """
@@ -140,9 +146,9 @@ def update_password_data(data_dict):
         # Update password value (column C)
     else:
         emptyblock()
-        print(f"Invalid password data format.")
-        print(" Please provide 'site', 'login'")
-        print(", and 'password' keys.\n")
+        print(f"Invalid password data format.\n")
+        print(f" Please provide 'site', 'login'")
+        print(", and 'password' keys")
 
 
 def list_passwords(show_password):
@@ -194,6 +200,7 @@ def get_login():
         print("Enter login or email ")
         login = input(f"(press Enter for '{default_user}'): \n")
         if not login:
+            emptyblock()
             print(Fore.GREEN + f"Using default login: {default_user}\n")
             return default_user
         else:
@@ -222,6 +229,7 @@ def option_password():
             return password
         
 def line_exit(info):
+    emptyblock()
     print(Fore.RED + info)
     emptyblock()
     print(Fore.RED + f"No data processed ! \n")
@@ -233,14 +241,15 @@ def get_passwords():
     """
     Get user data password information: site, login, password
     """
+    print(f"Create new entery ... \n")
     while True:
-        site = input(f"Enter site or platform: \n")
+        site = input(f"Enter new site or platform: ")
         if not site:  # Check if the input string is empty
             line_exit("Empty input site or platfrom !!")
             return
-        if len(site) > 12:
+        if len(site) > 18:
             print(f"Site or platform input string cannot")
-            print(Fore.RED + f" be greater than 12 characters!\n")
+            print(Fore.RED + f" be greater than 18 characters!\n")
             continue
         if check_value_in_column_a(site.lower()):
             print(Fore.RED + f"Site already exists !!\n")
@@ -302,6 +311,7 @@ def get_passwords():
             emptyblock()
             print(Fore.GREEN + f"Password added successfully\n")
             Press_Enter()
+            return #end loop
 
 
 def password_visible() -> bool:
@@ -310,9 +320,9 @@ def password_visible() -> bool:
     If the input is neither Yes nor No,
     return False to indicate going back to the main menu.
     """
-    print("Do you wish to make passwords visible during password listing?")
+    print(f"Do you wish to make passwords visible during password listing?\n")
     while True:
-        choice = input(f"Press Yes/No or ENTER : \n").lower()
+        choice = input(f"Press Yes/No or ENTER: ").lower()
         if not choice:  # If the user presses Enter without input
             return False
         elif choice == 'yes' or choice == 'y':
@@ -321,7 +331,7 @@ def password_visible() -> bool:
             return False
         else:
             emptyblock()
-            print(f"Invalid input")
+            print(f"Invalid input\n")
 
 
 def copy_password_entry(index_number):
@@ -346,7 +356,7 @@ def copy_password_entry(index_number):
     else:
         print(Fore.RED + f"Your index exceed the maximum")
         print(Fore.RED + f"of rows {max_row} in this\n")
-        line_exit()
+        line_exit("")
         return
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
@@ -398,6 +408,7 @@ def delete_password_entry(index_number):
                 line_exit("there are no password enteries")
         else:
             worksheet_to_update.delete_rows(index_number)
+            emptyblock()
             print(Fore.GREEN + f"Password entry index {index_number} is deleted")
             Press_Enter()
     else:
@@ -412,15 +423,15 @@ def menu_option_0():
     """
     Function to handle menu option 0: delete record in password list
     """
+    mylogo()
     print(f"Menu option 0\n")
-    print(f"delete record in password list\n")
-    print(f"Enter password index\n")
-    index_number = input(f"number of record to be deleted? : \n")
+    #print(f"delete record in password list\n")
+    print(f"Delete password by index ... \n")
+    index_number = input(f"number of record to be deleted?: ")
     if not index_number:
         line_exit("You entered nothing")
     else:
         if check_if_number(index_number):
-            
             delete_password_entry(int(index_number))
         else:
             line_exit("Invalid input")
@@ -430,7 +441,8 @@ def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
-    print(f"Menu Option 1 - Creating a new entry...\n")
+    mylogo()
+    print(f"Menu Option 1 \n")
     get_passwords()
 
 
@@ -438,10 +450,9 @@ def menu_option_2():
     """
     Function to handle menu option 2: List passwords
     """
+    mylogo()
     print(f"Menu Option 2\n")
-    print(f"\n")
     print(f"List passwords ...\n")
-    print(f"\n")
     list_passwords(password_visible())
 
 
@@ -449,10 +460,11 @@ def menu_option_3():
     """
     Update the key for password encryption/decryption.
     """
+    mylogo()
     global key  # Declare key as global
     old_key = key
     print(f"Menu option 3\n")
-    print(f"Change")
+    print(f"Change cipher key ... \n")
     while True:
         print(f"The old key: " + Fore.CYAN + key)
         key = input(f"Enter the new: ")
@@ -475,9 +487,10 @@ def menu_option_4():
     """
     Copy/paste password by entery number
     """
+    mylogo()
     print(f"Menu option 4\n")
     print(f"Copy/paste password ...\n")
-    print("Enter password index")
+    #print(f"Enter password index\n")
     index_number = input(f"number copy/paste into clipboard? : \n")
     if not index_number:
         line_exit("You entered nothing")
@@ -491,20 +504,21 @@ def menu_option_4():
 def menu_option_5():
     global default_user
     old_user = default_user
+    mylogo()
     print(f"Menu option 5\n")
     print(f"Change default user login ...\n")
     while True:
-        print("The default user login")
-        default_user = input(f": {default_user} \nEnter new user login : ")
+        print(f"The default user login: {default_user}\n")
+        default_user = input(f"Enter new user login: ")
         if len(default_user) <= 0:
             default_user = old_user
             line_exit("You entered nothing")
             break
         else:
-            if len(default_user) >= 12:
+            if len(default_user) >= 25:
                 default_user = old_user
                 print(Fore.RED + "default user login must be smaller")
-                print(Fore.RED + f" then 12 characters long.\n")
+                print(Fore.RED + f" then 25 characters long.\n")
                 print(Fore.RED + f"No data processed! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
                 Press_Enter()
@@ -528,17 +542,17 @@ def menu_option_6(update_bool):
             print(f"Press ENTER to bypass (DEMO)\n")
             master_password = input("Enter master password: ")
         else:
-            master_password = input("Enter new master password: ")
-           # print(master_password)
+            print(f"Change master password ... \n")
+            master_password = input(f"Enter new master password: ")
         if len(master_password) <= 0:
             emptyblock()
             print(Fore.GREEN + f"DEMO version allowed to continue \n")
             Press_Enter()
             return True
         else:
-            if len(master_password) >= 12:
+            if len(master_password) >= 20:
                 print(Fore.RED + "Enter master password less")
-                print(Fore.RED + " then 12 characters long.\n")
+                print(Fore.RED + " then 20 characters long.\n")
                 print(Fore.RED + f"No data processed! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
                 break
@@ -564,6 +578,7 @@ def menu_option_6(update_bool):
                         mystr = vigenere_cipher(master_password, key, mode="encode")
                         worksheet_to_update = SHEET.worksheet("masterpassword")
                         worksheet_to_update.update_cell(2, 1, mystr)
+                        emptyblock()
                         print(Fore.GREEN + "Master password is updated ")
                         Press_Enter()
                         return False
@@ -575,7 +590,7 @@ def main():
     """
     global key
     global default_user
-    default_user = "fve"
+    default_user = "TestUser@gmail.com"
     key = "KEY"
     menu_loop = menu_option_6(True)
     menu = """
