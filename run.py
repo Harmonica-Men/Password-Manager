@@ -208,8 +208,8 @@ def option_password():
     otherwise prompts the user again.
     """
     while True:
-        print(f"Enter password or ENTER\n")
-        password = input(f"auto-generate a new password): \n")
+        print(f"Enter password or ENTER ")
+        password = input(f"auto-generate a new password):")
         if not password:
             password = generate_random_password()  # Generate random password
             print(Fore.GREEN + "Using auto-generated password")
