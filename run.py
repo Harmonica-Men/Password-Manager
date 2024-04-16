@@ -341,6 +341,13 @@ def copy_password_entry(index_number):
     worksheet_to_update = SHEET.worksheet("passwords")
     data = worksheet_to_update.get_all_values()
     max_row = len(data)
+    row1_values = worksheet_to_update.row_values(1)
+    
+    if not row1_values:
+        print("debug1")
+        line_exit("There is password list to copy from")
+        return  
+    
     if int(index_number) <= max_row:
         # Convert the data into a list of arrays
         data_list = [row for row in data]
@@ -354,8 +361,9 @@ def copy_password_entry(index_number):
             line_exit("Failed to copy password entry to clipboard")
             return
     else:
-        print(Fore.RED + f"Your index exceed the maximum")
-        print(Fore.RED + f"of rows {max_row} in this\n")
+        emptyblock()
+        print(Fore.RED + "Your index exceed the maximum" 
+            + "of rows {max_row} in this")
         line_exit("")
         return
     emptyblock()
@@ -495,10 +503,13 @@ def menu_option_4():
     if not index_number:
         line_exit("You entered nothing")
     else:
-        if check_if_number(index_number):
-            copy_password_entry(int(index_number))
+        if int(index_number) == 0:
+            line_exit("Invalid input")
         else:
-            line_exit("Invalid Input")
+            if check_if_number(index_number):
+                copy_password_entry(int(index_number))
+            else:
+                line_exit("Invalid input")
 
 
 def menu_option_5():
