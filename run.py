@@ -188,6 +188,12 @@ def list_passwords(show_password):
     # Convert the data into a list of arrays
     data_list = [row for row in data]
     # Check is there are any password in list
+    
+    print("this data list:", data_list)
+    if data_list == [[]]:
+        line_exit("List is Empty")
+        Press_Enter()
+        return
         
     # Check if passwords should be displayed
     if show_password:
