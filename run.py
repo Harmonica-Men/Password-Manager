@@ -305,75 +305,121 @@ def get_passwords():
     """
     Get user data password information: site, login, password
     """
-    print(f"Create new entery ... \n")
-    while True:
-        site = input(f"Enter new site or platform: ")
-        if not site:  # Check if the input string is empty
-            line_exit("Empty input site or platfrom !!")
-            return
-        if len(site) > 18:
-            print(f"Site or platform input string cannot")
-            print(Fore.RED + f" be greater than 18 characters!\n")
-            continue
-        if check_value_in_column_a(site.lower()):
-            print(Fore.RED + f"Site already exists !!\n")
-            print("Do you want to change the site?")
-            print("Yes/No or press ENTER")
-            choice = input(f"return Main menu \n").lower()
-            if choice == 'yes' or choice == 'y':
-                login = get_login()
-                if login is None:
-                    line_exit("The login input is empty ! ")
-                    return
-                else:
-                    password = option_password()
-                    data_dict = {}
-                    data_dict['site'] = site
-                    data_dict['login'] = login
-                    encrypted = vigenere_cipher(password, key, mode="encode")
-                    data_dict['password'] = encrypted
-                    update_password_data(data_dict)
-                emptyblock()
-                print(Fore.GREEN + f"Password added successfully\n")
-                Press_Enter()
-                return
-            elif choice == 'no' or choice == 'n':
-                line_exit("")
-                return
-            else:
-                print(Fore.RED + f"Invalid choice !!\n")
-                print(Fore.RED + f"No data processed ! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
-                Press_Enter()
-                return
-        else:
+    # Prompt user to create a new entry
+    print(f"Create new entry ... \n")
+    # Prompt user to enter site or platform
+    site = input(f"Enter new site or platform: ")  
+    # Check if the input string is empty
+    if not site:  
+        # Exit if input is empty
+        line_exit("Empty input site or platform !!")  
+        return
+    # Check if site or platform string length exceeds 18 characters
+    if len(site) > 18:
+        # Print warning message
+        print(f"Site or platform input string cannot")  
+        print(Fore.RED + f" be greater than 18 characters!\n")
+    # Check if site already exists
+    if check_value_in_column_a(site.lower()):  
+        # Print warning message
+        print(Fore.RED + f"Site already exists !!\n")  
+        # Prompt user to change site
+        print("Do you want to change the site?")  
+        print("Yes/No or press ENTER")
+        # Get user choice
+        choice = input(f"return Main menu \n").lower()  
+        # Check if user wants to change site
+        if choice == 'yes' or choice == 'y':  
+            # Get login information
             login = get_login()
-            if login is None:
-                line_exit("The login input is empty !")
+            # Check if login is empty  
+            if login is None:  
+                # Exit if login is empty
+                line_exit("The login input is empty ! ")  
                 return
-            password = option_password()
-            if not password:
-                line_exit("Empty password input ...")
-                
-        data_dict = {'site': site, 'login': login, 'password': password}
-        if check_value_in_column_a(data_dict['site']):
-            print(f"Password data already exists.")
-            choice = input(f" Do you want to alter it? (Yes/No): \n").lower()
-            if choice == 'yes' or choice == 'y':
-                update_password_data(data_dict)
-            elif choice == 'no' or choice == 'n':
-                print(f"No changes made to password data\n")
             else:
-                print(Fore.RED + "Invalid choice. Please enter 'Yes' or 'No'")
-        else:
-            worksheet_to_update = SHEET.worksheet("passwords")
-            encrypted_password = vigenere_cipher(password, key, mode="encode")
-            row_data = [site, login, encrypted_password]
-            worksheet_to_update.append_row(row_data)
-            emptyblock()
-            print(Fore.GREEN + f"Password added successfully\n")
+                # Get password information
+                password = option_password()  
+                # Initialize data dictionary
+                data_dict = {}  
+                # Add site to data dictionary
+                data_dict['site'] = site  
+                # Add login to data dictionary
+                data_dict['login'] = login  
+                # Encrypt password
+                encrypted = vigenere_cipher(password, key, mode="encode")  
+                # Add encrypted password to data dictionary
+                data_dict['password'] = encrypted  
+                # Update password data
+                update_password_data(data_dict)  
+            # Print empty block
+            emptyblock()  
+            # Print success message
+            print(Fore.GREEN + f"Password added successfully\n")  
+            # Wait for user input
+            Press_Enter()  
+            return
+        # Check if user chooses not to change site
+        elif choice == 'no' or choice == 'n':  
+            # Exit
+            line_exit("")  
+            return
+        else:  
+            # Handle invalid choice
+            print(Fore.RED + f"Invalid choice !!\n")  
+            # Print warning message
+            print(Fore.RED + f"No data processed ! \n")
+            print(Fore.RED + f"Exiting ... Back to main menu \n")
             Press_Enter()
-            return #end loop
+            return
+    else:
+        # Get login information
+        login = get_login()
+        # Check if login is empty  
+        if login is None:  
+            # Exit if login is empty
+            line_exit("The login input is empty !")  
+            return
+        # Get password information
+        password = option_password()  
+        # Check if password is empty
+        if not password:  
+            # Exit if password is empty
+            line_exit("Empty password input ...")  
+    # Create data dictionary
+    data_dict = {'site': site, 'login': login, 'password': password}  
+    # Check if site already exists
+    if check_value_in_column_a(data_dict['site']):  
+        # Print warning message
+        print(f"Password data already exists.")  
+        # Prompt user to alter data
+        choice = input(f" Do you want to alter it? (Yes/No): \n").lower()  
+        # Check if user wants to alter data
+        if choice == 'yes' or choice == 'y': 
+            # Update password data 
+            update_password_data(data_dict)  
+        # Check if user chooses not to alter data
+        elif choice == 'no' or choice == 'n':  
+            # Print the message
+            print(f"No changes made to password data\n")  
+        # Handle invalid choice
+        else:  
+            print(Fore.RED + "Invalid choice. Please enter 'Yes' or 'No'")  # Print warning message
+    else:
+        # Access "passwords" worksheet
+        worksheet_to_update = SHEET.worksheet("passwords")  
+        # Encrypt password
+        encrypted_password = vigenere_cipher(password, key, mode="encode")  
+        # Create row data
+        row_data = [site, login, encrypted_password]  
+        # Append row to worksheet
+        worksheet_to_update.append_row(row_data)  
+        # Print empty block
+        emptyblock()  
+        # Print success message
+        print(Fore.GREEN + f"Password added successfully\n")  
+        # Wait for user input
+        Press_Enter()  
 
 
 def password_visible() -> bool:
@@ -382,19 +428,21 @@ def password_visible() -> bool:
     If the input is neither Yes nor No,
     return False to indicate going back to the main menu.
     """
-    print(f"Do you wish to make passwords visible during password listing?\n")
-    while True:
-        choice = input(f"Press Yes/No or ENTER: ").lower()
-        if not choice:  # If the user presses Enter without input
-            return False
-        elif choice == 'yes' or choice == 'y':
-            return True
-        elif choice == 'no' or choice == 'n':
-            return False
-        else:
-            emptyblock()
-            print(f"Invalid input\n")
-
+    print(f"Do you wish to make passwords visible during password listing?\n")  # Prompt user for visibility choice
+    # Get user choice
+    choice = input(f"Press Yes/No or ENTER: ").lower()  
+    # If the user presses Enter without input
+    if not choice:  
+        return False  
+    elif choice == 'yes' or choice == 'y':  # If user chooses Yes
+        return True  
+    elif choice == 'no' or choice == 'n':  # If user chooses No
+        return False 
+    # Handle invalid input
+    else:  
+        # Print empty block
+        emptyblock()  
+        print(f"Invalid input\n")
 
 def copy_password_entry(index_number):
     """
