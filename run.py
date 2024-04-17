@@ -448,94 +448,132 @@ def copy_password_entry(index_number):
     """
     Copy the password entry from the specified index in the DataFrame.
     """
-    worksheet_to_update = SHEET.worksheet("passwords")
-    data = worksheet_to_update.get_all_values()
-    max_row = len(data)
-    row1_values = worksheet_to_update.row_values(1)
-    
-    if not row1_values:
-        print("debug1")
-        line_exit("There is password list to copy from")
+    # Access "passwords" worksheet
+    worksheet_to_update = SHEET.worksheet("passwords")  
+    # Get all values from the worksheet
+    data = worksheet_to_update.get_all_values()  
+    # Get the number of rows in the worksheet
+    max_row = len(data)  
+    # Get values of the first row
+    row1_values = worksheet_to_update.row_values(1)  
+    # Check if the first row is empty
+    if not row1_values:  
+        # Exit function if there is no password list
+        line_exit("There is no password list to copy from")  
         return  
-    
-    if int(index_number) <= max_row:
+    # Check if the index is within the range of rows
+    if int(index_number) <= max_row:  
         # Convert the data into a list of arrays
         data_list = [row for row in data]
         # Decrypt the passwords using a Vigenère cipher
         for row in data_list:
             row[2] = vigenere_cipher(row[2], key, mode='decode')
-        password_entry = data_list[int(index_number)][2]
+        # Get the password entry at the specified index    
+        password_entry = data_list[int(index_number)][2]  
         try:
-            pyperclip.copy(password_entry)
+            # Copy the password entry to the clipboard
+            pyperclip.copy(password_entry)  
         except PyperclipException as e:
-            line_exit("Failed to copy password entry to clipboard")
+            # Exit function if copying fails
+            line_exit("Failed to copy password entry to clipboard")  
             return
     else:
         emptyblock()
-        print(Fore.RED + "Your index exceed the maximum" 
-            + "of rows {max_row} in this")
-        line_exit("")
+        print(Fore.RED + f"Your index {index_number} exceeds the maximum number"
+              , "of rows {max_row} in this worksheet")
+        # Exit function if the index exceeds the maximum number of rows
+        line_exit("")  
         return
     emptyblock()
     print(Fore.GREEN + f"Password is copied into the clipboard \n")
-    Press_Enter()
+    # Wait for user input
+    Press_Enter()  
+
 
 
 def check_if_number(input_str):
-    # Check if the input is a number
-    if isinstance(input_str, (int, float)):
-        return True
-    if input_str.isdigit():
-        return True
-    return False
+    """
+    Check if the input is a number
+    """
+    # Check if input is of type int or float
+    if isinstance(input_str, (int, float)):  
+        # Return True if input is a number
+        return True  
+    # Check if input consists of digits only
+    if input_str.isdigit():  
+        # Return True if input is a number
+        return True  
+    # Return False if input is not a number
+    return False  
+
+
 
 def check_worksheet_value0():
     """
     Checks if the worksheet has any values.
     Returns True if the worksheet is not empty, False otherwise.
     """
-    worksheet_to_update = SHEET.worksheet("passwords")
-    data = worksheet_to_update.get_all_values()
-    zero_value = len(data)
-    
-    if not zero_value:
-        iszero = False
+    # Access "passwords" worksheet
+    worksheet_to_update = SHEET.worksheet("passwords")  
+    # Get all values from the worksheet
+    data = worksheet_to_update.get_all_values()  
+    # Get the number of rows in the worksheet
+    zero_value = len(data)  
+    # Check if there are no values in the worksheet
+    if not zero_value:  
+        # Set iszero to False if there are no values
+        iszero = False  
     else:
-        iszero = True
-    
-    print("Zero value:", zero_value)
-    print("Is zero:", iszero)
-    
-    return iszero
+        # Set iszero to True if there are values
+        iszero = True  
+    # Print the number of rows in the worksheet
+    print("Zero value:", zero_value)  
+    # Print whether the worksheet is empty or not
+    print("Is zero:", iszero)  
+    # Return True if the worksheet is not empty, False otherwise
+    return iszero  
 
 
 def delete_password_entry(index_number):
     """
     Delete the password entry from the specified index in the DataFrame.
     """
-
-    worksheet_to_update = SHEET.worksheet("passwords")
-    data = worksheet_to_update.get_all_values()
-    row1_values = worksheet_to_update.row_values(1)
-
-    max_row = len(data)
-
-    if int(index_number) <= max_row:
-        row1_values = worksheet_to_update.row_values(1)
-        if not row1_values:
-                line_exit("there are no password enteries")
+    # Access "passwords" worksheet
+    worksheet_to_update = SHEET.worksheet("passwords")  
+    # Get all values from the worksheet
+    data = worksheet_to_update.get_all_values()  
+    # Get values of the first row
+    row1_values = worksheet_to_update.row_values(1)  
+    # Get the number of rows in the worksheet
+    max_row = len(data)  
+    # Check if the index number is within the range of rows
+    if int(index_number) <= max_row:  
+        # Get values of the first row
+        row1_values = worksheet_to_update.row_values(1)  
+        # Check if there are no values in the first row
+        if not row1_values:  
+            # Exit if there are no values
+            line_exit("There are no password entries")  
         else:
-            worksheet_to_update.delete_rows(index_number)
-            emptyblock()
-            print(Fore.GREEN + f"Password entry index {index_number} is deleted")
-            Press_Enter()
+            # Delete the row at the specified index
+            worksheet_to_update.delete_rows(index_number)  
+            # Print empty block
+            emptyblock()  
+            # Print success message
+            print(Fore.GREEN + f"Password entry at index {index_number} is deleted")  
+            # Wait for user input
+            Press_Enter()  
     else:
-        if int(max_row) <= 1:
-            line_exit("there are no password enteries")
+        # Check if the number of rows is less than or equal to 1
+        if int(max_row) <= 1:  
+            # Exit if there are no password entries
+            line_exit("There are no password entries")  
         else:
-            line_exit("index exceed the maximum of rows in password list")
+            # Exit if index is out of range
+            line_exit("Index exceeds the maximum number of rows in password list")  
+        # End function execution
         return
-
+    
 
 def menu_option_0():
     """
