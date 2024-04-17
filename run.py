@@ -189,8 +189,7 @@ def list_passwords(show_password):
     data_list = [row for row in data]
     # Check is there are any password in list
     if check_value_in_column_a:
-        line_exit("The password list is empty")
-        Press_Enter()
+      pass
     else:    
         # Check if passwords should be displayed
         if show_password:
@@ -925,7 +924,7 @@ Please enter your choice (0-7): """
                 os.system("clear")
                 # Copy an empty string to clear the clipboard
                 print(f"Thank you for using Password Manager\n")
-                print(f"Have a nica day ...\n")
+                print(f"Have a nice day ...\n")
                 try:
                     pyperclip.copy('')
                 except PyperclipException as e:
