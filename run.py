@@ -445,7 +445,7 @@ def password_visible() -> bool:
         # Print empty block
         emptyblock()
         print(f"Invalid Input , hide passwords \n")
-        
+        Press_Enter()
 
 
 def copy_password_entry(index_number):
