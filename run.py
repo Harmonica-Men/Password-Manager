@@ -1,43 +1,60 @@
+# Import the gspread library for Google Sheets integration
 import gspread
+# Import the pandas library for data manipulation
 import pandas as pd
+# Import the string module for working with string constants
 import string
+# Import the random module for generating random values
 import random
+# Import the pyperclip module for accessing the clipboard
 import pyperclip
+# Import the os module for operating system-related functionality
 import os
 
-from pyperclip import PyperclipException
+# Import the PyperclipException class for handling clipboard
+from pyperclip import PyperclipException   exceptions
+# Import the Credentials class for authentication
 from google.oauth2.service_account import Credentials
+# Import the Fore class from colorama for colored text output,
+# and init for initializing colorama
 from colorama import Fore, init
 
+# Initialize colorama with autoreset to reset colors after each print statement
 init(autoreset=True)
 
-global key
-key = "KEY"
+global key  # Declare a global variable key
+key = "KEY"  # Initialize the key variable with a value
 
+# Define an exception message
 EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 ]
+# Define the OAuth 2.0 scope for accessing Google Sheets and Google Drive
+# Load credentials from a service account file
 CREDS = Credentials.from_service_account_file('creds.json')
+# Add the specified scopes to the credentials
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+# Authorize the gspread client with the scoped credentials
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+# Open the Google Sheets spreadsheet named 'password_manager'
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
 
 def emptyblock():
     """
-    print a empty line
+    Print an empty line.
     """
     print("\n")
 
 
 def mylogo():
     """
-    print the Password manager logo in ascii-art
+    Print the Password manager logo in ASCII art.
     """
-    logo = """        
+    logo = """
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |P|a|s|s|w|o|r|d|-|M|a|n|a|g|e|r|  V1.00 DEMO
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -47,7 +64,7 @@ def mylogo():
 
 def Press_Enter():
     """
-    Pauze the program, until pressed ENTER
+    Pause the program until ENTER is pressed.
     """
     emptyblock()
     input(f"Press Enter to continue ... \n")
@@ -56,14 +73,15 @@ def Press_Enter():
 
 def generate_random_password(length=15):
     """
-    Generate a random password
+    Generate a random password.
+    
     """
     categories = [
         string.ascii_lowercase,
         string.ascii_uppercase,
         string.digits,
         string.punctuation
-    ]
+    ]  # Define character categories for password generation
 
     password = []
     selected_categories = random.sample(categories, k=3)
