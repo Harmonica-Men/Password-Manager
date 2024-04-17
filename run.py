@@ -12,7 +12,7 @@ import pyperclip
 import os
 
 # Import the PyperclipException class for handling clipboard
-from pyperclip import PyperclipException   exceptions
+from pyperclip import PyperclipException
 # Import the Credentials class for authentication
 from google.oauth2.service_account import Credentials
 # Import the Fore class from colorama for colored text output,
@@ -96,17 +96,16 @@ def generate_random_password(length=15):
     random.shuffle(password)
     return ''.join(password)
 
-
 def vigenere_cipher(text, key, mode='encode'):
     """
     Apply Vigenère Cipher to the given text using the provided key.
     """
     if mode not in ['encode', 'decode']:
         raise ValueError("Invalid mode. Mode must be 'encode' or 'decode'.")
-    alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$€%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
-    
-    #text = text.upper()
-    #key = key.upper()
+    # Cut string in seperate variables (too long for PEP8)
+    alpha0 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 '
+    alpha1 = "!#$€%&\()*+,-./:;<=>?@[]^_`{|}~"
+    alphabet = alpha0 + alpha1
     # Initialize the result string
     result = ''
     # Set the appropriate shift direction based on the mode
@@ -141,29 +140,37 @@ def check_value_in_column_a(data_array):
     Check if the given data array already exists in the passwords worksheet.
     Only for column A
     """
-    worksheet_to_update = SHEET.worksheet("passwords")
-    column_a_values = worksheet_to_update.col_values(1)  # Check Column A
-    if data_array in column_a_values:
-        return True
-    return False
+    # Access the "passwords" worksheet
+    worksheet_to_update = SHEET.worksheet("passwords")  
+    # Get all values from Column A
+    column_a_values = worksheet_to_update.col_values(1)  
+    # Check if the data array is in the values of Column A
+    if data_array in column_a_values:  
+        # Return True if the data array exists
+        return True  
+    # Return False if the data array does not exist
+    return False  
 
 
 def update_password_data(data_dict):
     """
     Update existing password data in the passwords worksheet.
     """
+    # Check if all required keys are present in the data dictionary
     if all(key in data_dict for key in ['site', 'login', 'password']):
-        # Check if all required keys are present
-        worksheet = SHEET.worksheet("passwords")
-        column_a_values = worksheet.col_values(1)
-        row_index = column_a_values.index(data_dict['site'].lower()) + 1
-        worksheet_to_update = SHEET.worksheet("passwords")
-        worksheet_to_update.update_cell(row_index, 2, data_dict['login'])
+        # Access the "passwords" worksheet
+        worksheet_to_update = SHEET.worksheet("passwords")  
+        # Get all values from Column A
+        column_a_values = worksheet_to_update.col_values(1)  
+        # Find the row index for the given site
+        row_index = column_a_values.index(data_dict['site'].lower()) + 1  
         # Update login value (column B)
-        worksheet_to_update.update_cell(row_index, 3, data_dict['password'])
+        worksheet_to_update.update_cell(row_index, 2, data_dict['login'])  
         # Update password value (column C)
+        worksheet_to_update.update_cell(row_index, 3, data_dict['password'])  
     else:
-        emptyblock()
+        # Print an empty block
+        emptyblock()  
         print(f"Invalid password data format.\n")
         print(f" Please provide 'site', 'login'")
         print(", and 'password' keys")
@@ -174,33 +181,52 @@ def list_passwords(show_password):
     List the specified number of entries in the passwords worksheet.
     If num_entries is None, all entries will be displayed.
     """
-    worksheet_to_update = SHEET.worksheet("passwords")
-    data = worksheet_to_update.get_all_values()
+    # Access the "passwords" worksheet
+    worksheet_to_update = SHEET.worksheet("passwords")  
+    # Get all values from the worksheet
+    data = worksheet_to_update.get_all_values()  
     # Convert the data into a list of arrays
-    data_list = [row for row in data]
-    # Decrypt the passwords using a Vigenère cipher
-    if show_password:
-        decrypted_data_list = []
-        for row in data:
-            decrypted_password = vigenere_cipher(row[2], key, mode='decode')
-            decrypted_row = [row[0], row[1], decrypted_password]
-            decrypted_data_list.append(decrypted_row)
-        data_list = decrypted_data_list
-    new_data_dict_list = []
-    for i, row in enumerate(data_list):
+    data_list = [row for row in data]  
+    # Check if passwords should be displayed
+    if show_password:  
+        # Initialize an empty list for decrypted data
+        decrypted_data_list = []  
+        # Iterate through each row in the data
+        for row in data:  
+            # Decrypt the password
+            decrypted_password = vigenere_cipher(row[2], key, mode='decode')  
+            # Create a new row with decrypted password
+            decrypted_row = [row[0], row[1], decrypted_password]  
+            # Add the decrypted row to the list
+            decrypted_data_list.append(decrypted_row)  
+        # Update the data list with decrypted data
+        data_list = decrypted_data_list  
+    # Initialize an empty list for new data dictionaries
+    new_data_dict_list = []  
+    # Iterate through each row in the data list
+    for i, row in enumerate(data_list):  
+        # Initialize a new data dictionary
         new_data_dict = {}  
-        new_data_dict["Row Number"] = i + 1 
-        new_data_dict["Site"] = row[0]
-        new_data_dict["Login"] = row[1]
-        new_data_dict["Password"] = row[2]
-        new_data_dict_list.append(new_data_dict)
+        # Add the row number to the dictionary
+        new_data_dict["Row Number"] = i + 1  
+        # Add the site to the dictionary
+        new_data_dict["Site"] = row[0]  
+        # Add the login to the dictionary
+        new_data_dict["Login"] = row[1] 
+        # Add the password to the dictionary
+        new_data_dict["Password"] = row[2]  
+        # Add the dictionary to the list
+        new_data_dict_list.append(new_data_dict)  
     # Convert the list of dictionaries into a DataFrame
-    df = pd.DataFrame(new_data_dict_list)
-    # Reorder columns to have 'Row Number' as the first column
-    df = df[['Row Number', 'Site', 'Login', 'Password']]
-    emptyblock()
-    print(df.iloc[0:].to_string(header=False, index=False))
-    Press_Enter()
+    df = pd.DataFrame(new_data_dict_list)  
+    # Reorder columns
+    df = df[['Row Number', 'Site', 'Login', 'Password']]  
+    # Print an empty block
+    emptyblock()  
+    # Print the DataFrame without headers and index
+    print(df.iloc[0:].to_string(header=False, index=False))  
+    # Pause the program until ENTER is pressed
+    Press_Enter()  
 
 
 def get_login():
@@ -209,14 +235,22 @@ def get_login():
     Returns the entered login if not empty.
     """
     while True:
-        print("Enter login or email ")
-        login = input(f"(press Enter for '{default_user}'): \n")
-        if not login:
-            emptyblock()
-            print(Fore.GREEN + f"Using default login: {default_user}\n")
-            return default_user
+        # Prompt the user to enter login or email
+        print("Enter login or email ")  
+        # Get user input for login
+        login = input(f"(press Enter for '{default_user}'): \n")  
+        # Check if login is empty
+        if not login:  
+            # Print an empty block
+            emptyblock()  
+            # Print default login message
+            print(Fore.GREEN + f"Using default login: {default_user}\n")  
+            # Return default user login
+            return default_user  
         else:
-            return login
+            # Return the entered login
+            return login  
+
 
 
 def option_password():
@@ -226,27 +260,45 @@ def option_password():
     otherwise prompts the user again.
     """
     while True:
-        print(f"Enter password or ENTER ")
-        password = input(f"auto-generate a new password):")
-        if not password:
-            password = generate_random_password()  # Generate random password
-            print(Fore.GREEN + "Using auto-generated password")
-            return password
-        elif len(password) < 6:
-            password = generate_random_password()  # Generate random password
-            print(Fore.RED + f"Password must be at least 6 characters long!\n")
-            print(Fore.RED + "Password is now auto-generated")
-            return password
+        # Prompt the user to enter a password
+        print(f"Enter password or ENTER ") 
+        # Get user input for password
+        password = input(f"auto-generate a new password):")  
+        # Check if password is empty
+        if not password:  
+            # Generate random password
+            password = generate_random_password()  
+            # Print message for auto-generated password
+            print(Fore.GREEN + "Using auto-generated password")  
+            # Return the auto-generated password
+            return password  
+        # Check if password length is less than 6
+        elif len(password) < 6:  
+            # Generate random password
+            password = generate_random_password()  
+            # Print password length error message
+            print(Fore.RED + f"Password must be at least 6 characters long!\n")  
+            # Print message for auto-generated password
+            print(Fore.RED + "Password is now auto-generated")  
+            # Return the auto-generated password
+            return password  
         else:
-            return password
+            # Return the entered password
+            return password  
         
 def line_exit(info):
-    emptyblock()
-    print(Fore.RED + info)
-    emptyblock()
-    print(Fore.RED + f"No data processed ! \n")
-    print(Fore.RED + f"Exiting ... Back to main menu \n")
-    Press_Enter()
+    """
+    Print exit message and pause the program.
+    """
+    # Print an empty block
+    emptyblock()  
+    # Print exit information in red color
+    print(Fore.RED + info)  
+    # Print an empty block
+    emptyblock()  
+    # Print message indicating no data processed and return to main menu
+    print(Fore.RED + f"No data processed ! \n")  
+    print(Fore.RED + f"Exiting ... Back to main menu \n")  
 
 
 def get_passwords():
