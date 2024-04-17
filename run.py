@@ -187,46 +187,51 @@ def list_passwords(show_password):
     data = worksheet_to_update.get_all_values()
     # Convert the data into a list of arrays
     data_list = [row for row in data]
-    # Check if passwords should be displayed
-    if show_password:
-        # Initialize an empty list for decrypted data
-        decrypted_data_list = []
-        # Iterate through each row in the data
-        for row in data:
-            # Decrypt the password
-            decrypted_password = vigenere_cipher(row[2], key, mode='decode')
-            # Create a new row with decrypted password
-            decrypted_row = [row[0], row[1], decrypted_password]
-            # Add the decrypted row to the list
-            decrypted_data_list.append(decrypted_row)
-        # Update the data list with decrypted data
-        data_list = decrypted_data_list
-    # Initialize an empty list for new data dictionaries
-    new_data_dict_list = []
-    # Iterate through each row in the data list
-    for i, row in enumerate(data_list):
-        # Initialize a new data dictionary
-        new_data_dict = {}
-        # Add the row number to the dictionary
-        new_data_dict["Row Number"] = i + 1
-        # Add the site to the dictionary
-        new_data_dict["Site"] = row[0]
-        # Add the login to the dictionary
-        new_data_dict["Login"] = row[1]
-        # Add the password to the dictionary
-        new_data_dict["Password"] = row[2]
-        # Add the dictionary to the list
-        new_data_dict_list.append(new_data_dict)
-    # Convert the list of dictionaries into a DataFrame
-    df = pd.DataFrame(new_data_dict_list)
-    # Reorder columns
-    df = df[['Row Number', 'Site', 'Login', 'Password']]
-    # Print an empty block
-    emptyblock()
-    # Print the DataFrame without headers and index
-    print(df.iloc[0:].to_string(header=False, index=False))
-    # Pause the program until ENTER is pressed
-    Press_Enter()
+    # Check is there are any password in list
+    if check_value_in_column_a:
+        line_exit("The password list is empty")
+        Press_Enter()
+    else:    
+        # Check if passwords should be displayed
+        if show_password:
+            # Initialize an empty list for decrypted data
+            decrypted_data_list = []
+            # Iterate through each row in the data
+            for row in data:
+                # Decrypt the password
+                decrypted_password = vigenere_cipher(row[2], key, mode='decode')
+                # Create a new row with decrypted password
+                decrypted_row = [row[0], row[1], decrypted_password]
+                # Add the decrypted row to the list
+                decrypted_data_list.append(decrypted_row)
+            # Update the data list with decrypted data
+            data_list = decrypted_data_list
+        # Initialize an empty list for new data dictionaries
+        new_data_dict_list = []
+        # Iterate through each row in the data list
+        for i, row in enumerate(data_list):
+            # Initialize a new data dictionary
+            new_data_dict = {}
+            # Add the row number to the dictionary
+            new_data_dict["Row Number"] = i + 1
+            # Add the site to the dictionary
+            new_data_dict["Site"] = row[0]
+            # Add the login to the dictionary
+            new_data_dict["Login"] = row[1]
+            # Add the password to the dictionary
+            new_data_dict["Password"] = row[2]
+            # Add the dictionary to the list
+            new_data_dict_list.append(new_data_dict)
+        # Convert the list of dictionaries into a DataFrame
+        df = pd.DataFrame(new_data_dict_list)
+        # Reorder columns
+        df = df[['Row Number', 'Site', 'Login', 'Password']]
+        # Print an empty block
+        emptyblock()
+        # Print the DataFrame without headers and index
+        print(df.iloc[0:].to_string(header=False, index=False))
+        # Pause the program until ENTER is pressed
+        Press_Enter()
 
 
 def get_login():
