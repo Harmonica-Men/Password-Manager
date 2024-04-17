@@ -869,7 +869,7 @@ def main():
     7. quit
 
 Please enter your choice (0-7): """
-    # If the menu loop is True (indicating successful setup),
+    # If the menu loop is True (indicating successful setup)
     # start the menu loop
     if menu_loop:
         while True:
