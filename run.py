@@ -579,101 +579,156 @@ def menu_option_0():
     """
     Function to handle menu option 0: delete record in password list
     """
-    mylogo()
-    print(f"Menu option 0\n")
-    print(f"Delete password by index ... \n")
-    index_number = input(f"number of record to be deleted?: ")
-    if not index_number:
-        line_exit("You entered nothing")
+    # Display the logo
+    mylogo()  
+    # Display menu option
+    print(f"Menu option 0\n")  
+    # Inform user about deleting a password by index
+    print(f"Delete password by index ... \n")  
+    # Prompt user for the record number to delete
+    index_number = input(f"number of record to be deleted?: ")  
+    # Check if the input is empty
+    if not index_number:  
+        # Inform user about empty input
+        line_exit("You entered nothing")  
     else:
-        if check_if_number(index_number):
-            delete_password_entry(int(index_number))
+        # Check if the input is a number
+        if check_if_number(index_number):  
+            # Call function to delete password entry
+            delete_password_entry(int(index_number))  
         else:
-            line_exit("Invalid input")
-
+            # Inform user about invalid input
+            line_exit("Invalid input")  
+            
 
 def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
     """
-    mylogo()
-    print(f"Menu Option 1 \n")
-    get_passwords()
+    # Display the logo
+    mylogo() 
+    # Display menu option
+    print(f"Menu Option 1 \n")  
+    # Call function to create a new password entry
+    get_passwords()  
 
 
 def menu_option_2():
     """
     Function to handle menu option 2: List passwords
     """
-    mylogo()
-    print(f"Menu Option 2\n")
-    print(f"List passwords ...\n")
-    list_passwords(password_visible())
+    # Display the logo
+    mylogo()  
+    # Display menu option
+    print(f"Menu Option 2\n")  
+    # Inform user about listing passwords
+    print(f"List passwords ...\n")  
+    # Call function to list passwords
+    list_passwords(password_visible())  
 
 
 def menu_option_3():
     """
     Update the key for password encryption/decryption.
     """
-    mylogo()
-    global key  # Declare key as global
-    old_key = key
-    print(f"Menu option 3\n")
-    print(f"Change cipher key ... \n")
+    # Display the logo
+    mylogo()  
+    # Declare key as global
+    global key  
+    # Store the old key
+    old_key = key  
+    # Display menu option
+    print(f"Menu option 3\n")  
+    # Inform user about changing the cipher key
+    print(f"Change cipher key ... \n")  
     while True:
-        print(f"The old key: " + Fore.CYAN + key)
-        key = input(f"Enter the new: ")
-        if len(key) == 0 or len(key) > 8:
-            key = old_key
+        # Display the old key
+        print(f"The old key: " + Fore.CYAN + key)  
+        # Prompt user for the new key
+        key = input(f"Enter the new: ")  
+        # Check if the new key is empty or too long
+        if len(key) == 0 or len(key) > 8:  
+            # Restore the old key
+            key = old_key  
             if len(key) > 8:
-                line_exit("cipher key is to long (max 8 charaters)")
+                # Inform user about key length limit
+                line_exit("cipher key is too long (max 8 characters)")  
                 return
             else:
-                line_exit("cipher key is empty")
+                # Inform user about empty key
+                line_exit("cipher key is empty")  
                 return
         else:
             break
-    emptyblock()
-    print(Fore.GREEN + f"Cipher Key updated successfully\n")
-    Press_Enter()
+    # Write empty print statement
+    emptyblock()  
+    # Inform user about successful key update
+    print(Fore.GREEN + f"Cipher Key updated successfully\n")  
+    # Prompt user to press Enter
+    Press_Enter()  
 
 
 def menu_option_4():
     """
-    Copy/paste password by entery number
+    Copy/paste password by entry number
     """
-    mylogo()
-    print(f"Menu option 4\n")
-    print(f"Copy/paste password ...\n")
-    index_number = input(f"number copy/paste into clipboard?: \n")
-    if not index_number:
-        line_exit("You entered nothing")
+    # Display the logo
+    mylogo()  
+    # Display menu option
+    print(f"Menu option 4\n")  
+    # Inform user about copying/pasting passwords
+    print(f"Copy/paste password ...\n")  
+    # Prompt user for entry number
+    index_number = input(f"number copy/paste into clipboard?: \n")  
+    # Check if user entered nothing
+    if not index_number:  
+        # Inform user about empty input
+        line_exit("You entered nothing")  
     else:
-        if int(index_number) == 0:
-            line_exit("Invalid input")
+        # Check if user entered 0
+        if int(index_number) == 0:  
+            # Inform user about invalid input
+            line_exit("Invalid input")  
         else:
-            if check_if_number(index_number):
-                copy_password_entry(int(index_number))
+            # Check if input is a number
+            if check_if_number(index_number):  
+                # Call function to copy password to clipboard
+                copy_password_entry(int(index_number))  
             else:
-                line_exit("Invalid input")
-
+                # Inform user about invalid input
+                line_exit("Invalid input")  
 
 def menu_option_5():
-    global default_user
-    old_user = default_user
-    mylogo()
-    print(f"Menu option 5\n")
-    print(f"Change default user login ...\n")
+    """
+    Function to handle menu option 5: Change default user login
+    """
+    # Access the global variable
+    global default_user  
+    # Store the old default user login
+    old_user = default_user  
+    # Display the logo
+    mylogo()  
+    # Display menu option
+    print(f"Menu option 5\n")  
+    # Inform user about changing default user login
+    print(f"Change default user login ...\n")  
     while True:
-        print(f"The default user login: {default_user}\n")
-        default_user = input(f"Enter new user login: ")
-        if len(default_user) <= 0:
-            default_user = old_user
-            line_exit("You entered nothing")
+        # Display current default user login
+        print(f"The default user login: {default_user}\n")  
+        # Prompt user for new default user login
+        default_user = input(f"Enter new user login: ")  
+        # Check if the input is empty
+        if len(default_user) <= 0:  
+            # Restore the old default user login
+            default_user = old_user  
+            # Inform user about empty input
+            line_exit("You entered nothing")  
             break
         else:
-            if len(default_user) >= 25:
-                default_user = old_user
+            # Check if the input exceeds 25 characters
+            if len(default_user) >= 25:  
+                # Restore the old default user login
+                default_user = old_user  
                 print(Fore.RED + "default user login must be smaller")
                 print(Fore.RED + f" then 25 characters long.\n")
                 print(Fore.RED + f"No data processed! \n")
@@ -681,7 +736,9 @@ def menu_option_5():
                 Press_Enter()
                 break
             else:
+                # Write empty print statements
                 emptyblock()
+                # Message password is added successfully
                 print(Fore.GREEN + f"Default password added successfully\n")
                 Press_Enter()
                 break
@@ -689,67 +746,105 @@ def menu_option_5():
 
 def menu_option_6(update_bool):
     """
-    menu option 6 has dual functionality to enter master password before 
-    using it in the menu option loop
+    Function to handle menu option 6: Change master password
     """
-    os.system("clear")
-    mylogo()
-    while True:
-        if update_bool:
-            print(f"Press ENTER to bypass (DEMO)\n")
-            master_password = input("Enter master password: ")
+    # Clear the console screen
+    os.system("clear")  
+    # Display the logo
+    mylogo()  
+    # Loop until a condition is met
+    while True:  
+        # Check if update_bool is True
+        if update_bool:  
+            # Display message for bypass option
+            print(f"Press ENTER to bypass (DEMO)\n")  
+            # Prompt for master password
+            master_password = input("Enter master password: ")  
         else:
-            print(f"Change master password ... \n")
-            master_password = input(f"Enter new master password: ")
-        if len(master_password) <= 0:
-            emptyblock()
-            print(Fore.GREEN + f"DEMO version allowed to continue \n")
+            # Display message for changing master password
+            print(f"Change master password ... \n")  
+            # Prompt for new master password
+            master_password = input(f"Enter new master password: ")  
+        # Check if the input is empty
+        if len(master_password) <= 0:  
+            # Display an empty block
+            emptyblock()  
+            # Inform about continuing with demo version
+            print(Fore.GREEN + f"DEMO version allowed to continue \n")  
+            # Wait for Enter key press
             Press_Enter()
-            return True
+            # Return True indicating demo version continuation  
+            return True  
         else:
-            if len(master_password) >= 20:
+            # Check if the input exceeds 20 characters
+            if len(master_password) >= 20:  
                 print(Fore.RED + "Enter master password less")
                 print(Fore.RED + " then 20 characters long.\n")
                 print(Fore.RED + f"No data processed! \n")
                 print(Fore.RED + f"Exiting ... Back to main menu \n")
-                break
+                # Break the loop
+                break  
             else:
-                worksheet_to_update = SHEET.worksheet("masterpassword")
-                password = worksheet_to_update.cell(2, 1).value
+                # Access the master password worksheet
+                worksheet_to_update = SHEET.worksheet("masterpassword")  
+                # Get the stored master password
+                password = worksheet_to_update.cell(2, 1).value  
+                # Decode the stored password
                 password = vigenere_cipher(password, key, mode="decode")
-                if master_password == password:
-                    if update_bool:
-                        return True
-                    else:
+                # Check if entered master password matches the stored one  
+                if master_password == password:  
+                    # If in update mode
+                    if update_bool:  
+                        # Return True indicating successful verification
+                        return True  
+                    # If not in update mode
+                    else:  
                         print(Fore.RED + "Master password is the same. ")
                         print(Fore.RED + "Nothing updated. ")
-                        Press_Enter()
-                        return False
+                        # Wait for Enter key press
+                        Press_Enter() 
+                        # Return False indicating no update 
+                        return False  
                 else:
-                    if update_bool:
+                    # If in update mode
+                    if update_bool:  
                         print(Fore.RED + f"Master password incorrect.\n")
                         print(Fore.RED + f"Exiting ... \n")
-                        Press_Enter()
-                        return False
-                    else:                                              
-                        mystr = vigenere_cipher(master_password, key, mode="encode")
-                        worksheet_to_update = SHEET.worksheet("masterpassword")
-                        worksheet_to_update.update_cell(2, 1, mystr)
-                        emptyblock()
-                        print(Fore.GREEN + "Master password is updated ")
-                        Press_Enter()
-                        return False
+                        # Wait for Enter key press
+                        Press_Enter() 
+                        # Return False indicating failed verification 
+                        return False  
+                    # If not in update mode
+                    else:  
+                        # Encode the new master password
+                        mystr = vigenere_cipher(master_password, key, mode="encode")  
+                        # Access the master password worksheet
+                        worksheet_to_update = SHEET.worksheet("masterpassword")  
+                        # Update the master password
+                        worksheet_to_update.update_cell(2, 1, mystr)  
+                        # Display an empty block
+                        emptyblock()  
+                        # Inform about successful update
+                        print(Fore.GREEN + "Master password is updated ")  
+                        # Wait for Enter key press
+                        Press_Enter() 
+                        # Return False indicating successful update 
+                        return False  
 
 
 def main():
     """
     Run all program functions
     """
-    global key
-    global default_user
-    default_user = "TestUser@gmail.com"
-    key = "KEY"
-    menu_loop = menu_option_6(True)
+    global key  # Declare key as a global variable
+    global default_user  # Declare default_user as a global variable
+    default_user = "TestUser@gmail.com"  # Set default_user to a test email address
+    key = "KEY"  # Set the initial key for encryption/decryption
+    
+    # Call menu_option_6 function with True argument to indicate initial run
+    menu_loop = menu_option_6(True)  
+
+    # Define the menu options
     menu = """
 *** Menu ***
 
@@ -763,34 +858,54 @@ def main():
     7. quit
 
 Please enter your choice (0-7): """
+    
+    # If the menu loop is True (indicating successful setup), start the menu loop
     if menu_loop:
-        
         while True:
-            mylogo()
-            user_choice = input(f"{menu} \n")
+            # Display the program logo
+            mylogo()  
+            # Prompt the user for a menu choice
+            user_choice = input(f"{menu} \n")  
+            # Based on the user's choice, 
+            # call the corresponding menu option function
             if user_choice == '0':
-                os.system("clear")
-                menu_option_0()
+                # Clear the console screen
+                os.system("clear")  
+                # Call the function to handle menu option 0
+                menu_option_0()  
             elif user_choice == '1':
+                # Clear the console screen
                 os.system("clear")
-                menu_option_1()
+                # Call the function to handle menu option 1  
+                menu_option_1()  
             elif user_choice == '2':
-                os.system("clear")
-                menu_option_2()
+                # Clear the console screen
+                os.system("clear")  
+                # Call the function to handle menu option 2
+                menu_option_2()  
             elif user_choice == '3':
-                os.system("clear")
-                menu_option_3()
+                # Clear the console screen
+                os.system("clear")  
+                # Call the function to handle menu option 3
+                menu_option_3()  
             elif user_choice == '4':
-                os.system("clear")
-                menu_option_4()
+                # Clear the console screen
+                os.system("clear")  
+                # Call the function to handle menu option 4
+                menu_option_4()  
             elif user_choice == '5':
-                os.system("clear")
-                menu_option_5()
+                # Clear the console screen
+                os.system("clear")  
+                # Call the function to handle menu option 5
+                menu_option_5()  
             elif user_choice == '6':
-                os.system("clear")
-                menu_loop == menu_option_6(False)
+                # Clear the console screen
+                os.system("clear")  
+                # Call the function to handle menu option 6
+                menu_loop == menu_option_6(False)  
             elif user_choice == '7':
-                os.system("clear")
+                # Clear the console screen
+                os.system("clear")  
                 # Copy an empty string to clear the clipboard
                 print(f"Thank you for using Password Manager\n")
                 print(f"Have a nica day ...\n")
@@ -798,17 +913,22 @@ Please enter your choice (0-7): """
                     pyperclip.copy('')
                 except PyperclipException as e:
                     pass
-                    #line_exit("Failed to copy password entry to clipboard")
+                  # Exit the program                    
                 break
             else:
-                emptyblock()
+                # Display an empty block
+                emptyblock()  
+                # Message the input choice is not valid
                 print(Fore.RED + "Invalid choice.")
                 print(Fore.RED + f" Please enter a number between 0 and 7.\n")
-                Press_Enter()
+                # Wait for Enter key press
+                Press_Enter()  
     else:
-        os.system("clear")
+        # Clear the console screen if menu loop setup failed
+        os.system("clear")  
 
 
 # Main program
 if __name__ == "__main__":
-    main()
+    # Call the main function if the script is executed directly
+    main()  
