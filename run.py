@@ -568,7 +568,7 @@ def delete_password_entry(index_number):
         line_exit("There are no password entries")
         return
     else:
-        if int(index_number) >= max_row:
+        if int(index_number) > max_row:
             line_exit("Your input is exceed maximum of password list enteries")
             return
         else:
