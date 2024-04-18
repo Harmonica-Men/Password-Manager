@@ -193,7 +193,6 @@ def list_passwords(show_password):
     #print("this data list:", data_list)
     if data_list == [[]]:
         line_exit("List is Empty")
-        Press_Enter()
         return
         
     # Check if passwords should be displayed
@@ -321,7 +320,6 @@ def get_passwords():
     site = input("Enter new site or platform: ")
     # Check if the input string is empty
     # print("site: ", site)
-    # breakpoint()
     if len(site) == 0:
         # Exit if input is empty
         # input("press enter to continue")
