@@ -69,7 +69,7 @@ def Press_Enter():
     """
     emptyblock()
     input(f"Press Enter to continue ... \n")
-    os.system("clear")
+    # os.system("clear")
 
 
 def generate_random_password(length=15):
@@ -307,6 +307,7 @@ def line_exit(info):
     # Print message indicating no data processed and return to main menu
     print(Fore.RED + "No data processed ! ")
     print(Fore.RED + "Exiting ... Back to main menu ")
+    Press_Enter()
     #os.system("clear")
 
 
@@ -592,6 +593,7 @@ def delete_password_entry(index_number):
             split_string = split_string0 + split_string1
             # Split string to big for PEP8
             line_exit(split_string)
+            
         # End function execution
         return
 
@@ -674,19 +676,23 @@ def menu_option_4():
     # Inform user about deleting a password by index
     print("Delete password by index ... ")
     # Prompt user for the record number to delete
-    index_number = input(f"number of record to be deleted?: ")
+    index_number = input("number of record to be deleted?: ")
     # Check if the input is empty
     if not index_number:
         # Inform user about empty input
         line_exit("You entered nothing")
+        Press_Enter()
     else:
         # Check if the input is a number
         if check_if_number(index_number):
             # Call function to delete password entry
             delete_password_entry(int(index_number))
+            #print(Fore.GREEN + f"password entry {index_number} succesfully deleted from list")
+            #Press_Enter()
         else:
             # Inform user about invalid input
             line_exit("Invalid input")
+            Press_Enter()
 
 
 def menu_option_5():
