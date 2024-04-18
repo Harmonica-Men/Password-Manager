@@ -190,7 +190,7 @@ def list_passwords(show_password):
     data_list = [row for row in data]
     # Check is there are any password in list
     
-    print("this data list:", data_list)
+    #print("this data list:", data_list)
     if data_list == [[]]:
         line_exit("List is Empty")
         Press_Enter()
@@ -250,7 +250,6 @@ def get_login():
         login = input(f"(press Enter for '{default_user}'): \n")
         # Check if login is empty
         if not login:
-            # Print a empty block
             emptyblock()
             # Print default login message
             print(Fore.GREEN + f"Using default login: {default_user}\n")
@@ -431,6 +430,7 @@ def get_passwords():
         print(Fore.GREEN + "Password added successfully")
         # Wait for user input
         Press_Enter()
+        return
 
 
 def password_visible() -> bool:
@@ -850,7 +850,7 @@ def main():
     6. change master password
     7. quit
 
-Please enter your choice (0-7): """
+Please enter your choice (1-7): """
     # If the menu loop is True (indicating successful setup)
     # start the menu loop
     if menu_loop:
@@ -865,7 +865,7 @@ Please enter your choice (0-7): """
                 # Clear the console screen
                 # os.system("clear")
                 # Call the function to handle menu option 1
-                menu_option_1()
+                menu_option_1()                
             elif user_choice == '2':
                 # Clear the console screen
                 # os.system("clear")
@@ -876,7 +876,7 @@ Please enter your choice (0-7): """
                 # os.system("clear")
                 # Call the function to handle menu option 3
                 menu_option_3()
-            if user_choice == '4':
+            elif user_choice == '4':
                 # Clear the console screen
                 # os.system("clear")
                 # Call the function to handle menu option 0
@@ -897,14 +897,10 @@ Please enter your choice (0-7): """
                 # Copy an empty string to clear the clipboard
                 print("Thank you for using Password Manager")
                 print("Have a nice day ...")
-                try:
-                    pyperclip.copy('')
-                except PyperclipException as e:
-                    pass
-                # Exit the program
                 break
             else:
                 # Display an empty block
+                print(user_choice)
                 emptyblock()
                 # Message the input choice is not valid
                 print(Fore.RED + "Invalid choice.")
