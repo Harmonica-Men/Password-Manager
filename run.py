@@ -316,9 +316,9 @@ def get_passwords():
     Get user data password information: site, login, password
     """
     # Prompt user to create a new entry
-    print(f"Create new entry ... \n")
+    print("Create new entry ... ")
     # Prompt user to enter site or platform
-    site = input(f"Enter new site or platform: ")
+    site = input("Enter new site or platform: ")
     # Check if the input string is empty
     if not site:
         # Exit if input is empty
@@ -592,32 +592,6 @@ def delete_password_entry(index_number):
         return
 
 
-def menu_option_0():
-    """
-    Function to handle menu option 0: delete record in password list
-    """
-    # Display the logo
-    mylogo()
-    # Display menu option
-    print("Menu option 0\n")
-    # Inform user about deleting a password by index
-    print("Delete password by index ... ")
-    # Prompt user for the record number to delete
-    index_number = input(f"number of record to be deleted?: ")
-    # Check if the input is empty
-    if not index_number:
-        # Inform user about empty input
-        line_exit("You entered nothing")
-    else:
-        # Check if the input is a number
-        if check_if_number(index_number):
-            # Call function to delete password entry
-            delete_password_entry(int(index_number))
-        else:
-            # Inform user about invalid input
-            line_exit("Invalid input")
-
-
 def menu_option_1():
     """
     Function to handle menu option 1: Create new entry
@@ -625,7 +599,7 @@ def menu_option_1():
     # Display the logo
     mylogo()
     # Display menu option
-    print("Menu Option 1 ")
+    print("Menu Option 1\n")
     # Call function to create a new password entry
     get_passwords()
 
@@ -637,7 +611,7 @@ def menu_option_2():
     # Display the logo
     mylogo()
     # Display menu option
-    print("Menu Option 2")
+    print("Menu Option 2\n")
     # Inform user about listing passwords
     print("List passwords ... ")
     # Call function to list passwords
@@ -655,7 +629,7 @@ def menu_option_3():
     # Store the old key
     old_key = key
     # Display menu option
-    print("Menu option 3")
+    print("Menu option 3\n")
     # Inform user about changing the cipher key
     print("Change cipher key ... ")
     while True:
@@ -687,33 +661,28 @@ def menu_option_3():
 
 def menu_option_4():
     """
-    Copy/paste password by entry number
+    Function to handle menu option 0: delete record in password list
     """
     # Display the logo
     mylogo()
     # Display menu option
-    print("Menu option 4")
-    # Inform user about copying/pasting passwords
-    print("Copy/paste password ... ")
-    # Prompt user for entry number
-    index_number = input("number copy/paste into clipboard?: ")
-    # Check if user entered nothing
+    print("Menu option 0\n")
+    # Inform user about deleting a password by index
+    print("Delete password by index ... ")
+    # Prompt user for the record number to delete
+    index_number = input(f"number of record to be deleted?: ")
+    # Check if the input is empty
     if not index_number:
         # Inform user about empty input
         line_exit("You entered nothing")
     else:
-        # Check if user entered 0
-        if int(index_number) == 0:
+        # Check if the input is a number
+        if check_if_number(index_number):
+            # Call function to delete password entry
+            delete_password_entry(int(index_number))
+        else:
             # Inform user about invalid input
             line_exit("Invalid input")
-        else:
-            # Check if input is a number
-            if check_if_number(index_number):
-                # Call function to copy password to clipboard
-                copy_password_entry(int(index_number))
-            else:
-                # Inform user about invalid input
-                line_exit("Invalid input")
 
 
 def menu_option_5():
@@ -727,7 +696,7 @@ def menu_option_5():
     # Display the logo
     mylogo()
     # Display menu option
-    print("Menu option 5")
+    print("Menu option 5 \n")
     # Inform user about changing default user login
     print("Change default user login ... ")
     while True:
@@ -780,6 +749,7 @@ def menu_option_6(update_bool):
             master_password = input("Enter master password: ")
         else:
             # Display message for changing master password
+            print("Menu option 6\n")
             print("Change master password ... ")
             # Prompt for new master password
             master_password = input("Enter new master password: ")
@@ -871,12 +841,11 @@ def main():
     # Define the menu options
     menu = """
 *** Menu ***
-
-    0. delete a record in password list
+    
     1. update / create a new entry
     2. list passwords
     3. set cipher key
-    
+    4. delete a record in password list
     5. change default user login
     6. change master password
     7. quit
@@ -892,12 +861,7 @@ Please enter your choice (0-7): """
             user_choice = input(f"{menu} \n")
             # Based on the user's choice,
             # call the corresponding menu option function
-            if user_choice == '0':
-                # Clear the console screen
-                # os.system("clear")
-                # Call the function to handle menu option 0
-                menu_option_0()
-            elif user_choice == '1':
+            if user_choice == '1':
                 # Clear the console screen
                 # os.system("clear")
                 # Call the function to handle menu option 1
@@ -912,10 +876,10 @@ Please enter your choice (0-7): """
                 # os.system("clear")
                 # Call the function to handle menu option 3
                 menu_option_3()
-            elif user_choice == '4':
+            if user_choice == '4':
                 # Clear the console screen
                 # os.system("clear")
-                # Call the function to handle menu option 4
+                # Call the function to handle menu option 0
                 menu_option_4()
             elif user_choice == '5':
                 # Clear the console screen
@@ -944,7 +908,7 @@ Please enter your choice (0-7): """
                 emptyblock()
                 # Message the input choice is not valid
                 print(Fore.RED + "Invalid choice.")
-                print(Fore.RED + " Please enter a number between 0 and 7")
+                print(Fore.RED + "Please enter a number between 1 and 7")
                 # Wait for Enter key press
                 Press_Enter()
     else:
