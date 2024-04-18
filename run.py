@@ -326,7 +326,6 @@ def get_passwords():
         # Exit if input is empty
         # input("press enter to continue")
         line_exit("Empty input site or platform !!")
-        Press_Enter()
         return
     # Check if site or platform string length exceeds 18 characters
     if len(site) > 18:
@@ -380,11 +379,12 @@ def get_passwords():
             return
         else:
             # Handle invalid choice
-            print(Fore.RED + "Invalid choice !!")
+            # print(Fore.RED + "Invalid choice !!")
             # Print warning message
-            print(Fore.RED + "No data processed ! ")
-            print(Fore.RED + "Exiting ... Back to main menu ")
-            Press_Enter()
+            #  print(Fore.RED + "No data processed ! ")
+            #print(Fore.RED + "Exiting ... Back to main menu ")
+            # Press_Enter()
+            line_exit("Invalid Choice")
             return
     else:
         # Get login information
@@ -564,13 +564,15 @@ def delete_password_entry(index_number):
     # Get the number of rows in the worksheet
     max_row = len(data)
     # Check if the index number is within the range of rows
-    if int(index_number) <= max_row:
-        # Get values of the first row
-        row1_values = worksheet_to_update.row_values(1)
-        # Check if there are no values in the first row
-        if not row1_values:
-            # Exit if there are no values
-            line_exit("There are no password entries")
+    # Check if the number of rows is less than or equal to 1
+    if int(max_row) <= 0 or int(index_number) == 0:
+        # Exit if there are no password entries
+        line_exit("There are no password entries")
+        return
+    else:
+        if int(index_number) >= max_row:
+            line_exit("Your input is exceed maximum of password list enteries")
+            return
         else:
             # Delete the row at the specified index
             worksheet_to_update.delete_rows(index_number)
@@ -581,21 +583,6 @@ def delete_password_entry(index_number):
             print(Fore.GREEN + f"index {index_number} is deleted")
             # Wait for user input
             Press_Enter()
-    else:
-        # Check if the number of rows is less than or equal to 1
-        if int(max_row) <= 1:
-            # Exit if there are no password entries
-            line_exit("There are no password entries")
-        else:
-            # Exit if index is out of range
-            split_string0 = "Index exceeds the maximum number"
-            split_string1 = " of rows in password list"
-            split_string = split_string0 + split_string1
-            # Split string to big for PEP8
-            line_exit(split_string)
-            
-        # End function execution
-        return
 
 
 def menu_option_1():
@@ -644,16 +631,19 @@ def menu_option_3():
         # Prompt user for the new key
         key = input("Enter the new: ")
         # Check if the new key is empty or too long
-        if len(key) == 0 or len(key) > 8:
+        if len(key) == 0 or len(key) >= 8:
+             # breakpoint()
             # Restore the old key
-            key = old_key
-            if len(key) > 8:
+        
+            if len(key) >= 8:
                 # Inform user about key length limit
                 line_exit("cipher key is too long (max 8 characters)")
+                key = old_key
                 return
             else:
                 # Inform user about empty key
                 line_exit("cipher key is empty")
+                key = old_key
                 return
         else:
             break
@@ -692,7 +682,6 @@ def menu_option_4():
         else:
             # Inform user about invalid input
             line_exit("Invalid input")
-            Press_Enter()
 
 
 def menu_option_5():
