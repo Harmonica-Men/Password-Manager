@@ -768,13 +768,15 @@ def menu_option_6(update_bool):
             # Return True indicating demo version continuation
             return True
         else:
-            # Check if the input exceeds 20 characters
-            if len(master_password) >= 20:
-                print(Fore.RED + "Enter master password less")
-                print(Fore.RED + " then 20 characters long.")
+            # Check if the input exceeds 20 characters or is smaller then 3 characters
+            if len(master_password) >= 20 or len(master_password) <= 3:
+                print(Fore.RED + "Enter master password must be ")
+                print(Fore.RED + "greater then 3 and smaller then 20")
+                print(Fore.RED + "characters long.")
                 emptyblock()
                 print(Fore.RED + "No data processed!")
                 print(Fore.RED + "Exiting ... Back to main menu ")
+                Press_Enter()
                 # Break the loop
                 break
             else:
