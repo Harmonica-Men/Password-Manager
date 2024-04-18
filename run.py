@@ -307,7 +307,7 @@ def line_exit(info):
     # Print message indicating no data processed and return to main menu
     print(Fore.RED + "No data processed ! ")
     print(Fore.RED + "Exiting ... Back to main menu ")
-    os.system("clear")
+    #os.system("clear")
 
 
 def get_passwords():
@@ -319,9 +319,13 @@ def get_passwords():
     # Prompt user to enter site or platform
     site = input("Enter new site or platform: ")
     # Check if the input string is empty
-    if not site:
+    # print("site: ", site)
+    # breakpoint()
+    if len(site) == 0:
         # Exit if input is empty
+        # input("press enter to continue")
         line_exit("Empty input site or platform !!")
+        Press_Enter()
         return
     # Check if site or platform string length exceeds 18 characters
     if len(site) > 18:
@@ -493,7 +497,7 @@ def copy_password_entry(index_number):
             return
     else:
         emptyblock()
-        print(Fore.RED + "Your index {index_number} exceeds the maximum")
+        print(Fore.RED + f"Your index {index_number} exceeds the maximum")
         print(Fore.RED + " of rows {max_row} in this worksheet")
         # Exit function if the index exceeds the maximum number of rows
         line_exit("")
@@ -573,7 +577,7 @@ def delete_password_entry(index_number):
             emptyblock()
             # Print success message
             print(Fore.GREEN + "Password entry at")
-            print(Fore.GREEN + "index {index_number} is deleted")
+            print(Fore.GREEN + f"index {index_number} is deleted")
             # Wait for user input
             Press_Enter()
     else:
