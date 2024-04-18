@@ -122,8 +122,8 @@ def vigenere_cipher(text, key, mode='encode'):
         try:
             key_char = key[i % len(key)]
         except ZeroDivisionError:
-            print(f"Key Value Error:"+" Cannot divide by zero.\n")
-            print(f"Return to menu ... \n")
+            print("Key Value Error:"+" Cannot divide by zero.")
+            print("Return to menu ... ")
             break
         key_char = key[i % len(key)]
         key_pos = alphabet.index(key_char)
@@ -171,8 +171,8 @@ def update_password_data(data_dict):
     else:
         # Print an empty block
         emptyblock()
-        print(f"Invalid password data format.\n")
-        print(f" Please provide 'site', 'login'")
+        print("Invalid password data format.\n")
+        print(" Please provide 'site', 'login'")
         print(", and 'password' keys")
 
 
@@ -268,9 +268,9 @@ def option_password():
     """
     while True:
         # Prompt the user to enter a password
-        print(f"Enter password or ENTER ")
+        print("Enter password or ENTER ")
         # Get user input for password
-        password = input(f"auto-generate a new password):")
+        password = input("auto-generate a new password):")
         # Check if password is empty
         if not password:
             # Generate random password
@@ -284,7 +284,7 @@ def option_password():
             # Generate random password
             password = generate_random_password()
             # Print password length error message
-            print(Fore.RED + f"Password must be at least 6 characters long!\n")
+            print(Fore.RED + "Password must be at least 6 characters long!")
             # Print message for auto-generated password
             print(Fore.RED + "Password is now auto-generated")
             # Return the auto-generated password
@@ -305,8 +305,8 @@ def line_exit(info):
     # Print an empty block
     emptyblock()
     # Print message indicating no data processed and return to main menu
-    print(Fore.RED + f"No data processed ! \n")
-    print(Fore.RED + f"Exiting ... Back to main menu \n")
+    print(Fore.RED + "No data processed ! ")
+    print(Fore.RED + "Exiting ... Back to main menu ")
 
 
 def get_passwords():
@@ -325,17 +325,17 @@ def get_passwords():
     # Check if site or platform string length exceeds 18 characters
     if len(site) > 18:
         # Print warning message
-        print(f"Site or platform input string cannot")
-        print(Fore.RED + f" be greater than 18 characters!\n")
+        print("Site or platform input string cannot")
+        print(Fore.RED + " be greater than 18 characters!")
     # Check if site already exists
     if check_value_in_column_a(site.lower()):
         # Print warning message
-        print(Fore.RED + f"Site already exists !!\n")
+        print(Fore.RED + "Site already exists !!")
         # Prompt user to change site
         print("Do you want to change the site?")
         print("Yes/No or press ENTER")
         # Get user choice
-        choice = input(f"return Main menu \n").lower()
+        choice = input("return Main menu ").lower()
         # Check if user wants to change site
         if choice == 'yes' or choice == 'y':
             # Get login information
@@ -363,7 +363,7 @@ def get_passwords():
             # Print empty block
             emptyblock()
             # Print success message
-            print(Fore.GREEN + f"Password added successfully\n")
+            print(Fore.GREEN + "Password added successfully")
             # Wait for user input
             Press_Enter()
             return
@@ -374,10 +374,10 @@ def get_passwords():
             return
         else:
             # Handle invalid choice
-            print(Fore.RED + f"Invalid choice !!\n")
+            print(Fore.RED + "Invalid choice !!")
             # Print warning message
-            print(Fore.RED + f"No data processed ! \n")
-            print(Fore.RED + f"Exiting ... Back to main menu \n")
+            print(Fore.RED + "No data processed ! ")
+            print(Fore.RED + "Exiting ... Back to main menu ")
             Press_Enter()
             return
     else:
@@ -399,7 +399,7 @@ def get_passwords():
     # Check if site already exists
     if check_value_in_column_a(data_dict['site']):
         # Print warning message
-        print(f"Password data already exists.")
+        print("Password data already exists.")
         # Prompt user to alter data
         choice = input(f" Do you want to alter it? (Yes/No): \n").lower()
         # Check if user wants to alter data
@@ -409,7 +409,7 @@ def get_passwords():
         # Check if user chooses not to alter data
         elif choice == 'no' or choice == 'n':
             # Print the message
-            print(f"No changes made to password data\n")
+            print("No changes made to password data\n")
         # Handle invalid choice
         else:
             # Print warning message
@@ -426,7 +426,7 @@ def get_passwords():
         # Print empty block
         emptyblock()
         # Print success message
-        print(Fore.GREEN + f"Password added successfully\n")
+        print(Fore.GREEN + "Password added successfully")
         # Wait for user input
         Press_Enter()
 
@@ -438,7 +438,7 @@ def password_visible() -> bool:
     return False to indicate going back to the main menu.
     """
     # Prompt user for visibility
-    print(f"Do you wish to make passwords visible during password listing?\n")
+    print("Do you wish to make passwords visible during password listing?")
     # Get user choice
     choice = input(f"Press Yes/No or ENTER: ").lower()
     # If the user presses Enter without input
@@ -452,7 +452,7 @@ def password_visible() -> bool:
     else:
         # Print empty block
         emptyblock()
-        print(f"Invalid Input , hide passwords \n")
+        print("Invalid Input , hide passwords ")
         Press_Enter()
 
 
@@ -497,7 +497,7 @@ def copy_password_entry(index_number):
         line_exit("")
         return
     emptyblock()
-    print(Fore.GREEN + f"Password is copied into the clipboard \n")
+    print(Fore.GREEN + "Password is copied into the clipboard ")
     # Wait for user input
     Press_Enter()
 
@@ -597,9 +597,9 @@ def menu_option_0():
     # Display the logo
     mylogo()
     # Display menu option
-    print(f"Menu option 0\n")
+    print("Menu option 0")
     # Inform user about deleting a password by index
-    print(f"Delete password by index ... \n")
+    print("Delete password by index ... ")
     # Prompt user for the record number to delete
     index_number = input(f"number of record to be deleted?: ")
     # Check if the input is empty
@@ -623,7 +623,7 @@ def menu_option_1():
     # Display the logo
     mylogo()
     # Display menu option
-    print(f"Menu Option 1 \n")
+    print("Menu Option 1 ")
     # Call function to create a new password entry
     get_passwords()
 
@@ -635,9 +635,9 @@ def menu_option_2():
     # Display the logo
     mylogo()
     # Display menu option
-    print(f"Menu Option 2\n")
+    print("Menu Option 2")
     # Inform user about listing passwords
-    print(f"List passwords ...\n")
+    print("List passwords ... ")
     # Call function to list passwords
     list_passwords(password_visible())
 
@@ -653,14 +653,14 @@ def menu_option_3():
     # Store the old key
     old_key = key
     # Display menu option
-    print(f"Menu option 3\n")
+    print("Menu option 3")
     # Inform user about changing the cipher key
-    print(f"Change cipher key ... \n")
+    print("Change cipher key ... ")
     while True:
         # Display the old key
-        print(f"The old key: " + Fore.CYAN + key)
+        print("The old key: " + Fore.CYAN + key)
         # Prompt user for the new key
-        key = input(f"Enter the new: ")
+        key = input("Enter the new: ")
         # Check if the new key is empty or too long
         if len(key) == 0 or len(key) > 8:
             # Restore the old key
@@ -678,7 +678,7 @@ def menu_option_3():
     # Write empty print statement
     emptyblock()
     # Inform user about successful key update
-    print(Fore.GREEN + f"Cipher Key updated successfully\n")
+    print(Fore.GREEN + "Cipher Key updated successfully")
     # Prompt user to press Enter
     Press_Enter()
 
@@ -690,11 +690,11 @@ def menu_option_4():
     # Display the logo
     mylogo()
     # Display menu option
-    print(f"Menu option 4\n")
+    print("Menu option 4")
     # Inform user about copying/pasting passwords
-    print(f"Copy/paste password ...\n")
+    print("Copy/paste password ... ")
     # Prompt user for entry number
-    index_number = input(f"number copy/paste into clipboard?: \n")
+    index_number = input("number copy/paste into clipboard?: ")
     # Check if user entered nothing
     if not index_number:
         # Inform user about empty input
@@ -725,14 +725,14 @@ def menu_option_5():
     # Display the logo
     mylogo()
     # Display menu option
-    print(f"Menu option 5\n")
+    print("Menu option 5")
     # Inform user about changing default user login
-    print(f"Change default user login ...\n")
+    print("Change default user login ... ")
     while True:
         # Display current default user login
         print(f"The default user login: {default_user}\n")
         # Prompt user for new default user login
-        default_user = input(f"Enter new user login: ")
+        default_user = input("Enter new user login: ")
         # Check if the input is empty
         if len(default_user) <= 0:
             # Restore the old default user login
@@ -746,16 +746,16 @@ def menu_option_5():
                 # Restore the old default user login
                 default_user = old_user
                 print(Fore.RED + "default user login must be smaller")
-                print(Fore.RED + f" then 25 characters long.\n")
-                print(Fore.RED + f"No data processed! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                print(Fore.RED + " then 25 characters long.")
+                print(Fore.RED + "No data processed! ")
+                print(Fore.RED + "Exiting ... Back to main menu ")
                 Press_Enter()
                 break
             else:
                 # Write empty print statements
                 emptyblock()
                 # Message password is added successfully
-                print(Fore.GREEN + f"Default password added successfully\n")
+                print(Fore.GREEN + "Default password added successfully")
                 Press_Enter()
                 break
 
@@ -773,20 +773,20 @@ def menu_option_6(update_bool):
         # Check if update_bool is True
         if update_bool:
             # Display message for bypass option
-            print(f"Press ENTER to bypass (DEMO)\n")
+            print("Press ENTER to bypass (DEMO)")
             # Prompt for master password
             master_password = input("Enter master password: ")
         else:
             # Display message for changing master password
-            print(f"Change master password ... \n")
+            print("Change master password ... ")
             # Prompt for new master password
-            master_password = input(f"Enter new master password: ")
+            master_password = input("Enter new master password: ")
         # Check if the input is empty
         if len(master_password) <= 0:
             # Display an empty block
             emptyblock()
             # Inform about continuing with demo version
-            print(Fore.GREEN + f"DEMO version allowed to continue \n")
+            print(Fore.GREEN + "DEMO version allowed to continue ")
             # Wait for Enter key press
             Press_Enter()
             # Return True indicating demo version continuation
@@ -795,9 +795,10 @@ def menu_option_6(update_bool):
             # Check if the input exceeds 20 characters
             if len(master_password) >= 20:
                 print(Fore.RED + "Enter master password less")
-                print(Fore.RED + " then 20 characters long.\n")
-                print(Fore.RED + f"No data processed! \n")
-                print(Fore.RED + f"Exiting ... Back to main menu \n")
+                print(Fore.RED + " then 20 characters long.")
+                emptyblock()
+                print(Fore.RED + "No data processed!")
+                print(Fore.RED + "Exiting ... Back to main menu ")
                 # Break the loop
                 break
             else:
@@ -824,8 +825,9 @@ def menu_option_6(update_bool):
                 else:
                     # If in update mode
                     if update_bool:
-                        print(Fore.RED + f"Master password incorrect.\n")
-                        print(Fore.RED + f"Exiting ... \n")
+                        print(Fore.RED + "Master password incorrect.")
+                        emptyblock()
+                        print(Fore.RED + "Exiting ... ")
                         # Wait for Enter key press
                         Press_Enter()
                         # Return False indicating failed verification
@@ -872,7 +874,7 @@ def main():
     1. update / create a new entry
     2. list passwords
     3. set cipher key
-    4. copy / paste password
+    
     5. change default user login
     6. change master password
     7. quit
@@ -927,8 +929,8 @@ Please enter your choice (0-7): """
                 # Clear the console screen
                 os.system("clear")
                 # Copy an empty string to clear the clipboard
-                print(f"Thank you for using Password Manager\n")
-                print(f"Have a nice day ...\n")
+                print("Thank you for using Password Manager")
+                print("Have a nice day ...")
                 try:
                     pyperclip.copy('')
                 except PyperclipException as e:
@@ -940,7 +942,7 @@ Please enter your choice (0-7): """
                 emptyblock()
                 # Message the input choice is not valid
                 print(Fore.RED + "Invalid choice.")
-                print(Fore.RED + f" Please enter a number between 0 and 7.\n")
+                print(Fore.RED + " Please enter a number between 0 and 7")
                 # Wait for Enter key press
                 Press_Enter()
     else:
