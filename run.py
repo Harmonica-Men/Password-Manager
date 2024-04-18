@@ -632,9 +632,7 @@ def menu_option_3():
         key = input("Enter the new: ")
         # Check if the new key is empty or too long
         if len(key) == 0 or len(key) >= 8:
-             # breakpoint()
             # Restore the old key
-        
             if len(key) >= 8:
                 # Inform user about key length limit
                 line_exit("cipher key is too long (max 8 characters)")
