@@ -51,6 +51,7 @@ def emptyblock():
 
 
 def mylogo():
+    os.system("clear")
     """
     Print the Password manager logo in ASCII art.
     """
@@ -307,6 +308,7 @@ def line_exit(info):
     # Print message indicating no data processed and return to main menu
     print(Fore.RED + "No data processed ! ")
     print(Fore.RED + "Exiting ... Back to main menu ")
+    os.system("clear")
 
 
 def get_passwords():
@@ -597,7 +599,7 @@ def menu_option_0():
     # Display the logo
     mylogo()
     # Display menu option
-    print("Menu option 0")
+    print("Menu option 0\n")
     # Inform user about deleting a password by index
     print("Delete password by index ... ")
     # Prompt user for the record number to delete
@@ -892,42 +894,42 @@ Please enter your choice (0-7): """
             # call the corresponding menu option function
             if user_choice == '0':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Call the function to handle menu option 0
                 menu_option_0()
             elif user_choice == '1':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Call the function to handle menu option 1
                 menu_option_1()
             elif user_choice == '2':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Call the function to handle menu option 2
                 menu_option_2()
             elif user_choice == '3':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Call the function to handle menu option 3
                 menu_option_3()
             elif user_choice == '4':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Call the function to handle menu option 4
                 menu_option_4()
             elif user_choice == '5':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Call the function to handle menu option 5
                 menu_option_5()
             elif user_choice == '6':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Call the function to handle menu option 6
                 menu_loop == menu_option_6(False)
             elif user_choice == '7':
                 # Clear the console screen
-                os.system("clear")
+                # os.system("clear")
                 # Copy an empty string to clear the clipboard
                 print("Thank you for using Password Manager")
                 print("Have a nice day ...")
