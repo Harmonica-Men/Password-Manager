@@ -830,9 +830,9 @@ def main():
     # Declare default_user as a global variable
     global default_user
     # Set default_user to a test email address
-    default_user = "mylogin@gmail.com"
+    default_user = "MyLogin@gmail.com"
     # Set the initial key for encryption/decryption
-    key = "codeInst"
+    key = "CodeInsT"
     # Call menu_option_6 function with True argument to indicate initial run
     menu_loop = menu_option_6(True)
     # Define the menu options
