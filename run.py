@@ -333,12 +333,12 @@ def get_passwords():
     # Check if site already exists
     if check_value_in_column_a(site.lower()):
         # Print warning message
+        line_exit("Site already exists !!")
+        emptyblock()
         print(Fore.RED + "Site already exists !!")
+        emptyblock()
         # Prompt user to change site
-        print("Do you want to change the site?")
-        print("Yes/No or press ENTER")
-        # Get user choice
-        choice = input("return Main menu ").lower()
+        choice = input("Yes/No or press ENTER return Main menu ").lower()
         # Check if user wants to change site
         if choice == 'yes' or choice == 'y':
             # Get login information
