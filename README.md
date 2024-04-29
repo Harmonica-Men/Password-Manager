@@ -1,60 +1,29 @@
-As a user concerned about the security of my online accounts,
-I want a Password Manager program
-So that I can securely store and manage all my passwords.
+![password-manager-scr01.png](images/password-manager-scr01.png)
+# Password-Manager
+As a user concerned about the security of your online accounts,
+You want a Password Manager program !!
+So that you can keep track, securely store and manage all your passwords.
+If you have internet access you can access your passwords.
 
-Scenario 1: Creating an Account
-Given that I am a new user,
-When I open the Password Manager application,
-Then I should be prompted to create an account by providing my email and a master password.
+## Disclamer 
 
-Scenario 2: Logging In
-Given that I am a registered user,
-When I open the Password Manager application,
-Then I should be prompted to log in by providing my email and master password.
+This is a demonstration program where fictional accounts and assioate passwords,
+are stored in this case on the google cloud.
+It's essential to understand you **NEVER** store passwords into the cloud !! Because,
+basically put yourself in a very unconformable position to expose your privacy.
 
-Scenario 3: Adding a New Password
-Given that I am logged into the Password Manager application,
-When I want to add a new password for an online account,
-Then I should be able to input the account name, username/email, and password.
+# User Experience 
+## User stories
 
-Scenario 4: Viewing Passwords
-Given that I am logged into the Password Manager application,
-When I want to view my stored passwords,
-Then I should be able to see a list of all my accounts along with their corresponding usernames/emails.
+### Site Goals
+* To access and manage all your accounts & password over the internet via SSH terminal as a End-To-End Encryption 
+to your by passing your Firewall to your local domain on a Server that function as a Password-Manager. (for example a Raspberry Pi)
+### Features
+* To be able to update, create or delete account and password enteries.
+* To lists passwords and give a choice to user obscure them from view or show the password explicitly.
+* To be able to set a Cipher-Key, this is a handy feature to add a extra level of complexity to obsucre your passwords. 
+* To set up a default user login, makes the UX more user friendly
+* To always be able to change the 'master password' to access the password-manager.
+* **note** There was a copy/paste password feature avaibele that I removed because it was not possible to integrate that
+in Heroku cloud envrirement
 
-Scenario 5: Updating a Password
-Given that I am logged into the Password Manager application,
-When I want to update a password for an existing account,
-Then I should be able to select the account and update the password.
-
-Scenario 6: Deleting a Password
-Given that I am logged into the Password Manager application,
-When I want to delete a password for an existing account,
-Then I should be able to select the account and delete the password.
-
-Scenario 7: Generating a Strong Password
-Given that I am logged into the Password Manager application,
-When I want to create a new password,
-Then I should be able to generate a strong, random password of specified length.
-
-Scenario 8: Logging Out
-Given that I am logged into the Password Manager application,
-When I want to log out,
-Then I should be able to securely log out of my account.
-
-Scenario 9: Changing Master Password
-Given that I am logged into the Password Manager application,
-When I want to change my master password,
-Then I should be able to update it by providing the current master password and the new one.
-
-Scenario 10: Secure Encryption
-Given that I am using the Password Manager application,
-When my passwords are stored,
-Then they should be encrypted using strong encryption algorithms to ensure security.
-
-Scenario 11: Accessibility
-Given that I am a user of the Password Manager application,
-When I use the application,
-Then it should be accessible across multiple devices and platforms to allow easy access to my passwords from anywhere.
-
-This user story outlines the main features and functionalities of a Password Manager program from the perspective of a user.
