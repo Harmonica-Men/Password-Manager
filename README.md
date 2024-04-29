@@ -1,7 +1,9 @@
 ![password-manager-scr01.png](images/password-manager-scr01.png)
 # Password-Manager
-As a user concerned about the security of your online accounts,
+As a user concerned about the security of your online accounts.
+
 You want a Password Manager program !!
+
 So that you can keep track, securely store and manage all your passwords.
 If you have internet access you can access your passwords.
 
