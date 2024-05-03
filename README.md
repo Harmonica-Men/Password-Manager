@@ -13,24 +13,23 @@
 
 - [A Step By Step Guide](#a-step-by-step-guide)
     - [Step 1 DEMO version](#step-1-demo)
-    - [Step 2 Run The Program](#step-2-RUN-PROGRAM)
+    - [Step 2 RUN PROGRAM](#step-2-run-program)
     - [Step 3 Enter Master Password](#Step-3-Enter-Master-Password)
     - [Step 4 Main Options](#Step-4-Main-Options)
-    - [Menu options](#Menu-options)
         - [Menu Option 1](#Menu-option-1)
-            update / create a new entry
+            Update / Create a new entry
         - [Menu Option 2](#Menu-Option-2)
             List passwords
         - [Menu Option 3](#Menu-Option-3)
             Set Cipher Key
         - [Menu Option 4](#Menu-Option-4)
-            delete a record in password list
+            Delete a record in password list
         - [Menu Option 5](#Menu-Option-5)
-            change user default password
+            Change user default password
         - [Menu Option 6](#Menu-Option-6)
-            change master password
+            Change master password
         - [Menu Option 7](#Menu-Option-7)
-            Quit
+            Quit (Step 5)
 
 - [Technology Used](#technologies)
 
@@ -97,7 +96,7 @@ As the administrator I want
 ## Step 4 Main Options
 ![alt text](assets/images/password-manager-scr04.png)
 ### Menu option 1 
-**Update / create a new entry**
+**Update / Create a New Entry**
 * Two choices:
     1. Press Enter to return to main menu
     2. Enter new site or platfrom
@@ -123,7 +122,7 @@ all accounts and passwords entries are chown whit encrypted passwords
 all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
 
 ### Menu Option 3
-**Change Cipher key**
+**Change Cipher Key**
 * This allow the user to change how password are encrypted into the google spreadsheet. The main advantage is to add a extra level of complexity how your password are stored or displayed.
 * inorder to ativie this a 'Caeser cipher' is used as basic principle.
 by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenère cipher'.
@@ -133,14 +132,14 @@ For additional information about the Vigenère cipher check this link:  [Here](h
 * **note** when Enter a blank cipher key the user, the cipher key is not changed and the user return back to the Main Menu
 
 ### Menu Option 4 
-**delete a record in password manager list**
+**Delete a Record In Password Manager List**
 * This allow the user to delete a record from the password list
 * By enter a record index number the record is deleted.
 * when entered a blank index number the user goes back to the Main Menu
 ![alt text](assets/images/password-manager-scr10.png)
 
 ### Menu Option 5
-**change default user login**
+**Change Default User Login**
 * This give the possiblity to enter a pre-determent user into password manager when a new account - password entry gona been entered.
 * Here also two choices, enter a new user login or
 * when the user leaves the login input field empty the user returns back to Main Menu.
@@ -194,7 +193,7 @@ For additional information about the Vigenère cipher check this link:  [Here](h
 
 ## Testing
 
-### Validator Testing- 
+### Validator Testing
 
 - CI Python Linter ([PEP CI Validator](https://pep8ci.herokuapp.com/))
 
@@ -230,7 +229,7 @@ The following git commands were used throughout development to push code to the 
 
 ```git push```  - This command was used to push all committed code to the remote repository on github.
 
-### Deployment through Heroku
+### Deployment Through Heroku
 
 The below steps were followed to deploy this project to Heroku:
 
@@ -246,7 +245,7 @@ The below steps were followed to deploy this project to Heroku:
 
 The live link can be found [here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/)
 
-### Clone the Repository Code Locally
+### Clone The Repository Code Locally
 
 Navigate to the GitHub Repository you want to clone to use locally:
 
@@ -270,3 +269,5 @@ The project will now of been cloned on your local machine for use.
 
 ### Daisy McGirr
 - My Mentor with Code Institute who has provided me with excellent feedback and guidance through this project. 
+
+[def]: #step-2-run-the-program
