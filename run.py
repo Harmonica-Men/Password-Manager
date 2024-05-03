@@ -6,13 +6,9 @@ import pandas as pd
 import string
 # Import the random module for generating random values
 import random
-# Import the pyperclip module for accessing the clipboard
-import pyperclip
 # Import the os module for operating system-related functionality
 import os
 
-# Import the PyperclipException class for handling clipboard
-from pyperclip import PyperclipException
 # Import the Credentials class for authentication
 from google.oauth2.service_account import Credentials
 # Import the Fore class from colorama for colored text output,
@@ -25,8 +21,7 @@ init(autoreset=True)
 global key  # Declare a global variable key
 key = "KEY"  # Initialize the key variable with a value
 
-# Define an exception message
-EXCEPT_MSG = "Pyperclip could not find a copy/paste mechanism"
+# Define google environment
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -472,15 +467,6 @@ def copy_password_entry(index_number):
         # Decrypt the passwords using a Vigenère cipher
         for row in data_list:
             row[2] = vigenere_cipher(row[2], key, mode='decode')
-        # Get the password entry at the specified index
-        password_entry = data_list[int(index_number)][2]
-        try:
-            # Copy the password entry to the clipboard
-            pyperclip.copy(password_entry)
-        except PyperclipException as e:
-            # Exit function if copying fails
-            line_exit("Failed to copy password entry to clipboard")
-            return
     else:
         emptyblock()
         print(Fore.RED + f"Your index {index_number} exceeds the maximum")
