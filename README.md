@@ -113,13 +113,15 @@ As the administrator I want:
 ### Menu Option 2 
 **List passwords**
 ![scr06](assets/images/password-manager-scr06.png)
-    * Two choices whether or not you wish the password,
-    to be visible during the listing?
+* Two choices whether or not you wish the password to be visible during the listing?
+
     1. user choice is : No or Enter
 ![scr07](assets/images/password-manager-scr07.png)
-all accounts and passwords entries are chown whit encrypted passwords
+
+* all accounts and passwords entries are chown whit encrypted passwords.
+
     2. user choice is : Yes
-    ![scr08](assets/images/password-manager-scr08.png)
+![scr08](assets/images/password-manager-scr08.png)
 all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
 
 ### Menu Option 3
