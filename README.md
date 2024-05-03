@@ -3,9 +3,9 @@
 
 ## Index - Table of Contents
 
-- [Introduction](#features)
-    - [Password Manager](#password-manager)
-    - [Important Security Warning](#important-security-warning)
+
+- [Password Manager](#password-manager)
+- [Important Security Warning](#important-security-warning)
 
 - [UX](#ux)
     - [Site Goals](#site-goals)
