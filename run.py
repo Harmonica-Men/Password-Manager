@@ -189,12 +189,9 @@ def list_passwords(show_password):
     # Convert the data into a list of arrays
     data_list = [row for row in data]
     # Check is there are any password in list
-    
-    #print("this data list:", data_list)
     if data_list == [[]]:
         line_exit("List is Empty")
         return
-        
     # Check if passwords should be displayed
     if show_password:
         # Initialize an empty list for decrypted data
@@ -307,7 +304,6 @@ def line_exit(info):
     print(Fore.RED + "No data processed ! ")
     print(Fore.RED + "Exiting ... Back to main menu ")
     Press_Enter()
-    #os.system("clear")
 
 
 def get_passwords():
@@ -333,14 +329,8 @@ def get_passwords():
     # Check if site already exists
     if check_value_in_column_a(site.lower()):
         # Print warning message
-        # emptyblock()
         print("\n")
         print(Fore.RED + "Site already exists !!\n")
-        #line_exit("Site already exists !!")
-        # emptyblock()
-        # print(Fore.RED + "Site already exists !!")
-        # emptyblock()
-        # Prompt user to change site
         choice = input("Yes/No or press ENTER return Main menu ").lower()
         # Check if user wants to change site
         if choice == 'yes' or choice == 'y':
@@ -379,12 +369,6 @@ def get_passwords():
             line_exit("")
             return
         else:
-            # Handle invalid choice
-            # print(Fore.RED + "Invalid choice !!")
-            # Print warning message
-            #  print(Fore.RED + "No data processed ! ")
-            #print(Fore.RED + "Exiting ... Back to main menu ")
-            # Press_Enter()
             line_exit("Invalid Choice")
             return
     else:
@@ -676,8 +660,6 @@ def menu_option_4():
         if check_if_number(index_number):
             # Call function to delete password entry
             delete_password_entry(int(index_number))
-            #print(Fore.GREEN + f"password entry {index_number} succesfully deleted from list")
-            #Press_Enter()
         else:
             # Inform user about invalid input
             line_exit("Invalid input")
@@ -762,7 +744,7 @@ def menu_option_6(update_bool):
             # Return True indicating demo version continuation
             return True
         else:
-            # Check if the input exceeds 20 characters or is smaller then 3 characters
+            # Check if exceeds 20 characters or is smaller then 3 characters
             if len(master_password) >= 20 or len(master_password) <= 3:
                 print(Fore.RED + "Enter master password must be ")
                 print(Fore.RED + "greater then 3 and smaller then 20")
@@ -841,7 +823,6 @@ def main():
     # Define the menu options
     menu = """
 *** Menu ***
-    
     1. update / create a new entry
     2. list passwords
     3. set cipher key
@@ -865,7 +846,7 @@ Please enter your choice (1-7): """
                 # Clear the console screen
                 # os.system("clear")
                 # Call the function to handle menu option 1
-                menu_option_1()                
+                menu_option_1()
             elif user_choice == '2':
                 # Clear the console screen
                 # os.system("clear")

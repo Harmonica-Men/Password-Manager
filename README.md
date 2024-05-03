@@ -15,7 +15,7 @@ This is a demonstration program where fictional accounts and associate passwords
 are stored in this case on the google cloud.
 
 It's essential to understand you **NEVER** store passwords into the cloud!! Because,
-basically put yourself in a very uncomfortable position to expose of your privacy.
+basically put yourself in a very uncomfortable position to expose of your privacy. Because the cloud is not **YOUR** intellectual property
 
 # UX
 ## Site Goals
@@ -67,7 +67,7 @@ Menu option 1 - Update / create a new entry
     * Two choices whether or not you wish the password to be visible during the listing?
     1. user choice is : No or Enter
 ![alt text](images/password-manager-scr07.png)
-all accounts and passwords entries are shown whit ciphered passwords.
+all accounts and passwords entries are chown whit encrypted passwords
     2. user choice is : Yes
     ![alt text](images/password-manager-scr08.png)
 all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
