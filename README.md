@@ -1,5 +1,4 @@
 
-
 ![demo-gif](images/Password-Manager-Demo.gif)
 
 # Password-Manager
@@ -143,7 +142,7 @@ all accounts and passwords entries are now chown whit there true context. (de-ci
 
 - CI Python Linter ([PEP CI Validator](https://pep8ci.herokuapp.com/))
 
-    ![PEP CI Validator result](/assets/images/test/cipythonlinter.png)
+    ![PEP CI Validator result](assets/images/cipythonlinter.png)
 
 ### Testing User Stories
 
