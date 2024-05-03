@@ -60,7 +60,7 @@ This is a demonstration program where fictional accounts and associate passwords
 are stored in this case on the google cloud.
 
 It's essential to understand you **NEVER** store passwords into the cloud!! Because,
-basically put yourself in a very uncomfortable position to expose of your privacy. Because the cloud is not **YOUR** intellectual property
+basically put yourself in a very uncomfortable position to expose of your privacy. Because the cloud is not **YOUR** intellectual property.
 
 # UX
 ## Site Goals
@@ -69,16 +69,16 @@ to your by passing your Firewall to your local domain on a Server that function 
 ## User Stories
 As a user I want:
 * To be able to update, create or delete account and password enteries.
-* To lists passwords and give a choice to user obscure them from view or show the password explicitly by request.
+* To lists passwords and give a choice to the user obscure them from view or show the password explicitly by request.
 * To be able to set a Cipher-Key, this is a handy feature to add a extra level of complexity to obsucre your passwords.
 * To set up a default user login, makes the UX more user friendly
 * To always be able to change the 'master password' to access the password-manager.
 * **note** There was a **copy/paste** password clipboard feature available that I need to removed because it was not possible to integrate that
 in Heroku cloud environment.
 
-As the administrator I want
-* access the file that stored the content of the accounts and passwords
-* the passwords itself are encrypted 
+As the administrator I want:
+* access the file that's stored the content of the accounts and passwords.
+* the passwords itself are encrypted.
 
 
 # A Step By Step Guide
@@ -86,15 +86,15 @@ As the administrator I want
   The live DEMO version of Password-Manager is online running on Heroku, [Here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/) the repo is located [here](https://github.com/Harmonica-Men/Password-Manager)
 
 ## Step 2 RUN PROGRAM
-![alt text](assets/images/password-manager-scr02.png)
+![scr02](assets/images/password-manager-scr02.png)
     * Enter a valid password to access the program (you can always be changed afterwards)    
     * Press Enter to bypass (DEMO version)
 
 ## Step 3 Enter Master Password
-![alt text](assets/images/password-manager-scr03.png)
+![scr03](assets/images/password-manager-scr03.png)
 
 ## Step 4 Main Options
-![alt text](assets/images/password-manager-scr04.png)
+![scr04](assets/images/password-manager-scr04.png)
 ### Menu option 1 
 **Update / Create a New Entry**
 * Two choices:
@@ -108,17 +108,18 @@ As the administrator I want
     1. Press Enter to auto-generated new random password
     2. Enter your own password
 * Password added successfully
-![alt text](assets/images/password-manager-scr05.png)
+![scr05](assets/images/password-manager-scr05.png)
 
 ### Menu Option 2 
 **List passwords**
-![alt text](assets/images/password-manager-scr06.png)
-    * Two choices whether or not you wish the password to be visible during the listing?
+![scr06](assets/images/password-manager-scr06.png)
+    * Two choices whether or not you wish the password,
+    to be visible during the listing?
     1. user choice is : No or Enter
-![alt text](assets/images/password-manager-scr07.png)
+![scr07](assets/images/password-manager-scr07.png)
 all accounts and passwords entries are chown whit encrypted passwords
     2. user choice is : Yes
-    ![alt text](assets/images/password-manager-scr08.png)
+    ![scr08](assets/images/password-manager-scr08.png)
 all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
 
 ### Menu Option 3
@@ -128,7 +129,7 @@ all accounts and passwords entries are now chown whit there true context. (de-ci
 by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenère cipher'.
 For additional information about the Vigenère cipher check this link:  [Here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
     
-![alt text](assets/images/password-manager-scr09.png)
+![scr09](assets/images/password-manager-scr09.png)
 * **note** when Enter a blank cipher key the user, the cipher key is not changed and the user return back to the Main Menu
 
 ### Menu Option 4 
@@ -136,27 +137,27 @@ For additional information about the Vigenère cipher check this link:  [Here](h
 * This allow the user to delete a record from the password list
 * By enter a record index number the record is deleted.
 * when entered a blank index number the user goes back to the Main Menu
-![alt text](assets/images/password-manager-scr10.png)
+![scr10](assets/images/password-manager-scr10.png)
 
 ### Menu Option 5
 **Change Default User Login**
 * This give the possiblity to enter a pre-determent user into password manager when a new account - password entry gona been entered.
 * Here also two choices, enter a new user login or
 * when the user leaves the login input field empty the user returns back to Main Menu.
-    ![alt text](assets/images/password-manager-scr11.png)
+    ![scr11](assets/images/password-manager-scr11.png)
 
 ### Menu Option 6
 **Change The Master Password**
 * Every door has a key and in this case as extra level protection, there is a master password to remember, this is in fact the only password to be remembered.
 * Here are also two choices, enter a new master password or
 * Leave the master password entry empty to go back to the main menu.
-![alt text](assets/images/password-manager-scr12.png)
+![scr12](assets/images/password-manager-scr12.png)
 * Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed
 
 ### Menu Option 7
 **Quit**
 * This option is to quit the Password-Manager
-![alt text](assets/images/password-manager-scr13.png)
+![scr13](assets/images/password-manager-scr13.png)
 
 ## Technologies
 - Heroku
