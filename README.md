@@ -75,7 +75,9 @@ all accounts and passwords entries are now chown whit there true context. (de-ci
 6. Menu Option 3 - Change Cipher key
     * This allow the user to change how password are encrypted into the google spreadsheet. The main advantage is to add a extra level of complexity how your password are stored or displayed.
     * inorder to ativie this a 'Caeser cipher' is used as basic principle.
-    by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenere Cipher'.
+    by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenère cipher'.
+    For additional information about the Vigenère cipher check this link:  [Here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
+     
     ![alt text](images/password-manager-scr09.png)
     * **note** when Enter a blank cipher key the user, the cipher key is not changed and the user return back to the Main Menu
 
