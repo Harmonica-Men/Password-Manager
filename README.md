@@ -1,27 +1,28 @@
 
-![password-manager-scr01.png](images/password-manager-scr01.png)
+
+![demo-gif](images/Password-Manager-Demo.gif)
+
 # Password-Manager
 As a user you are concerned about the security of your online accounts.
-You want a Password Manager program !!
+You want a Password Manager program!!
 So that you can keep track, securely store and manage all your passwords.
 If you have internet access you can access your passwords.
 
 ## Important Security warning
 This open source version of Password-Manager is suitable for **testing** and **educational** purposes only.
 
-This is a demonstration program where fictional accounts and assioate passwords,
+This is a demonstration program where fictional accounts and associate passwords,
 are stored in this case on the google cloud.
 
 It's essential to understand you **NEVER** store passwords into the cloud!! Because,
-basically put yourself in a very unconformable position to expose of your privacy.
+basically put yourself in a very uncomfortable position to expose of your privacy.
 
-# User Experience
-## User stories
-
-### Site Goals
-* To access and manage all your accounts & password over the internet via SSH terminal as a End-To-End Encryption
+# UX
+## Site Goals
+To access and manage all your accounts & password over the internet via SSH terminal as a End-To-End Encryption
 to your by passing your Firewall to your local domain on a Server that function as a Password-Manager. (for example a Raspberry Pi)
-### Features
+## User Stories
+As a user I want:
 * To be able to update, create or delete account and password enteries.
 * To lists passwords and give a choice to user obscure them from view or show the password explicitly by request.
 * To be able to set a Cipher-Key, this is a handy feature to add a extra level of complexity to obsucre your passwords.
@@ -29,8 +30,13 @@ to your by passing your Firewall to your local domain on a Server that function 
 * To always be able to change the 'master password' to access the password-manager.
 * **note** There was a **copy/paste** password clipboard feature available that I need to removed because it was not possible to integrate that
 in Heroku cloud environment.
-## UX
-### Step-By-Step Guide
+
+As the administrator I want
+* access the file that stored the content of the accounts and passwords
+* the passwords itself are encrypted 
+
+
+### A Step-By-Step Guide
 1. The live DEMO version of Password-Manager is online running on Heroku, [Here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/) the repo is located [here](https://github.com/Harmonica-Men/Password-Manager)
 2. RUN PROGRAM
 ![alt text](images/password-manager-scr02.png)
@@ -96,16 +102,114 @@ all accounts and passwords entries are now chown whit there true context. (de-ci
     * This option is to quit the Password-Manager
     ![alt text](images/password-manager-scr13.png)
 
-### Deployment
-* As already been said it is not so practical to use google sheet from the cloud to store your passwords.
-* Therefore a small alteration to the source code can be made to store this password data file locally.
-* Because everything is done in a terminal mode you can use any platform to access the password-manager.
-* The source-code of 'run.py' can be compiled in python and executed from the command line.
-* A data-file is stored on the local device can be in a JSON format.
+## Technologies
+- Heroku
+    - Used to deploy and host the application
+- Python
+    - Code used to create the application
+- Visual Code
+    - Visual Studio Code (VS Code) was developed by Microsoft. It is a free, open-source code editor designed for writing and editing code in various programming languages.
+    VS Code is available for Windows, macOS, and Linux and is actively maintained by a team of developers at Microsoft.
+- GitHub
+    - Source code is hosted on GitHub and deployed using Heroku.
+- Git
+    - Used for version control
+- Screen Recorder
+    - Capture game play for title gif
+    - https://chrome.google.com/webstore/detail/screen-recorder/hniebljpgcogalllopnjokppmgbhaden
+- ezgif
+    - Used to create the title gif (https://ezgif.com/)
 
-**note** this data is unencryted and have no hashes of validation to it.
+**Python Packages**
 
-Validation  -  linter - sceen shoit
+- Colorama
+    - Adding colored terminal text to the game (https://pypi.org/project/colorama/)
+- Random 
+    - Used to pick random cards from the deck
+- OS
+    - Used to clear terminal after option selection, each completed hand and end of the game.
+- String 
+    - the string module for working with string constants
+- Pandas 
+    - the pandas library for data manipulation
+- gspread 
+    - the gspread library for Google Sheets integration
 
-## Disclaimer
-This application has not been fully tested, so there may be still problems due to the new build script or to the new repository structure. So, for the moment, use it at your own risk!
+## Testing
+
+### Validator Testing- 
+
+- CI Python Linter ([PEP CI Validator](https://pep8ci.herokuapp.com/))
+
+    ![PEP CI Validator result](/assets/images/test/cipythonlinter.png)
+
+### Testing User Stories
+
+| Expectation (As a user, I want to...)  | Result (As a user, I...)    |
+| :---------------------------------: | :------------------------------:|
+| Get a quick and thorough overview of the accounts & password | Can find my way around the app easily and quickly I one overview |
+| Every step in app there is a clear discription what to expect  | Can read the instructions from the options menu in a logical manner |
+| Be able to enter the app simple click interactions | Run the app by simply clicking the `y` or `n` to continue or complete the program|
+| Receive correction messages | When I inputed wrong the program tells me what to do next|
+
+
+### Fixed bugs
+
+- Text line length greater 79 characters
+- Clear Terminal positioning
+- Whitespaces
+
+## Deployment
+
+### Version Control
+
+The site was created using the Visual Code code editor and pushed to github to the remote repository [here](https://github.com/Harmonica-Men/Password-Manager) .
+
+The following git commands were used throughout development to push code to the remote repo:
+
+```git add .```  - This command was used to add the file(s) to the staging area before they are committed.
+
+```git commit -m “commit message”```  - This command was used to commit changes to the local repository queue ready for the final step.
+
+```git push```  - This command was used to push all committed code to the remote repository on github.
+
+### Deployment through Heroku
+
+The below steps were followed to deploy this project to Heroku:
+
+* Go to Heroku and click "New" to create a new app.
+* Choose an app name and region, click "Create app".
+* Go to "Settings" and navigate to Config Vars. Add the following config variables:
+    * PORT : 8000
+* Navigate to Buildpacks and add buildpacks for Python and NodeJS (in that order).
+* Navigate to "Deploy". 
+* Set the deployment method to Github and enter repository name and connect.
+* Scroll down to Manual Deploy, select "main" branch and click "Deploy Branch".
+* The app will now be deployed to heroku
+
+The live link can be found [here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/)
+
+### Clone the Repository Code Locally
+
+Navigate to the GitHub Repository you want to clone to use locally:
+
+- Click on the code drop down button
+- Click on HTTPS
+- Copy the repository link to the clipboard
+- Open your IDE of choice (git must be installed for the next steps)
+- Type git clone copied-git-url into the IDE terminal
+
+The project will now of been cloned on your local machine for use.
+
+## Credits
+
+### w3 schools
+> Used to reference Python Structure
+
+### Stack Overflow
+> Used to reference different synthax issues from existing older boards. Also used to query clear function issues when I ran into them as referenced in the bug section.
+
+## Acknowledgements
+
+### Daisy McGirr
+- My Mentor with Code Institute who has provided me with excellent feedback and guidance through this project. 
