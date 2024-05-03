@@ -17,7 +17,20 @@
     - [Step 3 Enter Master Password](#Step-3-Enter-Master-Password)
     - [Step 4 Main Options](#Step-4-Main-Options)
     - [Menu options](#Menu-options)
-        -[Menu option 1](#Menu-option-1)
+        - [Menu Option 1](#Menu-option-1)
+            update / create a new entry
+        - [Menu Option 2](#Menu-Option-2)
+            List passwords
+        - [Menu Option 3](#Menu-Option-3)
+            Set Cipher Key
+        - [Menu Option 4](#Menu-Option-4)
+            delete a record in password list
+        - [Menu Option 5](#Menu-Option-5)
+            change user default password
+        - [Menu Option 6](#Menu-Option-6)
+            change master password
+        - [Menu Option 7](#Menu-Option-7)
+            Quit
 
 - [Technology Used](#technologies)
 
@@ -75,7 +88,7 @@ As the administrator I want
 
 ## Step 2 RUN PROGRAM
 ![alt text](assets/images/password-manager-scr02.png)
-    * Enter a valid password to access the program (you can always be changed afterwards)
+    * Enter a valid password to access the program (you can always be changed afterwards)    
     * Press Enter to bypass (DEMO version)
 
 ## Step 3 Enter Master Password
@@ -83,23 +96,23 @@ As the administrator I want
 
 ## Step 4 Main Options
 ![alt text](assets/images/password-manager-scr04.png)
-## Menu option 1 
-    Update / create a new entry
-    * Two choices:
-        1. Press Enter to return to main menu
-        2. Enter new site or platfrom
-    * Enter a new site: CodeInstitute (example)
-    * Enter login credentials, again two choices
-        1. Press Enter for the default login
-        2. Enter your credentials
-    * Enter password, again two choices
-        1. Press Enter to auto-generated new random password
-        2. Enter your own password
-    * Password added successfully
+### Menu option 1 
+**Update / create a new entry**
+* Two choices:
+    1. Press Enter to return to main menu
+    2. Enter new site or platfrom
+* Enter a new site: CodeInstitute (example)
+* Enter login credentials, again two choices
+    1. Press Enter for the default login
+    2. Enter your credentials
+* Enter password, again two choices
+    1. Press Enter to auto-generated new random password
+    2. Enter your own password
+* Password added successfully
 ![alt text](assets/images/password-manager-scr05.png)
 
-## Menu Option 2 
-List passwords
+### Menu Option 2 
+**List passwords**
 ![alt text](assets/images/password-manager-scr06.png)
     * Two choices whether or not you wish the password to be visible during the listing?
     1. user choice is : No or Enter
@@ -109,37 +122,42 @@ all accounts and passwords entries are chown whit encrypted passwords
     ![alt text](assets/images/password-manager-scr08.png)
 all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
 
-6. Menu Option 3 - Change Cipher key
-    * This allow the user to change how password are encrypted into the google spreadsheet. The main advantage is to add a extra level of complexity how your password are stored or displayed.
-    * inorder to ativie this a 'Caeser cipher' is used as basic principle.
-    by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenère cipher'.
-    For additional information about the Vigenère cipher check this link:  [Here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
-     
-    ![alt text](assets/images/password-manager-scr09.png)
-    * **note** when Enter a blank cipher key the user, the cipher key is not changed and the user return back to the Main Menu
+### Menu Option 3
+**Change Cipher key**
+* This allow the user to change how password are encrypted into the google spreadsheet. The main advantage is to add a extra level of complexity how your password are stored or displayed.
+* inorder to ativie this a 'Caeser cipher' is used as basic principle.
+by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenère cipher'.
+For additional information about the Vigenère cipher check this link:  [Here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
+    
+![alt text](assets/images/password-manager-scr09.png)
+* **note** when Enter a blank cipher key the user, the cipher key is not changed and the user return back to the Main Menu
 
-7. Menu Option 4 - delete a record in password manager list.
-    * This allow the user to delete a record from the password list
-    * By enter a record index number the record is deleted.
-    * when entered a blank index number the user goes back to the Main Menu
-    ![alt text](assets/images/password-manager-scr10.png)
+### Menu Option 4 
+**delete a record in password manager list**
+* This allow the user to delete a record from the password list
+* By enter a record index number the record is deleted.
+* when entered a blank index number the user goes back to the Main Menu
+![alt text](assets/images/password-manager-scr10.png)
 
-8. Menu Option 5 - change default user login
-    * This give the possiblity to enter a pre-determent user into password manager when a new account - password entry gona been entered.
-    * Here also two choices, enter a new user login or
-    * when the user leaves the login input field empty the user returns back to Main Menu.
+### Menu Option 5
+**change default user login**
+* This give the possiblity to enter a pre-determent user into password manager when a new account - password entry gona been entered.
+* Here also two choices, enter a new user login or
+* when the user leaves the login input field empty the user returns back to Main Menu.
     ![alt text](assets/images/password-manager-scr11.png)
 
-9. Menu Option 6 - Change The Master Password
-    * Every door has a key and in this case as extra level protection, there is a master password to remember, this is in fact the only password to be remembered.
-    * Here are also two choices, enter a new master password or
-    * Leave the master password entry empty to go back to the main menu.
-    ![alt text](assets/images/password-manager-scr12.png)
-    * Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed
+### Menu Option 6
+**Change The Master Password**
+* Every door has a key and in this case as extra level protection, there is a master password to remember, this is in fact the only password to be remembered.
+* Here are also two choices, enter a new master password or
+* Leave the master password entry empty to go back to the main menu.
+![alt text](assets/images/password-manager-scr12.png)
+* Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed
 
-10. Menu Option 7 - Quit
-    * This option is to quit the Password-Manager
-    ![alt text](assets/images/password-manager-scr13.png)
+### Menu Option 7
+**Quit**
+* This option is to quit the Password-Manager
+![alt text](assets/images/password-manager-scr13.png)
 
 ## Technologies
 - Heroku
