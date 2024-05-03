@@ -111,7 +111,9 @@ As the administrator I want:
 ![scr05](assets/images/password-manager-scr05.png)
 
 ### Menu Option 2 
+
 **List passwords**
+
 ![scr06](assets/images/password-manager-scr06.png)
 * Two choices whether or not you wish the password to be visible during the listing?
 
