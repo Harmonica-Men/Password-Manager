@@ -156,7 +156,7 @@ For additional information about the Vigenère cipher check this link:  [Here](h
 * Here are also two choices, enter a new master password or
 * Leave the master password entry empty to go back to the main menu.
 * Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed.
-    ![scr12](assets/images/password-manager-scr12.png)
+    ![scr12](assets/images/password-manager-scr13.png)
 ### Menu Option 7
 **Quit**
 * This option is to quit the Password-Manager
