@@ -129,30 +129,30 @@ all accounts and passwords entries are now chown whit there true context. (de-ci
 ### Menu Option 3
 **Change Cipher Key**
 * This allow the user to change how password are encrypted into the google spreadsheet. The main advantage is to add a extra level of complexity how your password are stored or displayed.
-* inorder to ativie this a 'Caeser cipher' is used as basic principle.
+* Inorder to ativie this a 'Caeser cipher' is used as basic principle.
 by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenère cipher'.
 For additional information about the Vigenère cipher check this link:  [Here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
     
 ![scr09](assets/images/password-manager-scr09.png)
-* **note** when Enter a blank cipher key the user, the cipher key is not changed and the user return back to the Main Menu
+* **note** When Enter a blank cipher key, the key is not changed and the user return back to the Main Menu
 
 ### Menu Option 4 
 **Delete a Record In Password Manager List**
 * This allow the user to delete a record from the password list
 * By enter a record index number the record is deleted.
-* when entered a blank index number the user goes back to the Main Menu
+* When Enter a blank index number the user goes back to the Main Menu
 ![scr10](assets/images/password-manager-scr10.png)
 
 ### Menu Option 5
 **Change Default User Login**
-* This give the possiblity to enter a pre-determent user into password manager when a new account - password entry gona been entered.
+* This give the possiblity to enter a pre-determent user into password manager when a new account - password entry gonna been entered.
 * Here also two choices, enter a new user login or
-* when the user leaves the login input field empty the user returns back to Main Menu.
+* When the user leaves the login input field empty the user returns back to Main Menu.
     ![scr11](assets/images/password-manager-scr11.png)
 
 ### Menu Option 6
 **Change The Master Password**
-* Every door has a key and in this case as extra level protection, there is a master password to remember, this is in fact the only password to be remembered.
+* Every $door$ has a key and in this case a extra level protection is been added, there is a master password to remember to access the main program, this is in fact the only password to be remembered.
 * Here are also two choices, enter a new master password or
 * Leave the master password entry empty to go back to the main menu.
 ![scr12](assets/images/password-manager-scr12.png)
