@@ -1,13 +1,47 @@
 
 ![demo-gif](assets/images/Password-Manager-Demo.gif)
 
+## Index - Table of Contents
+
+- [Introduction](#features)
+    - [Password Manager](#password-manager)
+    - [Important Security Warning](#important-security-warning)
+
+- [UX](#ux)
+    - [Site Goals](#site-goals)
+    - [User Stories](#user-stories)
+
+- [A Step By Step Guide](#a-step-by-step-guide)
+    - [Step 1 DEMO version](#step-1-demo)
+    - [Step 2 Run The Program](#step-2-RUN-PROGRAM)
+    - [Step 3 Enter Master Password](#Step-3-Enter-Master-Password)
+    - [Step 4 Main Options](#Step-4-Main-Options)
+    - [Menu options](#Menu-options)
+        -[Menu option 1](#Menu-option-1)
+
+- [Technology Used](#technologies)
+
+- [Testing](#testing) 
+    - [Validator Testing](#validator-testing)
+    - [Manual Testing](#manual-testing)
+    - [Fixed Bugs](#fixed-bugs)
+    
+
+- [Deployment](#deployment)
+
+- [Credits](#credits)
+
+ - [ Acknowledgements](#acknowledgements)
+
+##
+
 # Password-Manager
 As a user you are concerned about the security of your online accounts.
 You want a Password Manager program!!
 So that you can keep track, securely store and manage all your passwords.
 If you have internet access you can access your passwords.
 
-## Important Security warning
+## Important Security Warning
 This open source version of Password-Manager is suitable for **testing** and **educational** purposes only.
 
 This is a demonstration program where fictional accounts and associate passwords,
@@ -35,19 +69,22 @@ As the administrator I want
 * the passwords itself are encrypted 
 
 
-### A Step-By-Step Guide
-1. The live DEMO version of Password-Manager is online running on Heroku, [Here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/) the repo is located [here](https://github.com/Harmonica-Men/Password-Manager)
-2. RUN PROGRAM
+# A Step By Step Guide
+## Step 1 Demo
+  The live DEMO version of Password-Manager is online running on Heroku, [Here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/) the repo is located [here](https://github.com/Harmonica-Men/Password-Manager)
+
+## Step 2 RUN PROGRAM
 ![alt text](assets/images/password-manager-scr02.png)
     * Enter a valid password to access the program (you can always be changed afterwards)
     * Press Enter to bypass (DEMO version)
 
-3. Welcome to Password-Manager
+## Step 3 Enter Master Password
 ![alt text](assets/images/password-manager-scr03.png)
 
-4. Main Menu
+## Step 4 Main Options
 ![alt text](assets/images/password-manager-scr04.png)
-Menu option 1 - Update / create a new entry
+## Menu option 1 
+    Update / create a new entry
     * Two choices:
         1. Press Enter to return to main menu
         2. Enter new site or platfrom
@@ -61,7 +98,8 @@ Menu option 1 - Update / create a new entry
     * Password added successfully
 ![alt text](assets/images/password-manager-scr05.png)
 
-5. Menu Option 2 - List passwords
+## Menu Option 2 
+List passwords
 ![alt text](assets/images/password-manager-scr06.png)
     * Two choices whether or not you wish the password to be visible during the listing?
     1. user choice is : No or Enter
