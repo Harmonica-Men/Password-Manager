@@ -227,6 +227,12 @@ def list_passwords(show_password):
     # Pause the program until ENTER is pressed
     press_enter()
 
+def warning_message_login(limit, limit_string):
+    # Print warning message
+    print(Fore.RED + "Site or platform input string cannot")
+    print(Fore.RED + f" be {limit_string} than {limit} characters!")
+    print(Fore.GREEN + f"Using default login: {default_user}\n")
+
 
 def get_login():
     """
@@ -239,7 +245,7 @@ def get_login():
         # Get user input for login
         login = input(f"(press Enter for '{default_user}'): \n")
         # Check if login is empty
-        if not login:
+        if len(login) == 0:
             empty_block()
             # Print default login message
             print(Fore.GREEN + f"Using default login: {default_user}\n")
@@ -247,17 +253,11 @@ def get_login():
             return default_user
         else:
             if len(login) < 4:
-                # Print warning message
-                print(Fore.RED + "Site or platform input string cannot")
-                print(Fore.RED + " be smaller than 4 characters!")
-                print(Fore.GREEN + f"Using default login: {default_user}\n")
+                warning_message_login(4,'smaller')
                 # Return default user login
                 return default_user
             if len(login) > 15:
-                # Print warning message
-                print(Fore.RED + "Site or platform input string cannot")
-                print(Fore.RED + " be greater than 18 characters!")
-                print(Fore.GREEN + f"Using default login: {default_user}\n")
+                warning_message_login(15,'greater')
                 # Return default user login
                 return default_user
             return login
@@ -362,7 +362,6 @@ def get_passwords():
             # Check if login is empty
             if login is None:
                 # Exit if login is empty
-                # line_exit("The login input is empty ! ")
                 return
             else:
                 # Get password information
@@ -405,6 +404,7 @@ def get_passwords():
         # Get password information
         password = option_password()
         # Check if password is empty
+        
         if not password:
             # Exit if password is empty
             line_exit("Empty password input ...")
