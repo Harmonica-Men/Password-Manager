@@ -285,6 +285,15 @@ def option_password():
             # Return the auto-generated password
             return password
         else:
+            if len(password) > 20:
+                # Generate random password
+                password = generate_random_password()
+                # Print password length error message
+                print(Fore.RED + "Password must be at least 20 characters long!")
+                # Print message for auto-generated password
+                print(Fore.RED + "Password is now auto-generated")
+                # Return the auto-generated password
+                return password
             # Return the entered password
             return password
 
