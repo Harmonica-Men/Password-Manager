@@ -319,6 +319,8 @@ def get_passwords():
         # Print warning message
         print("Site or platform input string cannot")
         print(Fore.RED + " be greater than 18 characters!")
+        press_enter()
+        return
     # Check if site already exists
     if check_value_in_column_a(site.lower()):
         # Print warning message
