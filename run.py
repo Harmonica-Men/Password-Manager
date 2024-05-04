@@ -261,6 +261,16 @@ def get_login():
                 # Return default user login
                 return default_user
             return login
+        
+
+def password_length_error(limit, password):
+# Generate random password
+    password = generate_random_password()
+    # Print password length error message
+    print(Fore.RED + f"Password must be at least {limit} characters long!")
+    # Print message for auto-generated password
+    print(Fore.RED + "Password is now auto-generated")
+    return password
 
 
 def option_password():
@@ -284,22 +294,14 @@ def option_password():
             return password
         # Check if password length is less than 6
         elif len(password) < 6:
-            # Generate random password
-            password = generate_random_password()
-            # Print password length error message
-            print(Fore.RED + "Password must be at least 6 characters long!")
-            # Print message for auto-generated password
-            print(Fore.RED + "Password is now auto-generated")
+            # password length handler function
+            password_length_error(6, password)
             # Return the auto-generated password
             return password
         else:
             if len(password) > 20:
-                # Generate random password
-                password = generate_random_password()
-                # Print password length error message
-                print(Fore.RED + "Password must be at least 20 characters long!")
-                # Print message for auto-generated password
-                print(Fore.RED + "Password is now auto-generated")
+                # password length handler function
+                password_length_error(20, password)
                 # Return the auto-generated password
                 return password
             # Return the entered password
