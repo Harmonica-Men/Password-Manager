@@ -38,14 +38,14 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('password_manager')
 
 
-def emptyblock():
+def empty_block():
     """
     Print an empty line.
     """
     print("\n")
 
 
-def mylogo():
+def my_logo():
     os.system("clear")
     """
     Print the Password manager logo in ASCII art.
@@ -58,13 +58,12 @@ def mylogo():
     print(logo)
 
 
-def Press_Enter():
+def press_enter():
     """
     Pause the program until ENTER is pressed.
     """
-    emptyblock()
+    empty_block()
     input(f"Press Enter to continue ... \n")
-    # os.system("clear")
 
 
 def generate_random_password(length=15):
@@ -166,7 +165,7 @@ def update_password_data(data_dict):
         worksheet_to_update.update_cell(row_index, 3, data_dict['password'])
     else:
         # Print an empty block
-        emptyblock()
+        empty_block()
         print("Invalid password data format.\n")
         print(" Please provide 'site', 'login'")
         print(", and 'password' keys")
@@ -222,11 +221,11 @@ def list_passwords(show_password):
     # Reorder columns
     df = df[['Row Number', 'Site', 'Login', 'Password']]
     # Print an empty block
-    emptyblock()
+    empty_block()
     # Print the DataFrame without headers and index
     print(df.iloc[0:].to_string(header=False, index=False))
     # Pause the program until ENTER is pressed
-    Press_Enter()
+    press_enter()
 
 
 def get_login():
@@ -241,7 +240,7 @@ def get_login():
         login = input(f"(press Enter for '{default_user}'): \n")
         # Check if login is empty
         if not login:
-            emptyblock()
+            empty_block()
             # Print default login message
             print(Fore.GREEN + f"Using default login: {default_user}\n")
             # Return default user login
@@ -290,15 +289,15 @@ def line_exit(info):
     Print exit message and pause the program.
     """
     # Print an empty block
-    emptyblock()
+    empty_block()
     # Print exit information in red color
     print(Fore.RED + info)
     # Print an empty block
-    emptyblock()
+    empty_block()
     # Print message indicating no data processed and return to main menu
     print(Fore.RED + "No data processed ! ")
     print(Fore.RED + "Exiting ... Back to main menu ")
-    Press_Enter()
+    press_enter()
 
 
 def get_passwords():
@@ -313,7 +312,6 @@ def get_passwords():
     # print("site: ", site)
     if len(site) == 0:
         # Exit if input is empty
-        # input("press enter to continue")
         line_exit("Empty input site or platform !!")
         return
     # Check if site or platform string length exceeds 18 characters
@@ -352,11 +350,11 @@ def get_passwords():
                 # Update password data
                 update_password_data(data_dict)
             # Print empty block
-            emptyblock()
+            empty_block()
             # Print success message
             print(Fore.GREEN + "Password added successfully")
             # Wait for user input
-            Press_Enter()
+            press_enter()
             return
         # Check if user chooses not to change site
         elif choice == 'no' or choice == 'n':
@@ -410,11 +408,11 @@ def get_passwords():
         # Append row to worksheet
         worksheet_to_update.append_row(row_data)
         # Print empty block
-        emptyblock()
+        empty_block()
         # Print success message
         print(Fore.GREEN + "Password added successfully")
         # Wait for user input
-        Press_Enter()
+        press_enter()
         return
 
 
@@ -438,9 +436,9 @@ def password_visible() -> bool:
     # Handle invalid input
     else:
         # Print empty block
-        emptyblock()
+        empty_block()
         print("Invalid Input , hide passwords ")
-        Press_Enter()
+        press_enter()
 
 
 def copy_password_entry(index_number):
@@ -468,16 +466,16 @@ def copy_password_entry(index_number):
         for row in data_list:
             row[2] = vigenere_cipher(row[2], key, mode='decode')
     else:
-        emptyblock()
+        empty_block()
         print(Fore.RED + f"Your index {index_number} exceeds the maximum")
         print(Fore.RED + " of rows {max_row} in this worksheet")
         # Exit function if the index exceeds the maximum number of rows
         line_exit("")
         return
-    emptyblock()
+    empty_block()
     print(Fore.GREEN + "Password is copied into the clipboard ")
     # Wait for user input
-    Press_Enter()
+    press_enter()
 
 
 def check_if_number(input_str):
@@ -548,12 +546,12 @@ def delete_password_entry(index_number):
             # Delete the row at the specified index
             worksheet_to_update.delete_rows(index_number)
             # Print empty block
-            emptyblock()
+            empty_block()
             # Print success message
             print(Fore.GREEN + "Password entry at")
             print(Fore.GREEN + f"index {index_number} is deleted")
             # Wait for user input
-            Press_Enter()
+            press_enter()
 
 
 def menu_option_1():
@@ -561,7 +559,7 @@ def menu_option_1():
     Function to handle menu option 1: Create new entry
     """
     # Display the logo
-    mylogo()
+    my_logo()
     # Display menu option
     print("Menu Option 1\n")
     # Call function to create a new password entry
@@ -573,7 +571,7 @@ def menu_option_2():
     Function to handle menu option 2: List passwords
     """
     # Display the logo
-    mylogo()
+    my_logo()
     # Display menu option
     print("Menu Option 2\n")
     # Inform user about listing passwords
@@ -587,7 +585,7 @@ def menu_option_3():
     Update the key for password encryption/decryption.
     """
     # Display the logo
-    mylogo()
+    my_logo()
     # Declare key as global
     global key
     # Store the old key
@@ -617,11 +615,11 @@ def menu_option_3():
         else:
             break
     # Write empty print statement
-    emptyblock()
+    empty_block()
     # Inform user about successful key update
     print(Fore.GREEN + "Cipher Key updated successfully")
     # Prompt user to press Enter
-    Press_Enter()
+    press_enter()
 
 
 def menu_option_4():
@@ -629,7 +627,7 @@ def menu_option_4():
     Function to handle menu option 0: delete record in password list
     """
     # Display the logo
-    mylogo()
+    my_logo()
     # Display menu option
     print("Menu option 0\n")
     # Inform user about deleting a password by index
@@ -640,7 +638,7 @@ def menu_option_4():
     if not index_number:
         # Inform user about empty input
         line_exit("You entered nothing")
-        Press_Enter()
+        press_enter()
     else:
         # Check if the input is a number
         if check_if_number(index_number):
@@ -660,7 +658,7 @@ def menu_option_5():
     # Store the old default user login
     old_user = default_user
     # Display the logo
-    mylogo()
+    my_logo()
     # Display menu option
     print("Menu option 5 \n")
     # Inform user about changing default user login
@@ -686,14 +684,14 @@ def menu_option_5():
                 print(Fore.RED + " then 25 characters long.")
                 print(Fore.RED + "No data processed! ")
                 print(Fore.RED + "Exiting ... Back to main menu ")
-                Press_Enter()
+                press_enter()
                 break
             else:
                 # Write empty print statements
-                emptyblock()
+                empty_block()
                 # Message password is added successfully
                 print(Fore.GREEN + "Default password added successfully")
-                Press_Enter()
+                press_enter()
                 break
 
 
@@ -704,7 +702,7 @@ def menu_option_6(update_bool):
     # Clear the console screen
     os.system("clear")
     # Display the logo
-    mylogo()
+    my_logo()
     # Loop until a condition is met
     while True:
         # Check if update_bool is True
@@ -722,11 +720,11 @@ def menu_option_6(update_bool):
         # Check if the input is empty
         if len(master_password) <= 0:
             # Display an empty block
-            emptyblock()
+            empty_block()
             # Inform about continuing with demo version
             print(Fore.GREEN + "DEMO version allowed to continue ")
             # Wait for Enter key press
-            Press_Enter()
+            press_enter()
             # Return True indicating demo version continuation
             return True
         else:
@@ -735,10 +733,10 @@ def menu_option_6(update_bool):
                 print(Fore.RED + "Enter master password must be ")
                 print(Fore.RED + "greater then 3 and smaller then 20")
                 print(Fore.RED + "characters long.")
-                emptyblock()
+                empty_block()
                 print(Fore.RED + "No data processed!")
                 print(Fore.RED + "Exiting ... Back to main menu ")
-                Press_Enter()
+                press_enter()
                 # Break the loop
                 break
             else:
@@ -759,17 +757,17 @@ def menu_option_6(update_bool):
                         print(Fore.RED + "Master password is the same. ")
                         print(Fore.RED + "Nothing updated. ")
                         # Wait for Enter key press
-                        Press_Enter()
+                        press_enter()
                         # Return False indicating no update
                         return False
                 else:
                     # If in update mode
                     if update_bool:
                         print(Fore.RED + "Master password incorrect.")
-                        emptyblock()
+                        empty_block()
                         print(Fore.RED + "Exiting ... ")
                         # Wait for Enter key press
-                        Press_Enter()
+                        press_enter()
                         # Return False indicating failed verification
                         return False
                     # If not in update mode
@@ -783,11 +781,11 @@ def menu_option_6(update_bool):
                         # Update the master password
                         worksheet_to_update.update_cell(2, 1, mystr)
                         # Display an empty block
-                        emptyblock()
+                        empty_block()
                         # Inform about successful update
                         print(Fore.GREEN + "Master password is updated ")
                         # Wait for Enter key press
-                        Press_Enter()
+                        press_enter()
                         # Return False indicating successful update
                         return False
 
@@ -823,44 +821,30 @@ Please enter your choice (1-7): """
     if menu_loop:
         while True:
             # Display the program logo
-            mylogo()
+            my_logo()
             # Prompt the user for a menu choice
             user_choice = input(f"{menu} \n")
             # Based on the user's choice,
             # call the corresponding menu option function
             if user_choice == '1':
-                # Clear the console screen
-                # os.system("clear")
                 # Call the function to handle menu option 1
                 menu_option_1()
             elif user_choice == '2':
-                # Clear the console screen
-                # os.system("clear")
                 # Call the function to handle menu option 2
                 menu_option_2()
-            elif user_choice == '3':
-                # Clear the console screen
-                # os.system("clear")
+            elif user_choice == '3':                
                 # Call the function to handle menu option 3
                 menu_option_3()
-            elif user_choice == '4':
-                # Clear the console screen
-                # os.system("clear")
+            elif user_choice == '4':                
                 # Call the function to handle menu option 0
                 menu_option_4()
             elif user_choice == '5':
-                # Clear the console screen
-                # os.system("clear")
                 # Call the function to handle menu option 5
                 menu_option_5()
             elif user_choice == '6':
-                # Clear the console screen
-                # os.system("clear")
                 # Call the function to handle menu option 6
                 menu_loop == menu_option_6(False)
             elif user_choice == '7':
-                # Clear the console screen
-                # os.system("clear")
                 # Copy an empty string to clear the clipboard
                 print("Thank you for using Password Manager")
                 print("Have a nice day ...")
@@ -868,12 +852,12 @@ Please enter your choice (1-7): """
             else:
                 # Display an empty block
                 print(user_choice)
-                emptyblock()
+                empty_block()
                 # Message the input choice is not valid
                 print(Fore.RED + "Invalid choice.")
                 print(Fore.RED + "Please enter a number between 1 and 7")
                 # Wait for Enter key press
-                Press_Enter()
+                press_enter()
     else:
         # Clear the console screen if menu loop setup failed
         os.system("clear")
