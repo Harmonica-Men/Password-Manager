@@ -246,6 +246,13 @@ def get_login():
             # Return default user login
             return default_user
         else:
+            if len(login) < 4:
+                # Print warning message
+                print(Fore.RED + "Site or platform input string cannot")
+                print(Fore.RED + " be smaller than 4 characters!")
+                print(Fore.GREEN + f"Using default login: {default_user}\n")
+                # Return default user login
+                return default_user
             if len(login) > 15:
                 # Print warning message
                 print(Fore.RED + "Site or platform input string cannot")
@@ -253,6 +260,7 @@ def get_login():
                 print(Fore.GREEN + f"Using default login: {default_user}\n")
                 # Return default user login
                 return default_user
+            return login
 
 
 def option_password():
@@ -328,10 +336,16 @@ def get_passwords():
         # Exit if input is empty
         line_exit("Empty input site or platform !!")
         return
+    if len(site) < 4:
+        # Print warning message
+        print(Fore.RED + "Site or platform input string cannot")
+        print(Fore.RED + " be smaller than 4 characters!")
+        press_enter()
+        return
     # Check if site or platform string length exceeds 18 characters
     if len(site) > 18:
         # Print warning message
-        print("Site or platform input string cannot")
+        print(Fore.RED + "Site or platform input string cannot")
         print(Fore.RED + " be greater than 18 characters!")
         press_enter()
         return
