@@ -175,10 +175,10 @@ _ Enter a valid password to access the program (you can always be changed afterw
 ### Menu Option 6
 
 **Change The Master Password**
-- ![scr12](assets/images/password-manager-scr12.png)
+
 - Every **$door$** has a key and in this case a extra level protection is been added, there is a master password to remember to access the main program, this is in fact the only password to be remembered.
 - Here are also two choices, enter a new master password or
-
+  ![alt text](assets/password_manager_scr12.png)
 - Leave the master password entry empty to go back to the main menu.
 - Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed.
 
