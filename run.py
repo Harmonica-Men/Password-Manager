@@ -451,7 +451,7 @@ def get_passwords():
         return
 
 
-def password_visible() -> bool:
+def password_visible():
     """
     Prompt the user for a Yes or No answer and return a boolean value.
     If the input is neither Yes nor No,
@@ -474,6 +474,7 @@ def password_visible() -> bool:
         empty_block()
         print("Invalid Input , hide passwords ")
         press_enter()
+    return
 
 
 def copy_password_entry(index_number):
