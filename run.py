@@ -246,8 +246,13 @@ def get_login():
             # Return default user login
             return default_user
         else:
-            # Return the entered login
-            return login
+            if len(login) > 18:
+                # Print warning message
+                print(Fore.RED + "Site or platform input string cannot")
+                print(Fore.RED + " be greater than 18 characters!")
+                print(Fore.GREEN + f"Using default login: {default_user}\n")
+                # Return default user login
+                return default_user
 
 
 def option_password():
