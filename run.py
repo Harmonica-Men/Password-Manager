@@ -324,6 +324,13 @@ def line_exit(info):
     press_enter()
 
 
+def warning_message_credentials(limit, limit_string):
+    # Print warning message
+    print(Fore.RED + "Site or platform input string cannot")
+    print(Fore.RED + f" be {limit_string} than {limit} characters!")
+    press_enter()
+
+
 def get_passwords():
     """
     Get user data password information: site, login, password
@@ -339,17 +346,13 @@ def get_passwords():
         line_exit("Empty input site or platform !!")
         return
     if len(site) < 4:
-        # Print warning message
-        print(Fore.RED + "Site or platform input string cannot")
-        print(Fore.RED + " be smaller than 4 characters!")
-        press_enter()
+        # Print warning message credentials
+        warning_message_credentials(4,'smaller')
         return
     # Check if site or platform string length exceeds 18 characters
     if len(site) > 18:
-        # Print warning message
-        print(Fore.RED + "Site or platform input string cannot")
-        print(Fore.RED + " be greater than 18 characters!")
-        press_enter()
+        # Print warning message credentials
+        warning_message_credentials(18,'greater')
         return
     # Check if site already exists
     if check_value_in_column_a(site.lower()):
