@@ -134,11 +134,14 @@ _ Enter a valid password to access the program (you can always be changed afterw
 
 - Two choices whether or not you wish the password to be visible during the listing?
       1. user choice is : No or Enter
-      ![scr07](assets/images/password-manager-scr07.png)
+      
+  ![scr07](assets/images/password-manager-scr07.png)
 
 - all accounts and passwords entries are chown whit encrypted passwords.
       2. user choice is : Yes
-      ![scr08](assets/images/password-manager-scr08.png)
+
+  ![scr08](assets/images/password-manager-scr08.png)
+
   all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
 
 ### Menu Option 3
