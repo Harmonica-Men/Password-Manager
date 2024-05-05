@@ -288,8 +288,8 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 |             Expectation (As a user, I want to...)             |                             Result (As a user, I...)                              |
 | :-----------------------------------------------------------: | :-------------------------------------------------------------------------------: |
 | Get a quick and thorough overview of the accounts & password  |         Can find my way around the app easily and quickly I one overview          |
-| Every step in app there is a clear description what to expect |        Can read the instructions from the options menu in a logical manner        |
-|      Be able to enter the app simple click interactions       | Run the app by simply clicking the `y` or `n` to continue or complete the program |
+| Every step in app there is a clear description what to expect |        Can read the instructions from the Menu options in a logical manner        |
+|      Be able to enter the app simple click interactions       | Run the app by simply clicking the `y` , `n` or  `Enter`' to continue or complete the program and navigate whit numbers in Menu options|
 |                  Receive correction messages                  |             When I inputted wrong the program tells me what to do next             |
 
 ### Fixed bugs
@@ -348,7 +348,7 @@ The project will now of been cloned on your local machine for use.
 
 ### Stack Overflow
 
-> Used to reference different synthax issues from existing older boards. Also used to query clear function issues when I ran into them as referenced in the bug section.
+> Used to reference different syntax issues from existing older boards. Also used to query clear function issues when I ran into them as referenced in the bug section.
 
 ## Acknowledgements
 
