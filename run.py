@@ -634,7 +634,7 @@ def menu_option_3():
         # Display the old key
         print("The old key: " + Fore.CYAN + key)
         # Prompt user for the new key
-        key = input("Enter the new: ")
+        key = input("Enter the new key: ")
         # Check if the new key is empty or too long
         if len(key) == 0 or len(key) >= 8:
             # Restore the old key
@@ -660,12 +660,12 @@ def menu_option_3():
 
 def menu_option_4():
     """
-    Function to handle menu option 0: delete record in password list
+    Function to handle menu option 4: delete record in password list
     """
     # Display the logo
     my_logo()
     # Display menu option
-    print("Menu option 0\n")
+    print("Menu option 4\n")
     # Inform user about deleting a password by index
     print("Delete password by index ... ")
     # Prompt user for the record number to delete
