@@ -184,7 +184,8 @@ def list_passwords(show_password):
     data_list = [row for row in data]
     # Check is there are any password in list
     if data_list == [[]]:
-        line_exit("List is Empty")
+        print(Fore.RED + "List is Empty")
+        press_enter()
         return
     # Check if passwords should be displayed
     if show_password:
@@ -468,13 +469,6 @@ def password_visible():
         return True
     elif choice == 'no' or choice == 'n':  # If user chooses No
         return False
-    # Handle invalid input
-    else:
-        # Print empty block
-        empty_block()
-        print("Invalid Input , hide passwords ")
-        press_enter()
-    return
 
 
 def copy_password_entry(index_number):
@@ -674,7 +668,6 @@ def menu_option_4():
     if not index_number:
         # Inform user about empty input
         line_exit("You entered nothing")
-        press_enter()
     else:
         # Check if the input is a number
         if check_if_number(index_number):
