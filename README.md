@@ -97,8 +97,9 @@ The live DEMO version of Password-Manager is online running on Heroku, [Here](ht
 ## Step 2 RUN PROGRAM
 
 ![scr02](assets/images/password-manager-scr02.png)
-_ Enter a valid password to access the program (you can always be changed afterwards)  
- _ Press Enter to bypass (DEMO version)
+
+* Enter a valid password to access the program (you can always be changed afterwards)  
+* Press Enter to bypass (DEMO version)
 
 ## Step 3 Enter Master Password
 
