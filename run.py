@@ -228,6 +228,7 @@ def list_passwords(show_password):
     # Pause the program until ENTER is pressed
     press_enter()
 
+
 def warning_message_login(limit, limit_string):
     # Print warning message
     print(Fore.RED + "Site or platform input string cannot")
@@ -254,18 +255,18 @@ def get_login():
             return default_user
         else:
             if len(login) < 4:
-                warning_message_login(4,'smaller')
+                warning_message_login(4, 'smaller')
                 # Return default user login
                 return default_user
             if len(login) > 15:
-                warning_message_login(15,'greater')
+                warning_message_login(15, 'greater')
                 # Return default user login
                 return default_user
             return login
-        
+
 
 def password_length_error(limit, password):
-# Generate random password
+    # Generate random password
     password = generate_random_password()
     # Print password length error message
     print(Fore.RED + f"Password must be at least {limit} characters long!")
@@ -348,12 +349,12 @@ def get_passwords():
         return
     if len(site) < 4:
         # Print warning message credentials
-        warning_message_credentials(4,'smaller')
+        warning_message_credentials(4, 'smaller')
         return
     # Check if site or platform string length exceeds 18 characters
     if len(site) > 18:
         # Print warning message credentials
-        warning_message_credentials(18,'greater')
+        warning_message_credentials(18, 'greater')
         return
     # Check if site already exists
     if check_value_in_column_a(site.lower()):
@@ -410,7 +411,6 @@ def get_passwords():
         # Get password information
         password = option_password()
         # Check if password is empty
-        
         if not password:
             # Exit if password is empty
             line_exit("Empty password input ...")
@@ -760,7 +760,6 @@ def menu_option_6(update_bool):
             return True
         else:
             # Check if exceeds 20 characters or is smaller then 3 characters
-            # A different approuch to formulize condintion then previous error handeling
             if len(master_password) >= 20 or len(master_password) <= 3:
                 empty_block()
                 print(Fore.RED + "Enter master password must be ")
@@ -865,11 +864,11 @@ Please enter your choice (1-7): """
             elif user_choice == '2':
                 # Call the function to handle menu option 2
                 menu_option_2()
-            elif user_choice == '3':                
+            elif user_choice == '3':
                 # Call the function to handle menu option 3
                 menu_option_3()
-            elif user_choice == '4':                
-                # Call the function to handle menu option 0
+            elif user_choice == '4':
+                # Call the function to handle menu option 4
                 menu_option_4()
             elif user_choice == '5':
                 # Call the function to handle menu option 5
