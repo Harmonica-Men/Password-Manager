@@ -92,7 +92,7 @@ As the administrator I want:
 
 ## Step 1 Demo
 
-The live DEMO version of Password-Manager is online running on Heroku, [Here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/) the repo is located [here](https://github.com/Harmonica-Men/Password-Manager)
+The live DEMO version of Password-Manager is online running on Heroku, [here](https://terminal-password-manager-2fad20bf8063.herokuapp.com/) the repo is located [here](https://github.com/Harmonica-Men/Password-Manager)
 
 ## Step 2 RUN PROGRAM
 
@@ -152,7 +152,7 @@ The live DEMO version of Password-Manager is online running on Heroku, [Here](ht
 - This allow the user to change how password are encrypted into the google spreadsheet. The main advantage is to add a extra level of complexity how your password are stored or displayed.
 - In order to achieve this a 'Caeser cipher' is used as basic principle.
   by shifting the alphabet in a number of letters left or right, the password can be obscure. However instead of using a decimal places to shift in this program a cipher key is used. This method is also know as the 'Vigenère cipher'.
-  For additional information about the Vigenère cipher check this link: [Here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
+  For additional information about the Vigenère cipher check this link: [here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
 
     ![scr09](assets/images/password-manager-scr09.png)
 
@@ -183,7 +183,7 @@ The live DEMO version of Password-Manager is online running on Heroku, [Here](ht
 - Every **$door$** has a key and in this case a extra level protection is been added, there is a master password to remember to access the main program, this is in fact the only password to be remembered.
 - Here are also two choices, enter a new master password or
 - ![scr12](https://raw.githubusercontent.com/Harmonica-Men/Password-Manager/main/assets/images/password-manager-scr12.png)
-- Leave the master password entry empty to go back to the main menu.
+- Leave the master password entry empty to go back to the Main Menu.
 - Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed.
 
 ### Menu Option 7
@@ -239,10 +239,10 @@ The live DEMO version of Password-Manager is online running on Heroku, [Here](ht
 
 | Test                                                                                       | Steps                                                 | Expected                                                                                                                                                                  | Actual |
 | ------------------------------------------------------------------------------------------ | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| On run program enter the master password                                                   | Press Enter to bypass (only demo version)             | a demo confirmation message appears and acknowledge by pressing Enter                                                                                                     | PASS   |
-| On run program enter password less then 4 characters                                        | enter password od less then 4 chars                   | error message appear < 4 char input and exit the program                                                                                                                  | pass   |
-| On run program enter password greater then 20 characters                                    | enter password od greater then 20 chars               | error message appear > 18 char input and exit the program                                                                                                                 | pass   |
-| Master password entry – unknown password                                                  | Enter a valid master password                         | the Main option menu appears                                                                                                                                              | PASS   |
+| On run program enter the master password                                                   | Press Enter to bypass (only demo version)             | A demo confirmation message appears and acknowledge by pressing Enter                                                                                                     | PASS   |
+| On run program enter password less then 4 characters                                        | enter password of less then 4 chars                   | Error message appear < 4 char input and exit the program                                                                                                                  | pass   |
+| On run program enter password greater then 20 characters                                    | enter password of greater then 20 chars               | Error message appear > 18 char input and exit the program                                                                                                                 | pass   |
+| Master password entry – unknown password                                                  | Enter a valid master password                         | The main option menu appears                                                                                                                                              | PASS   |
 | Master password entry – know password                                                    | Enter a invalid master password                       | A error message appears that the input of the Master Password was incorrect then programs stops                                                                           | Pass   |
 | Site creation entry – less 4 char                                                        | Enter a input of less of 4 char                       | A error message appears that the input of the Site or platform was incorrect and continues whit the default                                                               | pass   |
 | Site creation entry – greater 18 char                                                    | Enter a input of greater of 18 char                   | A error message appears that the input of the Site or platform was incorrect and continues whit the default                                                               | pass   |
@@ -278,7 +278,7 @@ The live DEMO version of Password-Manager is online running on Heroku, [Here](ht
 | Enter new default user login – less then 25 char                                           | Enter the input field less then 25 char               | A confirmation message appear that the default user is successfully added - press enter to redirected to main menu                                                        | pass   |
 | Choose Main Menu option 6. Change the master password                                      | press enter in menu option 6                          | Menu option 6 appears                                                                                                                                                     | pass   |
 | Enter new master password                                                                  | press Enter or empty field                            | because this is a demo version when press enter a confirmation appears to acknowledgement to bypass the password is granted                                              | pass   |
-| Enter new master password less of 3 char                                                   | enter password od less then 3 chars                   | error message appear > 3 char input and press enter for redirect to main men                                                                                              | pass   |
+| Enter new master password less of 3 char                                                   | enter password of less then 3 chars                   | error message appear > 3 char input and press enter for redirect to main men                                                                                              | pass   |
 | Enter new master password greater of 20 char                                               | enter master password greater then 20 chars           | error message appear > 20 char input and press enter for redirect to main men                                                                                             | pass   |
 | Enter new master password – between 3 and 20 char                                          | Enter a valid master password                         | A confirmation message appear that master password is successfully added to the google spreadsheet - press enter to redirected to main men                                | pass   |
 | Choose Main Menu option 7. Quit                                                            | Enter number 7 to quit                                | Program stops immediately and presents a goodby message                                                                                                                     | pass   |
