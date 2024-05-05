@@ -1,4 +1,4 @@
-![demo-gif](assets/images/password-Manager-Demo.gif)
+![scr-gif](assets/images/Password-Manager-Demo.gif)
 
 ## Index - Table of Contents
 
@@ -85,8 +85,8 @@ As a user I want:
 
 As the administrator I want:
 
-- access the file that's stored the content of the accounts and passwords.
-- the passwords itself are encrypted.
+- Access the file that's stored the content of the accounts and passwords.
+- The passwords itself are encrypted.
 
 # A Step By Step Guide
 
@@ -150,7 +150,7 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 **Change Cipher Key**
 
 - This allow the user to change how password are encrypted into the google spreadsheet. The main advantage is to add a extra level of complexity how your password are stored or displayed.
-- In order to achieve this a 'Caeser cipher' is used as basic principle.
+- In order to achieve this a 'Caeser cipher' is used as basic principle,
   by shifting the alphabet in a number of letters left or right, the password can be obscure. However instead of using a decimal places to shift in this program a cipher key is used. This method is also know as the 'Vigenère cipher'.
   For additional information about the Vigenère cipher check this link: [here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
 
@@ -242,8 +242,8 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 | On run program enter the master password                                                   | 'Press Enter' to bypass (only demo version)             | A demo confirmation message appears and acknowledge by pressing Enter                                                                                                     | pass   |
 | On run program enter password less then 4 characters                                        | Enter password of less then 4 characters                   | Error message appear less 4 characters input and exit the program                                                                                                                  | pass   |
 | On run program enter password greater then 20 characters                                    | Enter password of greater then 20 characters               | Error message appear greater 20 characters input and exit the program                                                                                                                 | pass   |
-| Master password entry – unknown password                                                  | Enter a valid master password                         | The main option menu appears                                                                                                                                              | pass   |
-| Master password entry – know password                                                    | Enter a invalid master password                       | A error message appears that the input of the Master password was incorrect then programs stops                                                                           | pass   |
+| Master password entry – known password                                                  | Enter a valid master password                         | The main option menu appears                                                                                                                                              | pass   |
+| Master password entry – unknown password                                                    | Enter a invalid master password                       | A error message appears that the input of the Master password was incorrect then programs stops                                                                           | pass   |
 | Site creation entry – less 4 characters                                                        | Enter a input of less of 4 characters                       | A error message appears that the input of the Site or Platform was incorrect and continues whit the default                                                               | pass   |
 | Site creation entry – greater 18 characters                                                    | Enter a input of greater of 18 characters                   | A error message appears that the input of the Site or Platform was incorrect and continues whit the default                                                               | pass   |
 | Site creation entry – between 4 and 18 characters                                              | Enter a valid site                               | Continues to login credentials input field                                                                                                                                | pass   |
