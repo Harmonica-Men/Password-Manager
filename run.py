@@ -182,7 +182,7 @@ def list_passwords(show_password):
     data = worksheet_to_update.get_all_values()
     # Convert the data into a list of arrays
     data_list = [row for row in data]
-    # Check is there are any password in list
+    # Check if there are any password in list
     if data_list == [[]]:
         print(Fore.RED + "List is Empty")
         press_enter()
@@ -719,7 +719,7 @@ def menu_option_5():
                 # Write empty print statements
                 empty_block()
                 # Message password is added successfully
-                print(Fore.GREEN + "Default password added successfully")
+                print(Fore.GREEN + "Default login added successfully")
                 press_enter()
                 break
 
