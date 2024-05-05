@@ -134,11 +134,11 @@ _ Enter a valid password to access the program (you can always be changed afterw
 
 - Two choices whether or not you wish the password to be visible during the listing?
       1. user choice is : No or Enter
-  ![scr07](assets/images/password-manager-scr07.png)
+      ![scr07](assets/images/password-manager-scr07.png)
 
 - all accounts and passwords entries are chown whit encrypted passwords.
       2. user choice is : Yes
-  ![scr08](assets/images/password-manager-scr08.png)
+      ![scr08](assets/images/password-manager-scr08.png)
   all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
 
 ### Menu Option 3
@@ -150,7 +150,7 @@ _ Enter a valid password to access the program (you can always be changed afterw
   by shifting the alphabet in a number of letters left or right, the password can be obsured. However instead of using a decimal places to shift in this program a cipher key is used. This methode is also know as the 'Vigenère cipher'.
   For additional information about the Vigenère cipher check this link: [Here](https://https://en.wikipedia.org/wiki/Vigen%C3%A8re_cipher/)
 
-![scr09](assets/images/password-manager-scr09.png)
+    ![scr09](assets/images/password-manager-scr09.png)
 
 - **note** When Enter a blank cipher key, the key is not changed and the user return back to the Main Menu
 
