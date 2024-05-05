@@ -709,8 +709,10 @@ def menu_option_5():
             if len(default_user) >= 25:
                 # Restore the old default user login
                 default_user = old_user
+                empty_block()
                 print(Fore.RED + "default user login must be smaller")
                 print(Fore.RED + " then 25 characters long.")
+                empty_block()
                 print(Fore.RED + "No data processed! ")
                 print(Fore.RED + "Exiting ... Back to main menu ")
                 press_enter()
@@ -758,7 +760,9 @@ def menu_option_6(update_bool):
             return True
         else:
             # Check if exceeds 20 characters or is smaller then 3 characters
+            # A different approuch to formulize condintion then previous error handeling
             if len(master_password) >= 20 or len(master_password) <= 3:
+                empty_block()
                 print(Fore.RED + "Enter master password must be ")
                 print(Fore.RED + "greater then 3 and smaller then 20")
                 print(Fore.RED + "characters long.")
