@@ -463,12 +463,10 @@ def password_visible():
     # Get user choice
     choice = input(f"Press Yes/No or Any key: ").lower()
     # If the user presses Enter without input
-    if not choice:
+    if (choice == 'no' or choice == 'n') and (not choice):  # If user chooses No
         return False
     elif choice == 'yes' or choice == 'y':  # If user chooses Yes
-        return True
-    elif choice == 'no' or choice == 'n':  # If user chooses No
-        return False
+            return True
 
 
 def copy_password_entry(index_number):
