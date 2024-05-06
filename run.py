@@ -466,7 +466,7 @@ def password_visible():
     if (choice == 'no' or choice == 'n') and (not choice):  # If user chooses No
         return False
     elif choice == 'yes' or choice == 'y':  # If user chooses Yes
-            return True
+        return True
 
 
 def copy_password_entry(index_number):
