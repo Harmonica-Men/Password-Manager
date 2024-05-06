@@ -137,13 +137,13 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 
 - 1. user choice is : No or Enter
 
-![scr07](assets/images/password-manager-scr07.png)
+  ![scr07](assets/images/password-manager-scr07.png)
 
 - all accounts and passwords entries are chown whit encrypted passwords.
 
 - 2. user choice is : Yes
 
-![scr08](assets/images/password-manager-scr08.png)
+  ![scr08](assets/images/password-manager-scr08.png)
 
 -  all accounts and passwords entries are now chown whit there true context. (de-ciphered password)
 
@@ -195,6 +195,7 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 **Quit**
 
 - This option is to quit the Password-Manager
+
   ![scr13](assets/images/password-manager-scr13.png)
 
 ## Technologies
