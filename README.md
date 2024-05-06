@@ -167,6 +167,7 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 - This allow the user to delete a record from the password list.
 - By enter a record index number the record is deleted.
 - When Enter a blank index number the user goes back to the Main Menu.
+
   ![scr10](assets/images/password-manager-scr10.png)
 
 ### Menu Option 5
@@ -186,7 +187,9 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 
 - Every **$door$** has a key and in this case a extra level protection is been added, there is a master password to remember to access the main program, this is in fact the only password to be remembered.
 - Here are also two choices, enter a new master password or
+
   ![scr12](https://raw.githubusercontent.com/Harmonica-Men/Password-Manager/main/assets/images/password-manager-scr12.png)
+  
 - Leave the master password entry empty to go back to the Main Menu.
 - Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed and stored into the spreadsheet.
 
