@@ -463,7 +463,7 @@ def password_visible():
     # Get user choice
     choice = input(f"Press Yes/No or Any key: ").lower()
     # If the user presses Enter without input
-    if (choice == 'no' or choice == 'n') and (not choice):  # If user chooses No
+    if (choice == 'no' or choice == 'n') and (not choice):
         return False
     elif choice == 'yes' or choice == 'y':  # If user chooses Yes
         return True
