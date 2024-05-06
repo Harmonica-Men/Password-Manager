@@ -338,7 +338,7 @@ def get_passwords():
     Get user data password information: site, login, password
     """
     # Prompt user to create a new entry
-    print("Create new entry ... ")
+    print("update / create new entry ... ")
     # Prompt user to enter site or platform
     site = input("Enter new site or platform: ")
     # Check if the input string is empty
