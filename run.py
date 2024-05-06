@@ -586,7 +586,7 @@ def delete_password_entry(index_number):
 
 def menu_option_1():
     """
-    Function to handle menu option 1: Create new entry
+    Function to handle menu option 1: Create / update new entry
     """
     # Display the logo
     my_logo()

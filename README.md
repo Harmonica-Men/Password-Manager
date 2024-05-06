@@ -75,9 +75,9 @@ to your by passing your firewall to your local domain on a Server that function 
 
 As a user I want:
 
-- To be able to update, create or delete account and password enteries.
+- To be able to update, create or delete account and password entries.
 - To lists passwords and give a choice to the user obscure them from view or show the password explicitly by request.
-- To be able to set a Cipher-Key, this is a handy feature to add a extra level of complexity to obsucre your passwords.
+- To be able to set a Cipher-Key, this is a handy feature to add a extra level of complexity to obscure your passwords.
 - To set up a default user login, makes the UX more user friendly.
 - To always be able to change the 'master password' to access the password-manager.
 - **note** There was a **copy/paste** password clipboard feature available but that I need to removed because it was not possible to integrate that
@@ -189,7 +189,7 @@ The live DEMO version of Password-Manager is online running on Heroku, [here](ht
 - Here are also two choices, enter a new master password or
 
   ![scr12](https://raw.githubusercontent.com/Harmonica-Men/Password-Manager/main/assets/images/password-manager-scr12.png)
-  
+
 - Leave the master password entry empty to go back to the Main Menu.
 - Do not forget your using the DEMO version of password manager allowing you to bypass the master password confirmation on startup. But the master password is actually changed and stored into the spreadsheet.
 
