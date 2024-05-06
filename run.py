@@ -461,7 +461,7 @@ def password_visible():
     # Prompt user for visibility
     print("Do you wish to make passwords visible during password listing?")
     # Get user choice
-    choice = input(f"Press Yes/No or ENTER: ").lower()
+    choice = input(f"Press Yes/No or Any key: ").lower()
     # If the user presses Enter without input
     if not choice:
         return False
